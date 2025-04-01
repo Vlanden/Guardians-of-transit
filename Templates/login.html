@@ -9,6 +9,16 @@
 <body class="d-flex justify-content-center align-items-center vh-100">
     <div class="container w-50 p-4 shadow rounded">
         <h2 class="text-center">Iniciar Sesión</h2>
+
+        <!-- Mensajes Flash -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
         <form action="{{ url_for('login') }}" method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label">Usuario</label>
@@ -22,6 +32,9 @@
         </form>
         <div class="text-center mt-3">
             <a href="{{ url_for('forgot_password') }}">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="text-center mt-2">
+            <a href="{{ url_for('register') }}">Registrarse</a>
         </div>
     </div>
 </body>
