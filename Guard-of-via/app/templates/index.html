@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guardianes de la Vía</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Bienvenid@ a Guardianes de la Vía</h1>
+    <a href="{{ url_for('main.quiz') }}">Ir al Quiz</a> |
+    <a href="{{ url_for('main.game') }}">Jugar</a> |
+    <a href="{{ url_for('main.rewards') }}">Ver Recompensas</a>
+</body>
+</html>
