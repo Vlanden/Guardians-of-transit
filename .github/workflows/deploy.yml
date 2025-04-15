@@ -10,6 +10,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,23 +19,21 @@ jobs:
         env:
           VPS_USER: ${{ secrets.VPS_USER }}
           VPS_IP: ${{ secrets.VPS_IP }}
-          VPS_KEY: ${{ secrets.VPS_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_KEY }}
         run: |
-          # Determinamos la rama y la ruta correspondiente en el VPS
-          if [ "$GITHUB_REF" == "refs/heads/dev" ]; then
-            ENV="dev"
-          elif [ "$GITHUB_REF" == "refs/heads/uat" ]; then
-            ENV="uat"
-          elif [ "$GITHUB_REF" == "refs/heads/prod" ]; then
-            ENV="prod"
+          # Determinar la carpeta en función de la rama
+          if [[ "$GITHUB_REF_NAME" == "dev" ]]; then
+            DIR="dev"
+          elif [[ "$GITHUB_REF_NAME" == "uat" ]]; then
+            DIR="uat"
+          else
+            DIR="prod"
           fi
-          
-          # Conectamos al VPS y desplegamos el código en el entorno correspondiente
-          ssh -i $VPS_KEY $VPS_USER@$VPS_IP <<EOF
-            cd /var/www/Guardians_of_Via/$ENV
-            git fetch --all
-            git checkout $GITHUB_REF
-            git pull origin $GITHUB_REF
-            # Reiniciar el servicio adecuado (por ejemplo, Apache)
-            sudo systemctl restart apache2
+
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+
+          ssh -o StrictHostKeyChecking=no -i private_key $VPS_USER@$VPS_IP <<EOF
+            cd /var/www/Guard-of-via/$DIR
+            git pull origin $GITHUB_REF_NAME
           EOF
