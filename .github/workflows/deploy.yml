@@ -1,0 +1,40 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - dev
+      - uat
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to VPS
+        env:
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_IP: ${{ secrets.VPS_IP }}
+          VPS_KEY: ${{ secrets.VPS_KEY }}
+        run: |
+          # Determinamos la rama y la ruta correspondiente en el VPS
+          if [ "$GITHUB_REF" == "refs/heads/dev" ]; then
+            ENV="dev"
+          elif [ "$GITHUB_REF" == "refs/heads/uat" ]; then
+            ENV="uat"
+          elif [ "$GITHUB_REF" == "refs/heads/prod" ]; then
+            ENV="prod"
+          fi
+          
+          # Conectamos al VPS y desplegamos el código en el entorno correspondiente
+          ssh -i $VPS_KEY $VPS_USER@$VPS_IP <<EOF
+            cd /var/www/Guardians_of_Via/$ENV
+            git fetch --all
+            git checkout $GITHUB_REF
+            git pull origin $GITHUB_REF
+            # Reiniciar el servicio adecuado (por ejemplo, Apache)
+            sudo systemctl restart apache2
+          EOF
