@@ -1,10 +1,36 @@
 [
     {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "importPath": "app.main",
         "description": "app.main",
         "isExtraImport": true,
         "detail": "app.main",
+        "documentation": {}
+    },
+    {
+        "label": "hello",
+        "kind": 2,
+        "importPath": "app.app",
+        "description": "app.app",
+        "peekOfCode": "def hello():\n    return \"Hello, World!\"",
+        "detail": "app.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app.app",
+        "description": "app.app",
+        "peekOfCode": "app = Flask(__name__)\n@app.route('/')\ndef hello():\n    return \"Hello, World!\"",
+        "detail": "app.app",
         "documentation": {}
     }
 ]
