@@ -8,11 +8,27 @@
         "documentation": {}
     },
     {
-        "label": "app",
-        "importPath": "app.main",
-        "description": "app.main",
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
         "isExtraImport": true,
-        "detail": "app.main",
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "create_app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
         "documentation": {}
     },
     {
@@ -31,6 +47,33 @@
         "description": "app.app",
         "peekOfCode": "app = Flask(__name__)\n@app.route('/')\ndef hello():\n    return \"Hello, World!\"",
         "detail": "app.app",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "auth.routes",
+        "description": "auth.routes",
+        "peekOfCode": "def login():\n    return render_template('login.html')  # Asegúrate de que este HTML existe",
+        "detail": "auth.routes",
+        "documentation": {}
+    },
+    {
+        "label": "auth_bp",
+        "kind": 5,
+        "importPath": "auth.routes",
+        "description": "auth.routes",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__)\n@auth_bp.route('/login')\ndef login():\n    return render_template('login.html')  # Asegúrate de que este HTML existe",
+        "detail": "auth.routes",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "kind": 6,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "class Config:\n    SECRET_KEY = 'tu_clave_secreta'\n    SQLALCHEMY_DATABASE_URI = 'sqlite:///guardofvia.db'\n    SQLALCHEMY_TRACK_MODIFICATIONS = False",
+        "detail": "config",
         "documentation": {}
     }
 ]
