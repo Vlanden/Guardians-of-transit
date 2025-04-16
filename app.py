@@ -1,5 +1,5 @@
 from flask import Flask
-from config import Config
+from config.config import Config
 from auth.auth import auth_blueprint
 
 app = Flask(__name__)
