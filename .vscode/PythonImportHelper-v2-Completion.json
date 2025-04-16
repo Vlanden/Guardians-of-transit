@@ -14,14 +14,5 @@
         "isExtraImport": true,
         "detail": "app.main",
         "documentation": {}
-    },
-    {
-        "label": "index",
-        "kind": 2,
-        "importPath": "app.main",
-        "description": "app.main",
-        "peekOfCode": "def index():\n    return \"¡Hola, Guardianes del Vía!\"",
-        "detail": "app.main",
-        "documentation": {}
     }
 ]
