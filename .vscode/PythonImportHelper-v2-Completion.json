@@ -1,13 +1,5 @@
 [
     {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -24,56 +16,180 @@
         "documentation": {}
     },
     {
-        "label": "create_app",
-        "importPath": "app",
-        "description": "app",
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
         "isExtraImport": true,
-        "detail": "app",
+        "detail": "flask",
         "documentation": {}
     },
     {
-        "label": "hello",
-        "kind": 2,
-        "importPath": "app.app",
-        "description": "app.app",
-        "peekOfCode": "def hello():\n    return \"Hello, World!\"",
-        "detail": "app.app",
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
         "documentation": {}
     },
     {
-        "label": "app",
-        "kind": 5,
-        "importPath": "app.app",
-        "description": "app.app",
-        "peekOfCode": "app = Flask(__name__)\n@app.route('/')\ndef hello():\n    return \"Hello, World!\"",
-        "detail": "app.app",
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "models.user",
+        "description": "models.user",
+        "isExtraImport": true,
+        "detail": "models.user",
+        "documentation": {}
+    },
+    {
+        "label": "login_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "auth_blueprint",
+        "importPath": "auth.auth",
+        "description": "auth.auth",
+        "isExtraImport": true,
+        "detail": "auth.auth",
         "documentation": {}
     },
     {
         "label": "login",
         "kind": 2,
-        "importPath": "auth.routes",
-        "description": "auth.routes",
-        "peekOfCode": "def login():\n    return render_template('login.html')  # Asegúrate de que este HTML existe",
-        "detail": "auth.routes",
+        "importPath": "auth.auth",
+        "description": "auth.auth",
+        "peekOfCode": "def login():\n    if request.method == 'POST':\n        # Aquí agregarás la lógica para la autenticación\n        username = request.form['username']\n        password = request.form['password']\n        user = User.query.filter_by(username=username).first()\n        if user and user.check_password(password):\n            login_user(user)\n            return redirect(url_for('index'))\n    return render_template('login.html')",
+        "detail": "auth.auth",
         "documentation": {}
     },
     {
-        "label": "auth_bp",
+        "label": "register",
+        "kind": 2,
+        "importPath": "auth.auth",
+        "description": "auth.auth",
+        "peekOfCode": "def register():\n    if request.method == 'POST':\n        username = request.form['username']\n        password = request.form['password']\n        new_user = User(username=username, password=password)\n        new_user.save()\n        return redirect(url_for('auth.login'))\n    return render_template('register.html')\n# Ruta de perfil de usuario\n@auth_blueprint.route('/profile')",
+        "detail": "auth.auth",
+        "documentation": {}
+    },
+    {
+        "label": "profile",
+        "kind": 2,
+        "importPath": "auth.auth",
+        "description": "auth.auth",
+        "peekOfCode": "def profile():\n    return render_template('profile.html')",
+        "detail": "auth.auth",
+        "documentation": {}
+    },
+    {
+        "label": "auth_blueprint",
         "kind": 5,
-        "importPath": "auth.routes",
-        "description": "auth.routes",
-        "peekOfCode": "auth_bp = Blueprint('auth', __name__)\n@auth_bp.route('/login')\ndef login():\n    return render_template('login.html')  # Asegúrate de que este HTML existe",
-        "detail": "auth.routes",
+        "importPath": "auth.auth",
+        "description": "auth.auth",
+        "peekOfCode": "auth_blueprint = Blueprint('auth', __name__, template_folder='templates')\n# Ruta de inicio de sesión\n@auth_blueprint.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        # Aquí agregarás la lógica para la autenticación\n        username = request.form['username']\n        password = request.form['password']\n        user = User.query.filter_by(username=username).first()\n        if user and user.check_password(password):",
+        "detail": "auth.auth",
         "documentation": {}
     },
     {
         "label": "Config",
         "kind": 6,
-        "importPath": "config",
-        "description": "config",
-        "peekOfCode": "class Config:\n    SECRET_KEY = 'tu_clave_secreta'\n    SQLALCHEMY_DATABASE_URI = 'sqlite:///guardofvia.db'\n    SQLALCHEMY_TRACK_MODIFICATIONS = False",
-        "detail": "config",
+        "importPath": "config.config",
+        "description": "config.config",
+        "peekOfCode": "class Config:\n    SECRET_KEY = 'mi_clave_secreta'\n    SQLALCHEMY_DATABASE_URI = 'mysql://usuario:contraseña@localhost/guardianes_de_la_via'\n    SQLALCHEMY_TRACK_MODIFICATIONS = False",
+        "detail": "config.config",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "models.user",
+        "description": "models.user",
+        "peekOfCode": "class User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(100), unique=True, nullable=False)\n    password_hash = db.Column(db.String(128), nullable=False)\n    def set_password(self, password):\n        self.password_hash = generate_password_hash(password)\n    def check_password(self, password):\n        return check_password_hash(self.password_hash, password)\n    def save(self):\n        db.session.add(self)",
+        "detail": "models.user",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "models.user",
+        "description": "models.user",
+        "peekOfCode": "db = SQLAlchemy()\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(100), unique=True, nullable=False)\n    password_hash = db.Column(db.String(128), nullable=False)\n    def set_password(self, password):\n        self.password_hash = generate_password_hash(password)\n    def check_password(self, password):\n        return check_password_hash(self.password_hash, password)\n    def save(self):",
+        "detail": "models.user",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def index():\n    return \"Bienvenidos a Guardianes de la Vía\"\nif __name__ == \"__main__\":\n    app.run(host='0.0.0.0', port=5000, debug=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app = Flask(__name__)\napp.config.from_object(Config)\n# Registrar el blueprint de autenticación\napp.register_blueprint(auth_blueprint)\n@app.route('/')\ndef index():\n    return \"Bienvenidos a Guardianes de la Vía\"\nif __name__ == \"__main__\":\n    app.run(host='0.0.0.0', port=5000, debug=True)",
+        "detail": "app",
         "documentation": {}
     }
 ]
