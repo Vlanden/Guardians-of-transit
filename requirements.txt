@@ -1,2 +1,9 @@
 Flask
 gunicorn
+Flask-SQLAlchemy
+Flask-Login
+mysqlclient
+Werkzeug
+flask_jwt_extended
+bcrypt
+python-dotenv

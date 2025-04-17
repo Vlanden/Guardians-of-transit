@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Estilos/Inicio.css') }}" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&family=Oswald&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <title>Restablecer Contraseña</title>
+</head>
+<body>
+    <header>
+        {% include 'partials/header.html' %}
+    </header>
+
+    <main>
+        <article class="Elements">
+            <form action="{{ url_for('main.recuperacion') }}" method="POST">
+                <h1>Restablecer Contraseña</h1>
+
+                <div class="input-container">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="input-container">
+                    <label for="password">Nueva contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="input-container">
+                    <label for="confirm_password">Confirma contraseña:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+
+                <button type="submit">Confirmar</button>
+            </form>
+        </article>
+    </main>
+
+    <footer>
+        {% include 'partials/footer.html' %}    
+    </footer>
+</body>
+</html>

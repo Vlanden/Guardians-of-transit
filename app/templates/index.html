@@ -1,9 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Guardianes de la Vía</title>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
 </head>
 <body>
-    <h1>Bienvenido a Guardianes de la Vía</h1>
+
+    <header>
+        {% include 'partials/header.html' %}
+    </header>
+
+    {% if current_user.is_authenticated %}
+        <p>Hola, {{ current_user.username }} 👋</p>
+        <a href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+        <a href="{{ url_for('main.index') }}">Ir al Panel</a>
+    {% else %}
+        <a href="{{ url_for('auth.iniciarsesion') }}">Iniciar Sesión</a>
+        <a href="{{ url_for('auth.registro') }}">Registrarse</a>
+    {% endif %}
+
 </body>
 </html>
