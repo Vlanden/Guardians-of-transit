@@ -1,8 +1,12 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, request, jsonify
 from models.user import User
 from flask_login import login_user, login_required
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+import bcrypt
+import sqlite3
 
-auth_blueprint = Blueprint('auth', __name__, template_folder='templates')
+auth_bp = Blueprint('auth', __name__, template_folder='templates')
+
 
 # Ruta de inicio de sesión
 @auth_blueprint.route('/login', methods=['GET', 'POST'])
@@ -33,3 +37,13 @@ def register():
 @login_required
 def profile():
     return render_template('profile.html')
+
+
+            
+
+# Conexión a la base de datos (mover a un archivo aparte si es grande)
+def get_db():
+    return sqlite3.connect('usuarios.db')
+
+# ... (incluye aquí todas las funciones auxiliares: hash_password, check_password, etc.)
+
