@@ -35,6 +35,8 @@ def create_app():
         app.config['SQLALCHEMY_DATABASE_URI'] = db_path
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = raw_db_uri
+        
+    print(raw_db_uri)
 
     # Inicializar extensiones
     db.init_app(app)
