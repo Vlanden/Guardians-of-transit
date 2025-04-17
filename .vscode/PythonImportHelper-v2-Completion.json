@@ -1,5 +1,141 @@
 [
     {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "UserMixin",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "UserMixin",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "current_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "jwt",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "create_app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "create_app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -16,36 +152,185 @@
         "documentation": {}
     },
     {
-        "label": "create_app",
-        "importPath": "app",
-        "description": "app",
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
         "isExtraImport": true,
-        "detail": "app",
+        "detail": "flask",
         "documentation": {}
     },
     {
-        "label": "create_app",
-        "importPath": "app",
-        "description": "app",
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
         "isExtraImport": true,
-        "detail": "app",
+        "detail": "flask",
         "documentation": {}
     },
     {
-        "label": "home",
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "create_access_token",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "bcrypt",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "bcrypt",
+        "description": "bcrypt",
+        "detail": "bcrypt",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    password_hash = db.Column(db.String(200), nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    def set_password(self, password):\n        self.password_hash = generate_password_hash(password)\n    def check_password(self, password):\n        return check_password_hash(self.password_hash, password)",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "load_user",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def load_user(user_id):\n    return User.query.get(int(user_id))\nauth_bp = Blueprint('auth', __name__, template_folder='templates')\n@auth_bp.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        data = request.get_json()\n        user = User.query.filter_by(username=data['username']).first()\n        if user and user.check_password(data['password']):\n            access_token = create_access_token(identity=user.id)",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def login():\n    if request.method == 'POST':\n        data = request.get_json()\n        user = User.query.filter_by(username=data['username']).first()\n        if user and user.check_password(data['password']):\n            access_token = create_access_token(identity=user.id)\n            return jsonify(access_token=access_token), 200\n        return jsonify({\"error\": \"Credenciales inválidas\"}), 401\n    return render_template('InicioDeSesion.html')\n@auth_bp.route('/register', methods=['GET', 'POST'])",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "register",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def register():\n    if request.method == 'POST':\n        data = request.get_json()\n        if User.query.filter_by(username=data['username']).first():\n            return jsonify({\"error\": \"Usuario ya existe\"}), 400\n        new_user = User(\n            username=data['username'],\n            email=data['email']\n        )\n        new_user.set_password(data['password'])",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "auth_bp",
+        "kind": 5,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__, template_folder='templates')\n@auth_bp.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        data = request.get_json()\n        user = User.query.filter_by(username=data['username']).first()\n        if user and user.check_password(data['password']):\n            access_token = create_access_token(identity=user.id)\n            return jsonify(access_token=access_token), 200\n        return jsonify({\"error\": \"Credenciales inválidas\"}), 401",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "inicio",
         "kind": 2,
         "importPath": "app.routes",
         "description": "app.routes",
-        "peekOfCode": "def home():\n    return render_template('index.html')",
+        "peekOfCode": "def inicio():\n    return render_template('Inicio.html')\n# Página de inicio de sesión\n@main_bp.route('/iniciar-sesion')\ndef iniciodesesion():\n    return render_template('InicioDeSesion.html')\n# Página de registro\n@main_bp.route('/registro')\ndef registro():\n    return render_template('Registro.html')",
         "detail": "app.routes",
         "documentation": {}
     },
     {
-        "label": "main",
+        "label": "iniciodesesion",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def iniciodesesion():\n    return render_template('InicioDeSesion.html')\n# Página de registro\n@main_bp.route('/registro')\ndef registro():\n    return render_template('Registro.html')\n# Página de recuperación de contraseña\n@main_bp.route('/recuperacion', methods=['GET', 'POST'])\ndef recuperacion():\n    if request.method == 'POST':",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "registro",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def registro():\n    return render_template('Registro.html')\n# Página de recuperación de contraseña\n@main_bp.route('/recuperacion', methods=['GET', 'POST'])\ndef recuperacion():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        # Aquí puedes implementar el envío de correo de recuperación\n        flash('Si el correo existe, se han enviado las instrucciones para recuperar la contraseña.', 'info')\n        return redirect(url_for('main.iniciodesesion'))",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "recuperacion",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def recuperacion():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        # Aquí puedes implementar el envío de correo de recuperación\n        flash('Si el correo existe, se han enviado las instrucciones para recuperar la contraseña.', 'info')\n        return redirect(url_for('main.iniciodesesion'))\n    return render_template('Recuperacion.html')\n# Página protegida - solo si el usuario está autenticado\n@main_bp.route('/index')\n@login_required",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def index():\n    return render_template('Index.html', user=current_user)\n# Perfil del usuario\n@main_bp.route('/perfil')\n@login_required\ndef perfil():\n    return render_template('Perfil.html', user=current_user)\n# Términos y Condiciones\n@main_bp.route('/terminos')\ndef terminos():",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "perfil",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def perfil():\n    return render_template('Perfil.html', user=current_user)\n# Términos y Condiciones\n@main_bp.route('/terminos')\ndef terminos():\n    return render_template('terminos.html')\n# Políticas de Privacidad\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('politicas.html')",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "terminos",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def terminos():\n    return render_template('terminos.html')\n# Políticas de Privacidad\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('politicas.html')",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "privacidad",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def privacidad():\n    return render_template('politicas.html')",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "main_bp",
         "kind": 5,
         "importPath": "app.routes",
         "description": "app.routes",
-        "peekOfCode": "main = Blueprint('main', __name__)\n@main.route('/')\ndef home():\n    return render_template('index.html')",
+        "peekOfCode": "main_bp = Blueprint('main', __name__)\n# Página pública de bienvenida\n@main_bp.route('/')\ndef inicio():\n    return render_template('Inicio.html')\n# Página de inicio de sesión\n@main_bp.route('/iniciar-sesion')\ndef iniciodesesion():\n    return render_template('InicioDeSesion.html')\n# Página de registro",
         "detail": "app.routes",
         "documentation": {}
     },
