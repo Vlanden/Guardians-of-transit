@@ -1,0 +1,331 @@
+[
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "models.user",
+        "description": "models.user",
+        "isExtraImport": true,
+        "detail": "models.user",
+        "documentation": {}
+    },
+    {
+        "label": "login_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "create_access_token",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "get_jwt_identity",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "jwt_required",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "JWTManager",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "bcrypt",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "bcrypt",
+        "description": "bcrypt",
+        "detail": "bcrypt",
+        "documentation": {}
+    },
+    {
+        "label": "sqlite3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlite3",
+        "description": "sqlite3",
+        "detail": "sqlite3",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "create_app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "auth_bp",
+        "importPath": "auth",
+        "description": "auth",
+        "isExtraImport": true,
+        "detail": "auth",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "app.auth.auth",
+        "description": "app.auth.auth",
+        "peekOfCode": "def login():\n    if request.method == 'POST':\n        # Aquí agregarás la lógica para la autenticación\n        username = request.form['username']\n        password = request.form['password']\n        user = User.query.filter_by(username=username).first()\n        if user and user.check_password(password):\n            login_user(user)\n            return redirect(url_for('index'))\n    return render_template('login.html')",
+        "detail": "app.auth.auth",
+        "documentation": {}
+    },
+    {
+        "label": "register",
+        "kind": 2,
+        "importPath": "app.auth.auth",
+        "description": "app.auth.auth",
+        "peekOfCode": "def register():\n    if request.method == 'POST':\n        username = request.form['username']\n        password = request.form['password']\n        new_user = User(username=username, password=password)\n        new_user.save()\n        return redirect(url_for('auth.login'))\n    return render_template('register.html')\n# Ruta de perfil de usuario\n@auth_blueprint.route('/profile')",
+        "detail": "app.auth.auth",
+        "documentation": {}
+    },
+    {
+        "label": "profile",
+        "kind": 2,
+        "importPath": "app.auth.auth",
+        "description": "app.auth.auth",
+        "peekOfCode": "def profile():\n    return render_template('profile.html')\n# Conexión a la base de datos (mover a un archivo aparte si es grande)\ndef get_db():\n    return sqlite3.connect('usuarios.db')\n# ... (incluye aquí todas las funciones auxiliares: hash_password, check_password, etc.)",
+        "detail": "app.auth.auth",
+        "documentation": {}
+    },
+    {
+        "label": "get_db",
+        "kind": 2,
+        "importPath": "app.auth.auth",
+        "description": "app.auth.auth",
+        "peekOfCode": "def get_db():\n    return sqlite3.connect('usuarios.db')\n# ... (incluye aquí todas las funciones auxiliares: hash_password, check_password, etc.)",
+        "detail": "app.auth.auth",
+        "documentation": {}
+    },
+    {
+        "label": "auth_bp",
+        "kind": 5,
+        "importPath": "app.auth.auth",
+        "description": "app.auth.auth",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__, template_folder='templates')\n# Ruta de inicio de sesión\n@auth_blueprint.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        # Aquí agregarás la lógica para la autenticación\n        username = request.form['username']\n        password = request.form['password']\n        user = User.query.filter_by(username=username).first()\n        if user and user.check_password(password):",
+        "detail": "app.auth.auth",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "kind": 6,
+        "importPath": "app.config.config",
+        "description": "app.config.config",
+        "peekOfCode": "class Config:\n    SECRET_KEY = 'mi_clave_secreta'\n    SQLALCHEMY_DATABASE_URI = 'mysql://usuario:contraseña@localhost/guardianes_de_la_via'\n    SQLALCHEMY_TRACK_MODIFICATIONS = False",
+        "detail": "app.config.config",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(100), unique=True, nullable=False)\n    password_hash = db.Column(db.String(128), nullable=False)\n    def set_password(self, password):\n        self.password_hash = generate_password_hash(password)\n    def check_password(self, password):\n        return check_password_hash(self.password_hash, password)\n    def save(self):\n        db.session.add(self)",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "db = SQLAlchemy()\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(100), unique=True, nullable=False)\n    password_hash = db.Column(db.String(128), nullable=False)\n    def set_password(self, password):\n        self.password_hash = generate_password_hash(password)\n    def check_password(self, password):\n        return check_password_hash(self.password_hash, password)\n    def save(self):",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def home():\n    return render_template('index.html')",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 5,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "main = Blueprint('main', __name__)\n@main.route('/')\ndef home():\n    return render_template('index.html')",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "Guardians-of-via.run",
+        "description": "Guardians-of-via.run",
+        "peekOfCode": "app = create_app()\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "detail": "Guardians-of-via.run",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "Guardians-of-via.wsgi",
+        "description": "Guardians-of-via.wsgi",
+        "peekOfCode": "def home():\n    return render_template('Inicio.html')\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "detail": "Guardians-of-via.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "Guardians-of-via.wsgi",
+        "description": "Guardians-of-via.wsgi",
+        "peekOfCode": "app = Flask(__name__)\n# Configuración JWT\napp.config['JWT_SECRET_KEY'] = 'clave_super_secreta'\njwt = JWTManager(app)\n# Registra los Blueprints\napp.register_blueprint(auth_bp, url_prefix='/auth')\n# Mantén tu ruta principal si es necesaria\n@app.route('/')\ndef home():\n    return render_template('Inicio.html')",
+        "detail": "Guardians-of-via.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['JWT_SECRET_KEY']",
+        "kind": 5,
+        "importPath": "Guardians-of-via.wsgi",
+        "description": "Guardians-of-via.wsgi",
+        "peekOfCode": "app.config['JWT_SECRET_KEY'] = 'clave_super_secreta'\njwt = JWTManager(app)\n# Registra los Blueprints\napp.register_blueprint(auth_bp, url_prefix='/auth')\n# Mantén tu ruta principal si es necesaria\n@app.route('/')\ndef home():\n    return render_template('Inicio.html')\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "detail": "Guardians-of-via.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "jwt",
+        "kind": 5,
+        "importPath": "Guardians-of-via.wsgi",
+        "description": "Guardians-of-via.wsgi",
+        "peekOfCode": "jwt = JWTManager(app)\n# Registra los Blueprints\napp.register_blueprint(auth_bp, url_prefix='/auth')\n# Mantén tu ruta principal si es necesaria\n@app.route('/')\ndef home():\n    return render_template('Inicio.html')\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "detail": "Guardians-of-via.wsgi",
+        "documentation": {}
+    }
+]

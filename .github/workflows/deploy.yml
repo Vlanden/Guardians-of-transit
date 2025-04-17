@@ -1,0 +1,39 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - dev
+      - uat
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to VPS
+        env:
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_IP: ${{ secrets.VPS_IP }}
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_KEY }}
+        run: |
+          # Determinar la carpeta en función de la rama
+          if [[ "$GITHUB_REF_NAME" == "dev" ]]; then
+            DIR="dev"
+          elif [[ "$GITHUB_REF_NAME" == "uat" ]]; then
+            DIR="uat"
+          else
+            DIR="prod"
+          fi
+
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+
+          ssh -o StrictHostKeyChecking=no -i private_key $VPS_USER@$VPS_IP <<EOF
+            cd /var/www/Guard-of-via/$DIR
+            git pull origin $GITHUB_REF_NAME
+          EOF
