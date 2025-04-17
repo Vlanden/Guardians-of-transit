@@ -97,10 +97,10 @@
     },
     {
         "label": "Config",
-        "importPath": "config",
-        "description": "config",
+        "importPath": "config.config",
+        "description": "config.config",
         "isExtraImport": true,
-        "detail": "config",
+        "detail": "config.config",
         "documentation": {}
     },
     {
