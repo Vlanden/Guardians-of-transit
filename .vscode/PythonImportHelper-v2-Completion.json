@@ -48,6 +48,22 @@
         "documentation": {}
     },
     {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "User",
         "importPath": "models.user",
         "description": "models.user",
@@ -97,10 +113,10 @@
     },
     {
         "label": "Config",
-        "importPath": "config",
-        "description": "config",
+        "importPath": "config.config",
+        "description": "config.config",
         "isExtraImport": true,
-        "detail": "config",
+        "detail": "config.config",
         "documentation": {}
     },
     {
@@ -190,6 +206,24 @@
         "description": "app",
         "peekOfCode": "app = Flask(__name__)\napp.config.from_object(Config)\n# Registrar el blueprint de autenticación\napp.register_blueprint(auth_blueprint)\n@app.route('/')\ndef index():\n    return \"Bienvenidos a Guardianes de la Vía\"\nif __name__ == \"__main__\":\n    app.run(host='0.0.0.0', port=5000, debug=True)",
         "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "routes",
+        "description": "routes",
+        "peekOfCode": "def home():\n    return render_template('index.html')",
+        "detail": "routes",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 5,
+        "importPath": "routes",
+        "description": "routes",
+        "peekOfCode": "main = Blueprint('main', __name__)\n@main.route('/')\ndef home():\n    return render_template('index.html')",
+        "detail": "routes",
         "documentation": {}
     }
 ]
