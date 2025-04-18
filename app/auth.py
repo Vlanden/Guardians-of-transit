@@ -13,7 +13,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-auth_bp = Blueprint('auth', __name__, template_folder='templates')
+#auth_bp = Blueprint('auth', __name__, template_folder='templates')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -29,7 +29,7 @@ def login():
     
     return render_template('InicioDeSesion.html')
 
-@auth_bp.route('/register', methods=['GET', 'POST'])
+#@auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         data = request.get_json()

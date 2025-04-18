@@ -35,8 +35,6 @@ def create_app():
         app.config['SQLALCHEMY_DATABASE_URI'] = db_path
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = raw_db_uri
-        
-    print(raw_db_uri)
 
     # Inicializar extensiones
     db.init_app(app)
@@ -52,7 +50,7 @@ def create_app():
 
     # Registrar blueprints
     from app.routes import main_bp
-    from app.auth import auth_bp  # Si tienes este blueprint también
+    from app.Registro import auth_bp  # Si tienes este blueprint también
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
 
