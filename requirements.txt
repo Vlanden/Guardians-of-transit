@@ -7,3 +7,8 @@ Werkzeug
 flask_jwt_extended
 bcrypt
 python-dotenv
+flask_talisman
+flask_limiter
+pymysql
+waitress
+Flask_WTF
