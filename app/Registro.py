@@ -80,6 +80,8 @@ def validar_login(username, password):
             return redirect(url_for("main.terminos"))
         else:
             flash("Usuario o contraseña incorrectos", "danger")
+    else:
+        flash("El usuario no esta registrado")
 
 
 
