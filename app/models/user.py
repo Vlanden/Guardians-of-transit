@@ -45,4 +45,12 @@ class User(UserMixin, db.Model):
         ).first()
 
     def __repr__(self) -> str:
+<<<<<<< Updated upstream
         return f'<User {self.username}>'
+=======
+        return f'<User {self.username}>'
+    
+    
+    
+    
+>>>>>>> Stashed changes
