@@ -18,4 +18,7 @@ if __name__ == "__main__":
     # y habilita el modo debug solo en desarrollo.
     app.run(debug=True, host="0.0.0.0", port=5000)
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
