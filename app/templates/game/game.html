@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Quiz Educación Vial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bs_css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+
+
+
+<body>
+    {% include 'partials/header.html' %}
+
+    <div class="game-container">
+        <div id="pregunta" class="pregunta"></div>
+        <div id="respuestas" class="respuestas"></div>
+        <div id="resultado" class="resultado" style="display: none"></div>
+    </div>
+    <script src="{{ url_for('static', filename='js/bs_js/bootstrap.bundle.min.js') }}"></script>
+
+</body>
+
+
+</html>
+
+    <script>
+    const GUARDAR_URL = "{{ url_for('main.guardar_puntuacion') }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>

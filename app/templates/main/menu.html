@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juegos Recomendados</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        {% include 'partials/header.html' %}
+    </header>
+
+    <div class="search-container">
+        <div class="search-box">
+            <span>🔍</span>
+            <input type="text" id="searchInput" placeholder="Buscar juegos por ID..." onkeyup="buscarJuego()">
+        </div>
+    </div>
+    
+    <h2>Juegos recomendados</h2>
+
+    <div class="games-grid" id="gamesContainer">
+        {% for i in range(1, 8) %}
+        <div class="game-card" id="juego{{ i }}">
+            <center>
+                <img src="{{ url_for('static', filename='images/game' + i|string + '.jpg') }}" class="game-img">
+            </center>
+            <span class="game-name">Nombre</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <footer>
+        {% include 'partials/footer.html' %}
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+</body>
+</html>

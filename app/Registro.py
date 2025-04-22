@@ -95,4 +95,4 @@ def login():
 
         validar_login(username, password)
 
-    return render_template("InicioDeSesion.html")
+    return render_template("/auth/log-in.html")

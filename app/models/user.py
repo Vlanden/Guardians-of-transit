@@ -14,10 +14,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(200), nullable=False)
-    score = db.Column(db.Integer, default=0)  # Asegúrate que esta línea existe
-    reset_token = db.Column(db.String(100), nullable=True)
-    token_expiration = db.Column(db.DateTime, nullable=True)
-    score = db.Column(db.Integer, default=0)
+    
         
     def set_password(self, password):
         self.password_hash = bcrypt.hashpw(

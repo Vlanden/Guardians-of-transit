@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Meta datos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap y fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&family=Oswald&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS (usando url_for para rutas estáticas) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    
+    <!-- Estilo propio -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <title>Registro</title>
+</head>
+
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <header>
+        {% include 'partials/header.html' %}
+    </header>
+
+    <main class="main-container container w-75 bg-primary rounded-3 shadow">
+        <article class="row align-items-stretch">
+            <!-- Sección decorativa izquierda -->
+            <section class="Elements col bg-secondary d-none d-lg-block col-md-5 col-lg-5 rounded-start-3">
+                <!-- Puedes añadir contenido decorativo aquí -->
+            </section>
+            
+            <!-- Sección de formulario -->
+            <section class="Elements col bg-black p-5 rounded-end-3">
+                <form method="POST" action="{{ url_for('auth.register_view') }}" class="forms">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <h2 class="Title text-center py-4 text-white">¡Bienvenido!</h2>
+                    
+                    <!-- Campo de nombre de usuario -->
+                    <div class="input-container mb-4">
+                        <label class="labels fw-bold form-label text-white" for="username">Nombre de usuario:</label>
+                        <input type="text" id="username" name="username" class="inputs form-control" required>
+                    </div>
+                    
+                    <!-- Campo de email -->
+                    <div class="input-container mb-4">
+                        <label class="labels fw-bold form-label text-white" for="email">Correo electrónico:</label>
+                        <input type="email" id="email" name="email" class="inputs form-control" required>
+                    </div>
+                    
+                    <!-- Campo de contraseña -->
+                    <div class="input-container mb-4">
+                        <label class="labels fw-bold form-label text-white" for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" class="inputs form-control" required>
+                    </div>
+                    
+                    <!-- Confirmación de contraseña -->
+                    <div class="input-container mb-4">
+                        <label class="labels fw-bold form-label text-white" for="confirm_password">Confirma contraseña:</label>
+                        <input type="password" id="confirm_password" name="confirm_password" class="inputs form-control" required>
+                    </div>
+                    
+                    <!-- Botón de registro y enlace a login -->
+                    <div class="text-center mt-5">
+                        <button type="submit" class="register btn btn-primary" id="sign-up">Registro</button>
+                        <p class="fw-bold text-center mt-3 text-white">
+                            ¿Ya te registraste? 
+                            <a href="{{ url_for('auth.login_view') }}" class="text-primary">Inicia sesión aquí</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        {% include 'partials/footer.html' %}
+    </footer>
+    
+    <!-- Bootstrap JS (usando url_for para rutas estáticas) -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

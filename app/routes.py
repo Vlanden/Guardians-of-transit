@@ -4,7 +4,7 @@ from flask_login import login_required, current_user, logout_user
 
 from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
 from flask_login import login_required, current_user
-from app import limiter
+
 from app.models.user import User
 from app import db
 from datetime import datetime
@@ -16,17 +16,16 @@ main_bp = Blueprint('main', __name__)
 
 # Página pública de bienvenida
 @main_bp.route('/')
-@limiter.limit("100 per minute")
 def inicio():
-    return render_template('main/main-page.html')
+    return render_template('/main/main-page.html')
 
 @main_bp.route('/iniciar-sesion')
 def iniciodesesion():
-    return redirect(url_for('auth.login'))
+    return render_template("/auth/log-in.html")
 
 @main_bp.route('/registro')
 def registro():
-    return redirect(url_for('auth.register'))
+    return render_template('Registro.html')
 
 @main_bp.route('/terminos')
 def terminos():
@@ -43,7 +42,7 @@ def index():
 
 @main_bp.route('/perfil')
 @login_required
-@limiter.limit("30 per minute")
+
 def perfil():
     return render_template('main/profile.html', user=current_user)
 
@@ -93,13 +92,6 @@ def guardar_puntuacion():
             return make_response('¡Puntuación guardada con éxito!', 200)
         except Exception as e:
             return make_response(f'Error: {str(e)}', 400)
-
-
-
-# Políticas de Privacidad
-@main_bp.route('/privacidad')
-def privacidad():
-    return render_template('politicas.html')
 
 
 @main_bp.route('/logout')
