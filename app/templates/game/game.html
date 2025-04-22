@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz Educación Vial{% endblock %}
+
+{% block content %}
+<div class="game-container container my-4">
+    <div id="pregunta" class="pregunta card p-4 mb-4"></div>
+    <div id="respuestas" class="respuestas row g-3"></div>
+    <div id="resultado" class="resultado card mt-4 p-3" style="display: none"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const GUARDAR_URL = "{{ url_for('main.guardar_puntuacion') }}";
+</script>
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

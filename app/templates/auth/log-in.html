@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio de Sesión{% endblock %}
+
+{% block content %}
+<main class="container w-75 bg-primary rounded-3 shadow my-5">
+    <div class="row align-items-stretch">
+        <section class="col bg-secondary d-none d-lg-block col-md-5 col-lg-5 rounded-start-3">
+            <!-- Espacio decorativo -->
+        </section>
+        
+        <section class="col bg-black p-5 rounded-end-3">
+            <form method="post" action="{{ url_for('auth.login') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <h2 class="text-center py-4 text-white">¡Inicia sesión!</h2>
+                
+                <div class="mb-4">
+                    <label class="fw-bold form-label text-white" for="username">Nombre de usuario:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="fw-bold form-label text-white" for="pass">Contraseña:</label>
+                    <input type="password" id="pass" name="password" class="form-control" required>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                    <p class="fw-bold text-center mt-3 text-white">
+                        ¿No tienes una cuenta? 
+                        <a href="{{ url_for('auth.register') }}" class="text-primary">Regístrate aquí</a>
+                    </p>
+                    <p class="fw-bold text-center mt-1 text-white">
+                        ¿Olvidaste tu contraseña? 
+                        <a href="{{ url_for('auth.recover') }}" class="text-primary">Recupérala aquí</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Juegos Recomendados{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="search-container mb-4">
+        <div class="search-box input-group">
+            <span class="input-group-text">🔍</span>
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar juegos por ID..." onkeyup="buscarJuego()">
+        </div>
+    </div>
+    
+    <h2 class="text-center mb-4">Juegos recomendados</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="gamesContainer">
+        {% for i in range(1, 8) %}
+        <div class="col">
+            <div class="game-card card h-100" id="juego{{ i }}">
+                <img src="{{ url_for('static', filename='images/game' + i|string + '.jpg') }}" class="card-img-top game-img" alt="Juego {{ i }}">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Nombre del Juego</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+{% endblock %}

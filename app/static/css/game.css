@@ -1,0 +1,55 @@
+.game-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.pregunta {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: #333;
+}
+
+.respuestas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.opcion {
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s;
+  font-size: 18px;
+}
+
+.opcion:hover {
+  transform: scale(1.03);
+}
+
+.rojo { background-color: #ff6b6b; color: white; }
+.amarillo { background-color: #ffd166; color: black; }
+.negro { background-color: #333; color: white; }
+.blanco { background-color: #f7fff7; color: black; border: 1px solid #ddd; }
+
+.correcta {
+  background-color: #06d6a0 !important;
+  color: white !important;
+}
+
+.desactivada {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.resultado {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  font-size: 20px;
+}
