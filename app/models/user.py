@@ -45,3 +45,4 @@ class User(UserMixin, db.Model):
         ).first()
 
     def __repr__(self) -> str:
+        return f'<User {self.username}>'
