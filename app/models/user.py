@@ -40,21 +40,20 @@ class User(UserMixin, db.Model):
             self.password_hash.encode('utf-8')
         )
     
-    #Para lo mismo que las columnas
-    #def generate_reset_token(self, expires_in=3600):
-    #    """Genera un token de restablecimiento de contraseña y lo almacena en la base de datos"""
-    #    self.reset_token = secrets.token_urlsafe(32)
-    #    self.reset_token_expires = datetime.utcnow() + timedelta(seconds=expires_in)
-    #    db.session.commit()  # Guardamos el token y la fecha de expiración en la base de datos
-    #    return self.reset_token
+    def generate_reset_token(self, expires_in=3600):
+        """Genera un token de restablecimiento de contraseña y lo almacena en la base de datos"""
+        self.reset_token = secrets.token_urlsafe(32)
+        self.reset_token_expires = datetime.utcnow() + timedelta(seconds=expires_in)
+        db.session.commit()  # Guardamos el token y la fecha de expiración en la base de datos
+        return self.reset_token
 
-    #@staticmethod
-    #def verify_reset_token(token):
-    #    """Verifica si el token es válido y no ha expirado"""
-    #    return User.query.filter(
-    #        User.reset_token == token,
-    #        User.reset_token_expires > datetime.utcnow()
-    #    ).first()
+    @staticmethod
+    def verify_reset_token(token):
+        """Verifica si el token es válido y no ha expirado"""
+        return User.query.filter(
+            User.reset_token == token,
+            User.reset_token_expires > datetime.utcnow()
+        ).first()
 
     def __repr__(self) -> str:
         return f'<User {self.username}>'

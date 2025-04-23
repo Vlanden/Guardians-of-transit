@@ -5,9 +5,11 @@ from app.models.user import User
 from app.services.auth_service import (
     is_valid_email, is_valid_username, is_strong_password, send_reset_email
 )
+from flask import current_app
 import bcrypt
 from sqlalchemy.exc import SQLAlchemyError, OperationalError
 from contextlib import contextmanager
+from flask import flash
 
 auth = Blueprint('auth', __name__)
 
@@ -191,7 +193,7 @@ def reset_password():
             try:
                 with session_scope() as session:
                     session.add(user)
-                    send_reset_email(user)  # Opcionalmente enviar un correo de confirmación
+                    #send_reset_email(user)  # Opcionalmente enviar un correo de confirmación
 
                 flash('Tu contraseña ha sido restablecida correctamente.', 'success')
                 return redirect(url_for('auth.login'))
