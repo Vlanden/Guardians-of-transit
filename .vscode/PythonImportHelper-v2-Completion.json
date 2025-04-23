@@ -1107,7 +1107,7 @@
         "kind": 2,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "def get_venv_python():\n    if platform.system() == \"Windows\":\n        return os.path.join(\"venv\", \"Scripts\", \"python.exe\")\n    else:\n        return os.path.join(\"venv\", \"bin\", \"python\")\nVENV_PATH = os.path.abspath(\"venv\")\nPYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef install_requirements():",
+        "peekOfCode": "def get_venv_python():\n    \"\"\"Retorna la ruta del ejecutable Python dentro del entorno virtual.\"\"\"\n    if platform.system() == \"Windows\":\n        return os.path.join(\"venv\", \"Scripts\", \"python.exe\")\n    else:\n        return os.path.join(\"venv\", \"bin\", \"python\")\nVENV_PATH = os.path.join(os.path.dirname(__file__), 'venv')  # Ruta del entorno virtual\nPYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"",
         "detail": "run",
         "documentation": {}
     },
@@ -1116,7 +1116,16 @@
         "kind": 2,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "def is_using_virtualenv():\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef install_requirements():\n    subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", \"-r\", \"requirements.txt\"])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        print(f\"Reiniciando desde el entorno virtual: {PYTHON_BIN}\")\n        subprocess.check_call([PYTHON_BIN, __file__])\n        sys.exit(0)\n    print(\"Entorno virtual activo. Instalando dependencias...\")",
+        "peekOfCode": "def is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef create_virtualenv():\n    \"\"\"Crea un entorno virtual si no existe.\"\"\"\n    print(\"Entorno virtual no encontrado. Creando entorno virtual...\")\n    subprocess.check_call([sys.executable, '-m', 'venv', VENV_PATH])\ndef install_requirements():\n    \"\"\"Instala las dependencias desde requirements.txt.\"\"\"\n    print(\"Instalando dependencias desde requirements.txt...\")",
+        "detail": "run",
+        "documentation": {}
+    },
+    {
+        "label": "create_virtualenv",
+        "kind": 2,
+        "importPath": "run",
+        "description": "run",
+        "peekOfCode": "def create_virtualenv():\n    \"\"\"Crea un entorno virtual si no existe.\"\"\"\n    print(\"Entorno virtual no encontrado. Creando entorno virtual...\")\n    subprocess.check_call([sys.executable, '-m', 'venv', VENV_PATH])\ndef install_requirements():\n    \"\"\"Instala las dependencias desde requirements.txt.\"\"\"\n    print(\"Instalando dependencias desde requirements.txt...\")\n    pip_executable = os.path.join(VENV_PATH, 'Scripts', 'pip') if os.name == 'nt' else os.path.join(VENV_PATH, 'bin', 'pip')\n    subprocess.check_call([pip_executable, 'install', '-r', 'requirements.txt'])\nif __name__ == \"__main__\":",
         "detail": "run",
         "documentation": {}
     },
@@ -1125,7 +1134,7 @@
         "kind": 2,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "def install_requirements():\n    subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", \"-r\", \"requirements.txt\"])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        print(f\"Reiniciando desde el entorno virtual: {PYTHON_BIN}\")\n        subprocess.check_call([PYTHON_BIN, __file__])\n        sys.exit(0)\n    print(\"Entorno virtual activo. Instalando dependencias...\")\n    try:\n        install_requirements()",
+        "peekOfCode": "def install_requirements():\n    \"\"\"Instala las dependencias desde requirements.txt.\"\"\"\n    print(\"Instalando dependencias desde requirements.txt...\")\n    pip_executable = os.path.join(VENV_PATH, 'Scripts', 'pip') if os.name == 'nt' else os.path.join(VENV_PATH, 'bin', 'pip')\n    subprocess.check_call([pip_executable, 'install', '-r', 'requirements.txt'])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        if not os.path.exists(VENV_PATH):\n            create_virtualenv()\n        # Activar el entorno virtual en Windows",
         "detail": "run",
         "documentation": {}
     },
@@ -1134,7 +1143,7 @@
         "kind": 5,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "VENV_PATH = os.path.abspath(\"venv\")\nPYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef install_requirements():\n    subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", \"-r\", \"requirements.txt\"])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        print(f\"Reiniciando desde el entorno virtual: {PYTHON_BIN}\")\n        subprocess.check_call([PYTHON_BIN, __file__])",
+        "peekOfCode": "VENV_PATH = os.path.join(os.path.dirname(__file__), 'venv')  # Ruta del entorno virtual\nPYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef create_virtualenv():\n    \"\"\"Crea un entorno virtual si no existe.\"\"\"\n    print(\"Entorno virtual no encontrado. Creando entorno virtual...\")\n    subprocess.check_call([sys.executable, '-m', 'venv', VENV_PATH])\ndef install_requirements():",
         "detail": "run",
         "documentation": {}
     },
@@ -1143,7 +1152,7 @@
         "kind": 5,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "PYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef install_requirements():\n    subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", \"-r\", \"requirements.txt\"])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        print(f\"Reiniciando desde el entorno virtual: {PYTHON_BIN}\")\n        subprocess.check_call([PYTHON_BIN, __file__])\n        sys.exit(0)",
+        "peekOfCode": "PYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef create_virtualenv():\n    \"\"\"Crea un entorno virtual si no existe.\"\"\"\n    print(\"Entorno virtual no encontrado. Creando entorno virtual...\")\n    subprocess.check_call([sys.executable, '-m', 'venv', VENV_PATH])\ndef install_requirements():\n    \"\"\"Instala las dependencias desde requirements.txt.\"\"\"",
         "detail": "run",
         "documentation": {}
     },
