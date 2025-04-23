@@ -2,8 +2,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import db
 import bcrypt
-from datetime import datetime
-
+from datetime import datetime, timedelta
+import secrets
 from sqlalchemy import event
 from sqlalchemy.schema import DDL
 
@@ -15,23 +15,52 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(200), nullable=False)
     
-        
+    # Las siguientes columnas son para cuando este para enviar correos de recuperacion:
+    # reset_token = db.Column(db.String(100), nullable=True)
+    # reset_token_expires = db.Column(db.DateTime, nullable=True)
+    
+
+    # Método para cambiar la contraseña directamente
+    def change_password_direct(self, new_password):
+        """Cambia la contraseña del usuario directamente sin token"""
+        self.set_password(new_password)
+        db.session.commit()
+
     def set_password(self, password):
+        """Encripta la contraseña antes de guardarla"""
         self.password_hash = bcrypt.hashpw(
             password.encode('utf-8'), 
             bcrypt.gensalt()
         ).decode('utf-8')
-    
+        
     def check_password(self, password):
+        """Verifica si la contraseña proporcionada coincide con la almacenada"""
         return bcrypt.checkpw(
             password.encode('utf-8'),
             self.password_hash.encode('utf-8')
         )
     
-    def __repr__(self):
+    #Para lo mismo que las columnas
+    #def generate_reset_token(self, expires_in=3600):
+    #    """Genera un token de restablecimiento de contraseña y lo almacena en la base de datos"""
+    #    self.reset_token = secrets.token_urlsafe(32)
+    #    self.reset_token_expires = datetime.utcnow() + timedelta(seconds=expires_in)
+    #    db.session.commit()  # Guardamos el token y la fecha de expiración en la base de datos
+    #    return self.reset_token
+
+    #@staticmethod
+    #def verify_reset_token(token):
+    #    """Verifica si el token es válido y no ha expirado"""
+    #    return User.query.filter(
+    #        User.reset_token == token,
+    #        User.reset_token_expires > datetime.utcnow()
+    #    ).first()
+
+    def __repr__(self) -> str:
         return f'<User {self.username}>'
     
-    
+
+# Clases adicionales como Perfil, intentos, juegos_quiz, juegos_sim, y juegos_extra
 
 class Perfil(UserMixin, db.Model):
     __tablename__ = 'perfil'  

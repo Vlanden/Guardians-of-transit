@@ -48,7 +48,6 @@ def juego():
     return render_template('game/game.html', user=current_user)
 
 
-
 # ──────── API: FUNCIONES DEL USUARIO ────────
 
 @main_bp.route('/save-score', methods=['POST'])

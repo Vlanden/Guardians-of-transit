@@ -10,14 +10,22 @@ class UserService:
     
     @staticmethod
     def save_user_score(user: User, score: str) -> Tuple[bool, str]:
-        """Guarda la puntuación del usuario."""
+        """Guarda la puntuación del usuario en la base de datos.
+
+        Args:
+            user (User): Objeto del usuario.
+            score (str): Puntuación a guardar.
+
+        Returns:
+            Tuple[bool, str]: Resultado de la operación y mensaje.
+        """
         try:
             # Validar si score es un número entero antes de asignarlo
             if not score.isdigit():
                 return False, "La puntuación debe ser un número válido"
             
             score = int(score)
-            
+
             if score < 0:
                 return False, "La puntuación no puede ser negativa"
             
@@ -35,7 +43,15 @@ class UserService:
 
     @staticmethod
     def update_user_profile(user: User, data: dict) -> Tuple[bool, str]:
-        """Actualiza el perfil del usuario."""
+        """Actualiza el perfil del usuario.
+
+        Args:
+            user (User): Objeto del usuario.
+            data (dict): Diccionario con los nuevos datos del perfil.
+
+        Returns:
+            Tuple[bool, str]: Resultado de la operación y mensaje.
+        """
         try:
             # Validar que se incluyan los campos requeridos
             username = data.get('username', '')

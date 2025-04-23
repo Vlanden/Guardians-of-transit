@@ -12,12 +12,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('main.inicio') }}">Inicio</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('main.terminos') }}">Términos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('main.privacidad') }}">Privacidad</a>
-                </li>
                 {% if current_user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('main.juego') }}">Juego</a>

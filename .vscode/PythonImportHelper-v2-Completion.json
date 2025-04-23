@@ -345,6 +345,14 @@
         "documentation": {}
     },
     {
+        "label": "OperationalError",
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
         "label": "SQLAlchemyError",
         "importPath": "sqlalchemy.exc",
         "description": "sqlalchemy.exc",
@@ -366,6 +374,22 @@
         "description": "sqlalchemy.exc",
         "isExtraImport": true,
         "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
+        "label": "contextmanager",
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "isExtraImport": true,
+        "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "contextmanager",
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "isExtraImport": true,
+        "detail": "contextlib",
         "documentation": {}
     },
     {
@@ -401,6 +425,14 @@
         "documentation": {}
     },
     {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -422,6 +454,15 @@
         "description": "datetime",
         "isExtraImport": true,
         "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "secrets",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "secrets",
+        "description": "secrets",
+        "detail": "secrets",
         "documentation": {}
     },
     {
@@ -457,14 +498,6 @@
         "documentation": {}
     },
     {
-        "label": "recover",
-        "importPath": "app.controllers.auth_controller",
-        "description": "app.controllers.auth_controller",
-        "isExtraImport": true,
-        "detail": "app.controllers.auth_controller",
-        "documentation": {}
-    },
-    {
         "label": "register",
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
@@ -474,6 +507,14 @@
     },
     {
         "label": "reset_password",
+        "importPath": "app.controllers.auth_controller",
+        "description": "app.controllers.auth_controller",
+        "isExtraImport": true,
+        "detail": "app.controllers.auth_controller",
+        "documentation": {}
+    },
+    {
+        "label": "new_password",
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
         "isExtraImport": true,
@@ -504,15 +545,6 @@
         "importPath": "re",
         "description": "re",
         "detail": "re",
-        "documentation": {}
-    },
-    {
-        "label": "secrets",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "secrets",
-        "description": "secrets",
-        "detail": "secrets",
         "documentation": {}
     },
     {
@@ -547,14 +579,6 @@
         "importPath": "logging",
         "description": "logging",
         "detail": "logging",
-        "documentation": {}
-    },
-    {
-        "label": "contextmanager",
-        "importPath": "contextlib",
-        "description": "contextlib",
-        "isExtraImport": true,
-        "detail": "contextlib",
         "documentation": {}
     },
     {
@@ -630,11 +654,20 @@
         "documentation": {}
     },
     {
+        "label": "session_scope",
+        "kind": 2,
+        "importPath": "app.controllers.auth_controller",
+        "description": "app.controllers.auth_controller",
+        "peekOfCode": "def session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()\n        raise\n@auth.route('/login', methods=['GET', 'POST'], endpoint='login')\n@limiter.limit(\"10 per minute\")",
+        "detail": "app.controllers.auth_controller",
+        "documentation": {}
+    },
+    {
         "label": "login",
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def login():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        password = request.form.get('password', '').strip()\n        if not username or not password:\n            flash('Por favor complete todos los campos', 'error')\n            return redirect(url_for('auth.login'))\n        try:",
+        "peekOfCode": "def login():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        password = request.form.get('password', '').strip()\n        if not username or not password:\n            flash('Por favor complete todos los campos', 'error')\n            return render_template('auth/log-in.html', username=username)\n        try:",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -657,11 +690,11 @@
         "documentation": {}
     },
     {
-        "label": "recover",
+        "label": "new_password",
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def recover():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        email = request.form.get('email', '').strip()\n        if not is_valid_email(email):\n            flash('Correo electrónico inválido', 'error')\n            return redirect(url_for('auth.recover'))\n        user = User.query.filter_by(email=email).first()\n        if user:",
+        "peekOfCode": "def new_password(token):\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    user = User.verify_reset_token(token)  # Verificar si el token es válido\n    if not user:\n        flash('Token inválido o expirado', 'error')\n        return redirect(url_for('auth.recover'))  # Redirigir si el token no es válido\n    if request.method == 'POST':\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -670,7 +703,16 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def reset_password(token):\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    user = User.verify_reset_token(token)\n    if not user:\n        flash('Token inválido o expirado', 'error')\n        return redirect(url_for('auth.recover'))\n    if request.method == 'POST':\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()",
+        "peekOfCode": "def reset_password():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        email = request.form.get('email', '').strip()\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()\n        if not is_valid_email(email):\n            flash('Correo electrónico inválido', 'error')\n            return render_template('auth/reset-password.html')",
+        "detail": "app.controllers.auth_controller",
+        "documentation": {}
+    },
+    {
+        "label": "send_reset_email",
+        "kind": 2,
+        "importPath": "app.controllers.auth_controller",
+        "description": "app.controllers.auth_controller",
+        "peekOfCode": "def send_reset_email(user):\n    token = user.generate_reset_token()  # Genera el token para el correo\n    send_email(\n        user.email,\n        'Recuperación de contraseña',\n        'auth/reset_password_email',  # Usar template de correo con link a new-password.html\n        user=user,\n        token=token\n    )",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -679,7 +721,7 @@
         "kind": 5,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "auth = Blueprint('auth', __name__)\n@auth.route('/login', methods=['GET', 'POST'], endpoint='login')\n@limiter.limit(\"10 per minute\")\ndef login():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        password = request.form.get('password', '').strip()\n        if not username or not password:",
+        "peekOfCode": "auth = Blueprint('auth', __name__)\n# Contexto para manejo seguro de sesiones\n@contextmanager\ndef session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -697,7 +739,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(200), nullable=False)\n    def set_password(self, password):\n        self.password_hash = bcrypt.hashpw(\n            password.encode('utf-8'), \n            bcrypt.gensalt()",
+        "peekOfCode": "class User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(200), nullable=False)\n    # Las siguientes columnas son para cuando este para enviar correos de recuperacion:\n    # reset_token = db.Column(db.String(100), nullable=True)\n    # reset_token_expires = db.Column(db.DateTime, nullable=True)\n    # Método para cambiar la contraseña directamente",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -751,7 +793,7 @@
         "kind": 5,
         "importPath": "app.routes.auth",
         "description": "app.routes.auth",
-        "peekOfCode": "auth_bp = Blueprint('auth', __name__, url_prefix='/auth')\n# Definimos las rutas y las funciones asociadas\nauth_bp.add_url_rule('/login', view_func=login, methods=['GET', 'POST'])\nauth_bp.add_url_rule('/logout', view_func=logout, methods=['GET'])\nauth_bp.add_url_rule('/register', view_func=register, methods=['GET', 'POST'])\nauth_bp.add_url_rule('/recover', view_func=recover, methods=['GET', 'POST'])\nauth_bp.add_url_rule('/reset_password', view_func=reset_password, methods=['GET', 'POST'])",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__, url_prefix='/auth')\n# Definimos las rutas y las funciones asociadas\nauth_bp.add_url_rule('/login', view_func=login, methods=['GET', 'POST'])\nauth_bp.add_url_rule('/logout', view_func=logout, methods=['GET'])\nauth_bp.add_url_rule('/register', view_func=register, methods=['GET', 'POST'])\nauth_bp.add_url_rule('/reset-password', view_func=reset_password, methods=['GET', 'POST'])  # Para cambiar la contraseña sin token\nauth_bp.add_url_rule('/new-password/<token>', view_func=new_password, methods=['GET', 'POST'])  # Para el flujo basado en token",
         "detail": "app.routes.auth",
         "documentation": {}
     },
@@ -904,7 +946,7 @@
         "kind": 6,
         "importPath": "app.services.user_service",
         "description": "app.services.user_service",
-        "peekOfCode": "class UserService:\n    @staticmethod\n    def save_user_score(user: User, score: str) -> Tuple[bool, str]:\n        \"\"\"Guarda la puntuación del usuario.\"\"\"\n        try:\n            # Validar si score es un número entero antes de asignarlo\n            if not score.isdigit():\n                return False, \"La puntuación debe ser un número válido\"\n            score = int(score)\n            if score < 0:",
+        "peekOfCode": "class UserService:\n    @staticmethod\n    def save_user_score(user: User, score: str) -> Tuple[bool, str]:\n        \"\"\"Guarda la puntuación del usuario en la base de datos.\n        Args:\n            user (User): Objeto del usuario.\n            score (str): Puntuación a guardar.\n        Returns:\n            Tuple[bool, str]: Resultado de la operación y mensaje.\n        \"\"\"",
         "detail": "app.services.user_service",
         "documentation": {}
     },
@@ -913,7 +955,7 @@
         "kind": 5,
         "importPath": "app.services.user_service",
         "description": "app.services.user_service",
-        "peekOfCode": "logger = logging.getLogger(__name__)\nclass UserService:\n    @staticmethod\n    def save_user_score(user: User, score: str) -> Tuple[bool, str]:\n        \"\"\"Guarda la puntuación del usuario.\"\"\"\n        try:\n            # Validar si score es un número entero antes de asignarlo\n            if not score.isdigit():\n                return False, \"La puntuación debe ser un número válido\"\n            score = int(score)",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nclass UserService:\n    @staticmethod\n    def save_user_score(user: User, score: str) -> Tuple[bool, str]:\n        \"\"\"Guarda la puntuación del usuario en la base de datos.\n        Args:\n            user (User): Objeto del usuario.\n            score (str): Puntuación a guardar.\n        Returns:\n            Tuple[bool, str]: Resultado de la operación y mensaje.",
         "detail": "app.services.user_service",
         "documentation": {}
     },
