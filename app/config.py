@@ -17,6 +17,7 @@ class Config:
     #INSTANCE_PATH = os.path.join(BASE_DIR, 'instance')
     #DB_PATH = BASE_DIR / 'database.db'  # En el directorio del proyecto
     
+
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') 
     ##Pendiente de checar   
     SQLALCHEMY_TRACK_MODIFICATIONS = False

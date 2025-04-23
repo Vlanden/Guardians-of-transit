@@ -337,6 +337,38 @@
         "documentation": {}
     },
     {
+        "label": "SQLAlchemyError",
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemyError",
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
+        "label": "DisconnectionError",
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
+        "label": "OperationalError",
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
         "label": "UserService",
         "importPath": "app.services.user_service",
         "description": "app.services.user_service",
@@ -345,12 +377,27 @@
         "documentation": {}
     },
     {
-        "label": "secrets",
-        "kind": 6,
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
         "isExtraImport": true,
-        "importPath": "secrets",
-        "description": "secrets",
-        "detail": "secrets",
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -370,14 +417,6 @@
         "documentation": {}
     },
     {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
         "label": "timedelta",
         "importPath": "datetime",
         "description": "datetime",
@@ -386,11 +425,19 @@
         "documentation": {}
     },
     {
-        "label": "timedelta",
-        "importPath": "datetime",
-        "description": "datetime",
+        "label": "event",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
         "isExtraImport": true,
-        "detail": "datetime",
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "DDL",
+        "importPath": "sqlalchemy.schema",
+        "description": "sqlalchemy.schema",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.schema",
         "documentation": {}
     },
     {
@@ -460,6 +507,15 @@
         "documentation": {}
     },
     {
+        "label": "secrets",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "secrets",
+        "description": "secrets",
+        "detail": "secrets",
+        "documentation": {}
+    },
+    {
         "label": "smtplib",
         "kind": 6,
         "isExtraImport": true,
@@ -491,6 +547,14 @@
         "importPath": "logging",
         "description": "logging",
         "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "contextmanager",
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "isExtraImport": true,
+        "detail": "contextlib",
         "documentation": {}
     },
     {
@@ -570,7 +634,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def login():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        password = request.form.get('password', '').strip()\n        if not username or not password:\n            flash('Por favor complete todos los campos', 'error')\n            return redirect(url_for('auth.login'))\n        user = User.query.filter_by(username=username).first()",
+        "peekOfCode": "def login():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        password = request.form.get('password', '').strip()\n        if not username or not password:\n            flash('Por favor complete todos los campos', 'error')\n            return redirect(url_for('auth.login'))\n        try:",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -633,7 +697,52 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(200), nullable=False)\n    score = db.Column(db.Integer, default=0)\n    reset_token = db.Column(db.String(100), unique=True, nullable=True)\n    reset_token_expires = db.Column(db.DateTime, nullable=True)\n    def set_password(self, password: str) -> None:",
+        "peekOfCode": "class User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(200), nullable=False)\n    def set_password(self, password):\n        self.password_hash = bcrypt.hashpw(\n            password.encode('utf-8'), \n            bcrypt.gensalt()",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "Perfil",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class Perfil(UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime)\n    ultima_conexion = db.Column(db.DateTime)\n    juegos_jugados = db.Column(db.Integer, default=0) \nclass intentos(UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "intentos",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class intentos(UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)\n    juego_id = db.Column(db.Integer, nullable=False)\n    puntaje = db.Column(db.Integer, nullable=False)\n    fecha_inicio = db.Column(db.DateTime)\n    fecha_fin = db.Column(db.DateTime)\nclass juegos_quiz(UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_quiz",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class juegos_quiz(UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'\n    id_quiz = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)\n    descripcion = db.Column(db.String(255), nullable=False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nclass juegos_sim(UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_sim",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class juegos_sim(UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)\n    descripcion = db.Column(db.String(255), nullable=False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_sim.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_sim AUTO_INCREMENT = 100000;\")",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_extra",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class juegos_extra(UserMixin, db.Model):\n    __tablename__ = 'juegos_extra'\n    id_extra = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)\n    descripcion = db.Column(db.String(255), nullable=False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_extra.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_extra AUTO_INCREMENT = 200000;\")",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -795,7 +904,16 @@
         "kind": 6,
         "importPath": "app.services.user_service",
         "description": "app.services.user_service",
-        "peekOfCode": "class UserService:\n    @staticmethod\n    def save_user_score(user: User, score: str) -> Tuple[bool, str]:\n        \"\"\"Guarda la puntuación del usuario.\"\"\"\n        try:\n            # Validar si score es un número entero antes de asignarlo\n            score = int(score)\n            if score < 0:\n                return False, \"La puntuación no puede ser negativa\"\n            user.score = score",
+        "peekOfCode": "class UserService:\n    @staticmethod\n    def save_user_score(user: User, score: str) -> Tuple[bool, str]:\n        \"\"\"Guarda la puntuación del usuario.\"\"\"\n        try:\n            # Validar si score es un número entero antes de asignarlo\n            if not score.isdigit():\n                return False, \"La puntuación debe ser un número válido\"\n            score = int(score)\n            if score < 0:",
+        "detail": "app.services.user_service",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "app.services.user_service",
+        "description": "app.services.user_service",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nclass UserService:\n    @staticmethod\n    def save_user_score(user: User, score: str) -> Tuple[bool, str]:\n        \"\"\"Guarda la puntuación del usuario.\"\"\"\n        try:\n            # Validar si score es un número entero antes de asignarlo\n            if not score.isdigit():\n                return False, \"La puntuación debe ser un número válido\"\n            score = int(score)",
         "detail": "app.services.user_service",
         "documentation": {}
     },
@@ -805,6 +923,15 @@
         "importPath": "app.utils.database",
         "description": "app.utils.database",
         "peekOfCode": "def ensure_db_exists(app):\n    \"\"\"Asegura que el archivo de base de datos existe y tiene permisos adecuados.\"\"\"\n    db_path = os.path.join(app.instance_path, 'app.db')\n    try:\n        # Asegurarse de que el directorio de la base de datos exista\n        if not os.path.exists(app.instance_path):\n            os.makedirs(app.instance_path, exist_ok=True)\n        # Si el archivo de la base de datos no existe, lo creamos\n        if not os.path.exists(db_path):\n            with open(db_path, 'w'):  # Abrir con 'with' asegura que el archivo se cierre adecuadamente",
+        "detail": "app.utils.database",
+        "documentation": {}
+    },
+    {
+        "label": "session_scope",
+        "kind": 2,
+        "importPath": "app.utils.database",
+        "description": "app.utils.database",
+        "peekOfCode": "def session_scope():\n    \"\"\"Proporciona un ámbito transaccional seguro\"\"\"\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except SQLAlchemyError as e:\n        session.rollback()\n        raise e\n    finally:",
         "detail": "app.utils.database",
         "documentation": {}
     },
@@ -822,8 +949,17 @@
         "kind": 6,
         "importPath": "app.config",
         "description": "app.config",
-        "peekOfCode": "class Config:\n    # Configuración básica\n    SECRET_KEY = os.getenv('FLASK_SECRET_KEY', secrets.token_urlsafe(64))\n    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', secrets.token_urlsafe(64))\n    # Base de datos\n    BASE_DIR = Path(__file__).parent.parent\n    INSTANCE_PATH = os.path.join(BASE_DIR, 'instance')\n    DB_PATH = BASE_DIR / 'database.db'  # En el directorio del proyecto\n    SQLALCHEMY_DATABASE_URI = f'sqlite:///{DB_PATH}'    \n    SQLALCHEMY_TRACK_MODIFICATIONS = False",
+        "peekOfCode": "class Config:\n    # Configuración básica\n    SECRET_KEY = os.getenv('FLASK_SECRET_KEY', secrets.token_urlsafe(64))\n    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', secrets.token_urlsafe(64))\n    # Base de datos\n    #BASE_DIR = Path(__file__).parent.parent\n    #INSTANCE_PATH = os.path.join(BASE_DIR, 'instance')\n    #DB_PATH = BASE_DIR / 'database.db'  # En el directorio del proyecto\n    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') \n    ##Pendiente de checar   ",
         "detail": "app.config",
+        "documentation": {}
+    },
+    {
+        "label": "configure_db_engine",
+        "kind": 2,
+        "importPath": "app.extensions",
+        "description": "app.extensions",
+        "peekOfCode": "def configure_db_engine(app):\n    \"\"\"Configura el motor de la base de datos con manejo de reconexión\"\"\"\n    engine = db.engine\n    # Configuración para manejar reconexiones\n    @event.listens_for(engine, \"engine_connect\")\n    def ping_connection(connection, branch):\n        if branch:\n            return\n        try:\n            # Ejecuta un ping simple para verificar la conexión",
+        "detail": "app.extensions",
         "documentation": {}
     },
     {
@@ -831,7 +967,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",",
+        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\nlimiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -840,7 +976,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True",
+        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\nlimiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -849,7 +985,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)",
+        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\nlimiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -858,16 +994,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "csrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)",
-        "detail": "app.extensions",
-        "documentation": {}
-    },
-    {
-        "label": "talisman",
-        "kind": 5,
-        "importPath": "app.extensions",
-        "description": "app.extensions",
-        "peekOfCode": "talisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)",
+        "peekOfCode": "csrf = CSRFProtect()\nlimiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -876,7 +1003,25 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "limiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)",
+        "peekOfCode": "limiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)\ndef configure_db_engine(app):",
+        "detail": "app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "talisman",
+        "kind": 5,
+        "importPath": "app.extensions",
+        "description": "app.extensions",
+        "peekOfCode": "talisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)\ndef configure_db_engine(app):\n    \"\"\"Configura el motor de la base de datos con manejo de reconexión\"\"\"",
+        "detail": "app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "limiter",
+        "kind": 5,
+        "importPath": "app.extensions",
+        "description": "app.extensions",
+        "peekOfCode": "limiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)\ndef configure_db_engine(app):\n    \"\"\"Configura el motor de la base de datos con manejo de reconexión\"\"\"\n    engine = db.engine",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -885,7 +1030,7 @@
         "kind": 5,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True, host=\"0.0.0.0\", port=5000)",
+        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True)",
         "detail": "run",
         "documentation": {}
     },

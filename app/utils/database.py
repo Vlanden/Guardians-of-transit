@@ -16,7 +16,23 @@ def ensure_db_exists(app):
 
             # Establecer permisos adecuados (aquí usaremos 0o644, más restrictivo)
             os.chmod(db_path, 0o644)
-z
+
     except Exception as e:
         app.logger.error(f"No se pudo crear el archivo de BD: {str(e)}")
         raise  # Re-lanzar la excepción después de loguearla
+
+from contextlib import contextmanager
+from sqlalchemy.exc import SQLAlchemyError
+
+@contextmanager
+def session_scope():
+    """Proporciona un ámbito transaccional seguro"""
+    session = db.session
+    try:
+        yield session
+        session.commit()
+    except SQLAlchemyError as e:
+        session.rollback()
+        raise e
+    finally:
+        session.close()

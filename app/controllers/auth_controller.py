@@ -10,6 +10,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 auth = Blueprint('auth', __name__)
 
+
 @auth.route('/login', methods=['GET', 'POST'], endpoint='login')
 @limiter.limit("10 per minute")
 def login():
@@ -24,14 +25,21 @@ def login():
             flash('Por favor complete todos los campos', 'error')
             return redirect(url_for('auth.login'))
 
-        user = User.query.filter_by(username=username).first()
-        if user and bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
-            login_user(user)
-            return redirect(request.args.get('next') or url_for('main.index'))
+        try:
+            user = User.query.filter_by(username=username).first()
+            if user and bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
+                login_user(user)
+                return redirect(request.args.get('next') or url_for('main.index'))
 
-        flash('Usuario o contraseña incorrectos', 'error')
+            flash('Usuario o contraseña incorrectos', 'error')
+
+        except OperationalError as e:
+            flash('Error de conexión con la base de datos. Intente nuevamente.', 'error')
+            app.logger.error(f"Error de conexión MySQL: {str(e)}")
+            return redirect(url_for('auth.login'))
 
     return render_template('auth/log-in.html')
+
 
 
 @auth.route('/logout', methods=['GET'], endpoint='logout')
@@ -39,6 +47,7 @@ def logout():
     logout_user()
     flash('Has cerrado sesión correctamente', 'success')
     return redirect(url_for('main.index'))
+
 
 
 @auth.route('/register', methods=['GET', 'POST'], endpoint="register")
@@ -79,16 +88,22 @@ def register():
 
         hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         new_user = User(username=username, email=email, password_hash=hashed_pw)
+
         try:
-            db.session.add(new_user)
-            db.session.commit()
+            with session_scope() as session:
+                session.add(new_user)
+                session.commit()
+
         except SQLAlchemyError as e:
-            db.session.rollback()
-            print("Si")
+            flash('Hubo un error al registrar el usuario. Intente nuevamente.', 'error')
+            app.logger.error(f"Error de base de datos: {str(e)}")
+            return redirect(url_for('auth.register'))
+
         flash('Registro exitoso. Ahora puedes iniciar sesión.', 'success')
         return redirect(url_for('auth.login'))
 
     return render_template('auth/sign-up.html')
+
 
 
 @auth.route('/recover', methods=['GET', 'POST'], endpoint='recover')

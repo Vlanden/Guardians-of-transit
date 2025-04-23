@@ -4,28 +4,49 @@ from flask import Flask
 from .config import Config
 from .extensions import db, login_manager, jwt, csrf, limiter, talisman
 from .utils.logging import configure_logging
+from sqlalchemy.exc import OperationalError
+
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    
-    # Configurar logging
-    #configure_logging(app)
-    
-    # Inicializar extensiones
+
+    # Configurar procesadores de contexto
+    configure_context_processors(app)
+
+    # Inicializar extensiones —> esto registra 'app' con SQLAlchemy
     initialize_extensions(app)
-    
+
+    # Configurar logging (si decides activarlo)
+    # configure_logging(app)
+
     # Configurar manejo de usuarios
     configure_user_loader(app)
-    
+
     # Registrar blueprints
     register_blueprints(app)
-    
-    # Configuración adicional
-    configure_context_processors(app)
+
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_pre_ping': True,  # Verifica conexiones antes de usarlas
+        'pool_recycle': 3600,   # Recicla conexiones cada 1 hora
+        'pool_size': 10,        # Conexiones mantenidas abiertas
+        'max_overflow': 5,      # Conexiones adicionales permitidas
+        'pool_timeout': 30      # Tiempo de espera para obtener conexión
+    }
+
+    # ✅ AHORA SÍ: crear la base de datos una vez que db ya está registrado con app
     configure_database(app)
-    
+
+    @app.errorhandler(OperationalError)
+    def handle_db_errors(e):
+        db.session.rollback()
+        flash('Error temporal con la base de datos. Por favor intente nuevamente.', 'error')
+        return redirect(url_for('main.index'))
+
     return app
+
+
+
 
 def initialize_extensions(app):
     """Inicializa todas las extensiones Flask"""
@@ -77,10 +98,12 @@ def configure_database(app):
         try:
             # Verificar permisos de escritura
             #test_path = app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', '')
-
-            
             db.create_all()
             app.logger.info("Base de datos creada exitosamente")
         except Exception as e:
             app.logger.error(f"Error crítico: {str(e)}")
             raise
+
+
+        
+        
