@@ -6,17 +6,19 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
         <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">-->
-
+        <script src="https://kit.fontawesome.com/tu-kit-aqui.js" crossorigin="anonymous"></script>
 
 </head>
 <header class="main-header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand" href="{{ url_for('main.inicio') }}">Guardianes de la Vía</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-label="Abrir menú">
+                <i class="fas fa-bars text-white fs-2"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('main.inicio') }}">Inicio</a>
@@ -33,6 +35,7 @@
                     </li>
                     {% endif %}
                 </ul>
+
                 <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item dropdown">
