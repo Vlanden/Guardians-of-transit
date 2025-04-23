@@ -288,14 +288,6 @@
         "documentation": {}
     },
     {
-        "label": "create_app",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
         "label": "User",
         "importPath": "app.models.user",
         "description": "app.models.user",
@@ -667,6 +659,33 @@
         "description": "flask_talisman",
         "isExtraImport": true,
         "detail": "flask_talisman",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "platform",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "platform",
+        "description": "platform",
+        "detail": "platform",
         "documentation": {}
     },
     {
@@ -1084,11 +1103,47 @@
         "documentation": {}
     },
     {
-        "label": "app",
+        "label": "get_venv_python",
+        "kind": 2,
+        "importPath": "run",
+        "description": "run",
+        "peekOfCode": "def get_venv_python():\n    if platform.system() == \"Windows\":\n        return os.path.join(\"venv\", \"Scripts\", \"python.exe\")\n    else:\n        return os.path.join(\"venv\", \"bin\", \"python\")\nVENV_PATH = os.path.abspath(\"venv\")\nPYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef install_requirements():",
+        "detail": "run",
+        "documentation": {}
+    },
+    {
+        "label": "is_using_virtualenv",
+        "kind": 2,
+        "importPath": "run",
+        "description": "run",
+        "peekOfCode": "def is_using_virtualenv():\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef install_requirements():\n    subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", \"-r\", \"requirements.txt\"])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        print(f\"Reiniciando desde el entorno virtual: {PYTHON_BIN}\")\n        subprocess.check_call([PYTHON_BIN, __file__])\n        sys.exit(0)\n    print(\"Entorno virtual activo. Instalando dependencias...\")",
+        "detail": "run",
+        "documentation": {}
+    },
+    {
+        "label": "install_requirements",
+        "kind": 2,
+        "importPath": "run",
+        "description": "run",
+        "peekOfCode": "def install_requirements():\n    subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", \"-r\", \"requirements.txt\"])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        print(f\"Reiniciando desde el entorno virtual: {PYTHON_BIN}\")\n        subprocess.check_call([PYTHON_BIN, __file__])\n        sys.exit(0)\n    print(\"Entorno virtual activo. Instalando dependencias...\")\n    try:\n        install_requirements()",
+        "detail": "run",
+        "documentation": {}
+    },
+    {
+        "label": "VENV_PATH",
         "kind": 5,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True)",
+        "peekOfCode": "VENV_PATH = os.path.abspath(\"venv\")\nPYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef install_requirements():\n    subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", \"-r\", \"requirements.txt\"])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        print(f\"Reiniciando desde el entorno virtual: {PYTHON_BIN}\")\n        subprocess.check_call([PYTHON_BIN, __file__])",
+        "detail": "run",
+        "documentation": {}
+    },
+    {
+        "label": "PYTHON_BIN",
+        "kind": 5,
+        "importPath": "run",
+        "description": "run",
+        "peekOfCode": "PYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef install_requirements():\n    subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", \"-r\", \"requirements.txt\"])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        print(f\"Reiniciando desde el entorno virtual: {PYTHON_BIN}\")\n        subprocess.check_call([PYTHON_BIN, __file__])\n        sys.exit(0)",
         "detail": "run",
         "documentation": {}
     },
