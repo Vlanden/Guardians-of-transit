@@ -10,7 +10,7 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     
     # Configurar logging
-    configure_logging(app)
+    #configure_logging(app)
     
     # Inicializar extensiones
     initialize_extensions(app)
@@ -33,6 +33,8 @@ def initialize_extensions(app):
     
     db.init_app(app)
     login_manager.init_app(app)
+    ##Pendiente de checar
+    login_manager.login_view = 'auth.login'
     jwt.init_app(app)
     limiter.init_app(app)
     csrf.init_app(app)
@@ -74,13 +76,8 @@ def configure_database(app):
     with app.app_context():
         try:
             # Verificar permisos de escritura
-            test_path = app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', '')
-            try:
-                with open(test_path, 'a'):
-                    pass
-            except PermissionError:
-                app.logger.error(f"Sin permisos para escribir en {test_path}")
-                raise
+            #test_path = app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', '')
+
             
             db.create_all()
             app.logger.info("Base de datos creada exitosamente")

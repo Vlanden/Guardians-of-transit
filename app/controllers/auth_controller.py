@@ -6,6 +6,7 @@ from app.services.auth_service import (
     is_valid_email, is_valid_username, is_strong_password, send_reset_email
 )
 import bcrypt
+from sqlalchemy.exc import SQLAlchemyError
 
 auth = Blueprint('auth', __name__)
 
@@ -78,9 +79,12 @@ def register():
 
         hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         new_user = User(username=username, email=email, password_hash=hashed_pw)
-        db.session.add(new_user)
-        db.session.commit()
-
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print("Si")
         flash('Registro exitoso. Ahora puedes iniciar sesión.', 'success')
         return redirect(url_for('auth.login'))
 

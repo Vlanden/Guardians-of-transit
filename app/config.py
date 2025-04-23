@@ -13,11 +13,12 @@ class Config:
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', secrets.token_urlsafe(64))
     
     # Base de datos
-    BASE_DIR = Path(__file__).parent.parent
-    INSTANCE_PATH = os.path.join(BASE_DIR, 'instance')
-    DB_PATH = BASE_DIR / 'database.db'  # En el directorio del proyecto
+    #BASE_DIR = Path(__file__).parent.parent
+    #INSTANCE_PATH = os.path.join(BASE_DIR, 'instance')
+    #DB_PATH = BASE_DIR / 'database.db'  # En el directorio del proyecto
     
-    SQLALCHEMY_DATABASE_URI = f'sqlite:///{DB_PATH}'    
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') 
+    ##Pendiente de checar   
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Seguridad
@@ -26,6 +27,7 @@ class Config:
     SESSION_COOKIE_SAMESITE = 'Lax'
     PERMANENT_SESSION_LIFETIME = timedelta(days=7)
     
+    ##Pendiente de checar
     # Email
     MAIL_SERVER = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
     MAIL_PORT = int(os.getenv('MAIL_PORT', 587))
@@ -33,9 +35,10 @@ class Config:
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')  # Asegúrate de que esta variable esté en el .env
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')  # Asegúrate de que esta variable esté en el .env
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER', 'no-reply@superiorteam.site')
+    ##########################
     
     # Logging
-    LOG_FOLDER = 'logs'
-    LOG_FILE = 'app.log'
-    LOG_MAX_BYTES = 1024 * 1024  # 1MB
-    LOG_BACKUP_COUNT = 5
+    #LOG_FOLDER = 'logs'
+    #LOG_FILE = 'app.log'
+    #LOG_MAX_BYTES = 1024 * 1024  # 1MB
+    #LOG_BACKUP_COUNT = 5
