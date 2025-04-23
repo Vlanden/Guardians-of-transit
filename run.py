@@ -42,7 +42,7 @@ if __name__ == "__main__":
         if os.path.exists(activate_script):
             exec(open(activate_script).read(), dict(__file__=activate_script))
         else:
-            print(f"No se pudo encontrar el script de activación en {activate_script}. Asegúrate de que el entorno virtual esté correctamente creado.")
+            print(f"No se pudo encontrar el script de activación en {activate_script}. Asegúrate de que el entorno virtual esté correctamente creado, o que sea el sistema operativo correcto.")
     
     print("Entorno virtual activo. Instalando dependencias...")
     try:
@@ -54,4 +54,5 @@ if __name__ == "__main__":
     # Ahora que estamos dentro del entorno virtual, puedes ejecutar la aplicación Flask
     from app import create_app
     app = create_app()
-    app.run()
+    app.run(debug=True)
+    #app.run(debug=True, host="0.0.0.0", port=5000)

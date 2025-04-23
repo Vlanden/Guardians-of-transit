@@ -15,6 +15,7 @@ auth = Blueprint('auth', __name__)
 
 
 # Contexto para manejo seguro de sesiones
+# Permite manejar sesiones de base de datos asegurando commit o rollback según sea necesario
 @contextmanager
 def session_scope():
     session = db.session
@@ -26,9 +27,22 @@ def session_scope():
         raise
 
 
+
+
+
+
+
+
+
+
+
+
+
+# Funcion para iniciar la sesión del usuario
 @auth.route('/login', methods=['GET', 'POST'], endpoint='login')
-@limiter.limit("10 per minute")
+@limiter.limit("10 per minute")  # Límite de intentos por seguridad
 def login():
+    # Si ya está autenticado, redirige al índice
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
 
@@ -36,32 +50,58 @@ def login():
         username = request.form.get('username', '').strip()
         password = request.form.get('password', '').strip()
 
+        # Validación de campos vacíos
         if not username or not password:
             flash('Por favor complete todos los campos', 'error')
             return render_template('auth/log-in.html', username=username)
 
         try:
+            # Busca el usuario por nombre
             user = User.query.filter_by(username=username).first()
+            # Verifica que exista y que la contraseña coincida
             if user and bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
-                login_user(user)
+                login_user(user)  # Inicia sesión
                 return redirect(request.args.get('next') or url_for('main.index'))
 
             flash('Usuario o contraseña incorrectos', 'error')
 
+        # Captura error de conexión con la base de datos
         except OperationalError as e:
             flash('Error de conexión con la base de datos. Intente nuevamente.', 'error')
             current_app.logger.error(f"Error de conexión MySQL: {str(e)}")
             return render_template('auth/log-in.html', username=username)
-        
+
+        # Si ya inició sesión, genera token para recuperación
         if current_user.is_authenticated:
             token = current_user.generate_reset_token()
         else:
-                token = None
-                return render_template('auth/log-in.html', token=token)
+            token = None
+            return render_template('auth/log-in.html', token=token)
 
     return render_template('auth/log-in.html')
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Funcion para terminar la sesion
+#Agregar que antes de cerrar la sesion se guarde la fecha o hora en la tabla de perfil
 @auth.route('/logout', methods=['GET'], endpoint='logout')
 def logout():
     logout_user()
@@ -69,6 +109,24 @@ def logout():
     return redirect(url_for('main.index'))
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Funcion para registrar al usuario
+#Agregar que se registre en la tabla de perfil su username y su fecha de registro
 @auth.route('/register', methods=['GET', 'POST'], endpoint="register")
 @limiter.limit("10 per minute")
 def register():
@@ -82,6 +140,7 @@ def register():
         confirm_password = request.form.get('confirm_password', '').strip()
 
         errors = []
+        # Validaciones de campos
         if not all([username, email, password, confirm_password]):
             errors.append("Todos los campos son requeridos")
         if not is_valid_username(username):
@@ -98,6 +157,7 @@ def register():
                 flash(error, 'error')
             return render_template('auth/sign-up.html', username=username, email=email)
 
+        # Validar que usuario y correo no estén registrados
         if User.query.filter_by(username=username).first():
             flash('Nombre de usuario ya registrado', 'error')
             return render_template('auth/sign-up.html', username=username, email=email)
@@ -105,10 +165,12 @@ def register():
             flash('Correo electrónico ya registrado', 'error')
             return render_template('auth/sign-up.html', username=username, email=email)
 
+        # Crear nuevo usuario con contraseña encriptada
         hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         new_user = User(username=username, email=email, password_hash=hashed_pw)
 
         try:
+            # Inserta el nuevo usuario usando el contexto seguro
             with session_scope() as session:
                 session.add(new_user)
 
@@ -122,50 +184,82 @@ def register():
 
     return render_template('auth/sign-up.html')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Funcion para cuando el usuario olvidó su contraseña
+# Se accede a través de un link enviado por correo con un token
 @auth.route('/new-password/<token>', methods=['GET', 'POST'], endpoint='new_password')
 @limiter.limit("5 per minute")
 def new_password(token):
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.index'))  # Si ya está autenticado, redirigir al inicio
 
-    user = User.verify_reset_token(token)  # Verificar si el token es válido
+    user = User.verify_reset_token(token)  # Verificar si el token es válido y obtener el usuario asociado
     if not user:
-        flash('Token inválido o expirado', 'error')
-        return redirect(url_for('auth.recover'))  # Redirigir si el token no es válido
+        flash('Token inválido o expirado', 'error')  # Mensaje si el token ya no es válido
+        return redirect(url_for('auth.recover'))  # Redirigir al formulario de recuperación
 
     if request.method == 'POST':
         password = request.form.get('password', '').strip()
         confirm_password = request.form.get('confirm_password', '').strip()
 
         if password != confirm_password:
-            flash('Las contraseñas no coinciden', 'error')
+            flash('Las contraseñas no coinciden', 'error')  # Validar que ambas contraseñas coincidan
             return render_template('auth/new-password.html', token=token)
 
         if not is_strong_password(password):
-            flash('La contraseña debe ser más segura', 'error')
+            flash('La contraseña debe ser más segura', 'error')  # Validar seguridad de la contraseña
             return render_template('auth/new-password.html', token=token)
 
-        hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        user.password_hash = hashed_pw
+        hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')  # Hashear la nueva contraseña
+        user.password_hash = hashed_pw  # Actualizar la contraseña del usuario
 
         try:
             with session_scope() as session:
-                session.add(user)
+                session.add(user)  # Guardar cambios en la base de datos
 
             flash('Tu contraseña ha sido restablecida correctamente. Inicia sesión.', 'success')
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('auth.login'))  # Redirigir al login
 
         except SQLAlchemyError as e:
-            flash('Error al actualizar la contraseña. Intente nuevamente.', 'error')
+            flash('Error al actualizar la contraseña. Intente nuevamente.', 'error')  # Error en base de datos
             current_app.logger.error(f"Error de base de datos: {str(e)}")
     
-    return render_template('auth/new-password.html', token=token)
+    return render_template('auth/new-password.html', token=token)  # Mostrar formulario si es GET o hay errores
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Función para restablecer la contraseña directamente desde el correo
+# Este endpoint se usa si el usuario ya recibió el token pero se prefiere permitir cambio directo (sin token en URL)
 @auth.route('/reset-password', methods=['GET', 'POST'], endpoint='reset_password')
 @limiter.limit("5 per minute")
 def reset_password():
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.index'))  # Redirigir si ya inició sesión
 
     if request.method == 'POST':
         email = request.form.get('email', '').strip()
@@ -173,47 +267,57 @@ def reset_password():
         confirm_password = request.form.get('confirm_password', '').strip()
 
         if not is_valid_email(email):
-            flash('Correo electrónico inválido', 'error')
+            flash('Correo electrónico inválido', 'error')  # Validación de correo
             return render_template('auth/reset-password.html')
 
         if password != confirm_password:
-            flash('Las contraseñas no coinciden', 'error')
+            flash('Las contraseñas no coinciden', 'error')  # Validar contraseñas
             return render_template('auth/reset-password.html')
 
         if not is_strong_password(password):
-            flash('La contraseña debe ser más segura', 'error')
+            flash('La contraseña debe ser más segura', 'error')  # Validar seguridad
             return render_template('auth/reset-password.html')
 
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(email=email).first()  # Buscar al usuario por correo
 
         if user:
-            hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-            user.password_hash = hashed_pw
+            hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')  # Hashear nueva contraseña
+            user.password_hash = hashed_pw  # Guardar nuevo hash
 
             try:
                 with session_scope() as session:
-                    session.add(user)
-                    #send_reset_email(user)  # Opcionalmente enviar un correo de confirmación
+                    session.add(user)  # Guardar en base de datos
+                    #send_reset_email(user)  # ← Comentado, pero se puede usar para confirmar el cambio
 
                 flash('Tu contraseña ha sido restablecida correctamente.', 'success')
-                return redirect(url_for('auth.login'))
+                return redirect(url_for('auth.login'))  # Redirigir al login
 
             except SQLAlchemyError as e:
-                flash('Error al actualizar la contraseña. Intente nuevamente.', 'error')
+                flash('Error al actualizar la contraseña. Intente nuevamente.', 'error')  # Errores de base de datos
                 current_app.logger.error(f"Error de base de datos: {str(e)}")
         else:
-            flash('No hay cuenta asociada a este correo', 'error')
+            flash('No hay cuenta asociada a este correo', 'error')  # Usuario no encontrado
     
-    return render_template('auth/reset-password.html')
+    return render_template('auth/reset-password.html')  # Mostrar formulario por defecto
 
 
+
+
+
+
+
+
+
+
+
+
+# Función para enviar el correo con el enlace para restablecer la contraseña
 def send_reset_email(user):
-    token = user.generate_reset_token()  # Genera el token para el correo
+    token = user.generate_reset_token()  # Genera un token único con expiración
     send_email(
         user.email,
         'Recuperación de contraseña',
-        'auth/reset_password_email',  # Usar template de correo con link a new-password.html
+        'auth/reset_password_email',  # Template HTML del correo
         user=user,
-        token=token
+        token=token  # Este token se usará para acceder a la vista /new-password/<token>
     )
-

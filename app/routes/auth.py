@@ -1,5 +1,11 @@
 from flask import Blueprint
-from app.controllers.auth_controller import (login, logout, register, reset_password, new_password)
+from app.controllers.auth_controller import (
+    login, 
+    logout,
+    register, 
+    reset_password, 
+    new_password
+)
 
 # Creamos el Blueprint con el nombre 'auth' y prefijo opcional si se necesita.
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')

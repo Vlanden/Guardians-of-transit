@@ -120,6 +120,30 @@
         "documentation": {}
     },
     {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "render_template",
         "importPath": "flask",
         "description": "flask",
@@ -530,6 +554,54 @@
         "documentation": {}
     },
     {
+        "label": "get_all_quiz_games",
+        "importPath": "app.controllers.games_controller",
+        "description": "app.controllers.games_controller",
+        "isExtraImport": true,
+        "detail": "app.controllers.games_controller",
+        "documentation": {}
+    },
+    {
+        "label": "get_all_sim_games",
+        "importPath": "app.controllers.games_controller",
+        "description": "app.controllers.games_controller",
+        "isExtraImport": true,
+        "detail": "app.controllers.games_controller",
+        "documentation": {}
+    },
+    {
+        "label": "get_all_extra_games",
+        "importPath": "app.controllers.games_controller",
+        "description": "app.controllers.games_controller",
+        "isExtraImport": true,
+        "detail": "app.controllers.games_controller",
+        "documentation": {}
+    },
+    {
+        "label": "create_quiz_game",
+        "importPath": "app.controllers.games_controller",
+        "description": "app.controllers.games_controller",
+        "isExtraImport": true,
+        "detail": "app.controllers.games_controller",
+        "documentation": {}
+    },
+    {
+        "label": "create_sim_game",
+        "importPath": "app.controllers.games_controller",
+        "description": "app.controllers.games_controller",
+        "isExtraImport": true,
+        "detail": "app.controllers.games_controller",
+        "documentation": {}
+    },
+    {
+        "label": "create_extra_game",
+        "importPath": "app.controllers.games_controller",
+        "description": "app.controllers.games_controller",
+        "isExtraImport": true,
+        "detail": "app.controllers.games_controller",
+        "documentation": {}
+    },
+    {
         "label": "UserController",
         "importPath": "app.controllers.user_controller",
         "description": "app.controllers.user_controller",
@@ -693,7 +765,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()\n        raise\n@auth.route('/login', methods=['GET', 'POST'], endpoint='login')\n@limiter.limit(\"10 per minute\")",
+        "peekOfCode": "def session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()\n        raise",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -702,7 +774,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def login():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        password = request.form.get('password', '').strip()\n        if not username or not password:\n            flash('Por favor complete todos los campos', 'error')\n            return render_template('auth/log-in.html', username=username)\n        try:",
+        "peekOfCode": "def login():\n    # Si ya está autenticado, redirige al índice\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        password = request.form.get('password', '').strip()\n        # Validación de campos vacíos\n        if not username or not password:\n            flash('Por favor complete todos los campos', 'error')",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -711,7 +783,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def logout():\n    logout_user()\n    flash('Has cerrado sesión correctamente', 'success')\n    return redirect(url_for('main.index'))\n@auth.route('/register', methods=['GET', 'POST'], endpoint=\"register\")\n@limiter.limit(\"10 per minute\")\ndef register():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':",
+        "peekOfCode": "def logout():\n    logout_user()\n    flash('Has cerrado sesión correctamente', 'success')\n    return redirect(url_for('main.index'))",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -720,7 +792,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def register():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        email = request.form.get('email', '').strip()\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()\n        errors = []\n        if not all([username, email, password, confirm_password]):",
+        "peekOfCode": "def register():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        email = request.form.get('email', '').strip()\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()\n        errors = []\n        # Validaciones de campos",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -729,7 +801,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def new_password(token):\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    user = User.verify_reset_token(token)  # Verificar si el token es válido\n    if not user:\n        flash('Token inválido o expirado', 'error')\n        return redirect(url_for('auth.recover'))  # Redirigir si el token no es válido\n    if request.method == 'POST':\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()",
+        "peekOfCode": "def new_password(token):\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))  # Si ya está autenticado, redirigir al inicio\n    user = User.verify_reset_token(token)  # Verificar si el token es válido y obtener el usuario asociado\n    if not user:\n        flash('Token inválido o expirado', 'error')  # Mensaje si el token ya no es válido\n        return redirect(url_for('auth.recover'))  # Redirigir al formulario de recuperación\n    if request.method == 'POST':\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -738,7 +810,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def reset_password():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        email = request.form.get('email', '').strip()\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()\n        if not is_valid_email(email):\n            flash('Correo electrónico inválido', 'error')\n            return render_template('auth/reset-password.html')",
+        "peekOfCode": "def reset_password():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))  # Redirigir si ya inició sesión\n    if request.method == 'POST':\n        email = request.form.get('email', '').strip()\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()\n        if not is_valid_email(email):\n            flash('Correo electrónico inválido', 'error')  # Validación de correo\n            return render_template('auth/reset-password.html')",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -747,7 +819,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def send_reset_email(user):\n    token = user.generate_reset_token()  # Genera el token para el correo\n    send_email(\n        user.email,\n        'Recuperación de contraseña',\n        'auth/reset_password_email',  # Usar template de correo con link a new-password.html\n        user=user,\n        token=token\n    )",
+        "peekOfCode": "def send_reset_email(user):\n    token = user.generate_reset_token()  # Genera un token único con expiración\n    send_email(\n        user.email,\n        'Recuperación de contraseña',\n        'auth/reset_password_email',  # Template HTML del correo\n        user=user,\n        token=token  # Este token se usará para acceder a la vista /new-password/<token>\n    )",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -756,7 +828,7 @@
         "kind": 5,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "auth = Blueprint('auth', __name__)\n# Contexto para manejo seguro de sesiones\n@contextmanager\ndef session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()",
+        "peekOfCode": "auth = Blueprint('auth', __name__)\n# Contexto para manejo seguro de sesiones\n# Permite manejar sesiones de base de datos asegurando commit o rollback según sea necesario\n@contextmanager\ndef session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -765,7 +837,7 @@
         "kind": 6,
         "importPath": "app.controllers.user_controller",
         "description": "app.controllers.user_controller",
-        "peekOfCode": "class UserController:\n    @staticmethod\n    @login_required\n    @limiter.limit(\"10 per minute\")\n    def save_score():\n        \"\"\"Endpoint para guardar puntuación del usuario actual.\"\"\"\n        if request.method == 'POST':\n            score = request.form.get('score') or request.form.get('puntuacion')\n            score = score.strip() if score else None\n            if not score or not score.isdigit():",
+        "peekOfCode": "class UserController:\n    @staticmethod\n    @login_required  # Asegura que el usuario esté autenticado\n    @limiter.limit(\"10 per minute\")  # Limita a 10 solicitudes por minuto para evitar abuso\n    def save_score():\n        \"\"\"Endpoint para guardar puntuación del usuario actual.\"\"\"\n        if request.method == 'POST':\n            # Intenta obtener la puntuación desde el formulario (compatibilidad con 'score' o 'puntuacion')\n            score = request.form.get('score') or request.form.get('puntuacion')\n            score = score.strip() if score else None  # Elimina espacios en blanco",
         "detail": "app.controllers.user_controller",
         "documentation": {}
     },
@@ -774,7 +846,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(200), nullable=False)\n    # Las siguientes columnas son para cuando este para enviar correos de recuperacion:\n    # reset_token = db.Column(db.String(100), nullable=True)\n    # reset_token_expires = db.Column(db.DateTime, nullable=True)\n    # Método para cambiar la contraseña directamente",
+        "peekOfCode": "class User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(200), nullable=False)\n    # Las siguientes columnas son para cuando este para enviar correos de recuperacion:\n    # reset_token = db.Column(db.String(100), nullable=True)\n    # reset_token_expires = db.Column(db.DateTime, nullable=True)\n    # Método para cambiar la contraseña directamente sin usar un token",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -830,6 +902,69 @@
         "description": "app.routes.auth",
         "peekOfCode": "auth_bp = Blueprint('auth', __name__, url_prefix='/auth')\n# Definimos las rutas y las funciones asociadas\nauth_bp.add_url_rule('/login', view_func=login, methods=['GET', 'POST'])\nauth_bp.add_url_rule('/logout', view_func=logout, methods=['GET'])\nauth_bp.add_url_rule('/register', view_func=register, methods=['GET', 'POST'])\nauth_bp.add_url_rule('/reset-password', view_func=reset_password, methods=['GET', 'POST'])  # Para cambiar la contraseña sin token\nauth_bp.add_url_rule('/new-password/<token>', view_func=new_password, methods=['GET', 'POST'])  # Para el flujo basado en token",
         "detail": "app.routes.auth",
+        "documentation": {}
+    },
+    {
+        "label": "list_quiz_games",
+        "kind": 2,
+        "importPath": "app.routes.games",
+        "description": "app.routes.games",
+        "peekOfCode": "def list_quiz_games():\n    \"\"\"Retorna todos los juegos tipo quiz\"\"\"\n    return jsonify(get_all_quiz_games())\n@games_bp.route('/quiz', methods=['POST'])\ndef new_quiz_game():\n    \"\"\"Crea un nuevo juego tipo quiz\"\"\"\n    data = request.get_json()\n    return jsonify(create_quiz_game(data))\n# === Rutas para la tabla juegos_sim ===\n@games_bp.route('/sim', methods=['GET'])",
+        "detail": "app.routes.games",
+        "documentation": {}
+    },
+    {
+        "label": "new_quiz_game",
+        "kind": 2,
+        "importPath": "app.routes.games",
+        "description": "app.routes.games",
+        "peekOfCode": "def new_quiz_game():\n    \"\"\"Crea un nuevo juego tipo quiz\"\"\"\n    data = request.get_json()\n    return jsonify(create_quiz_game(data))\n# === Rutas para la tabla juegos_sim ===\n@games_bp.route('/sim', methods=['GET'])\ndef list_sim_games():\n    \"\"\"Retorna todos los juegos tipo simulación\"\"\"\n    return jsonify(get_all_sim_games())\n@games_bp.route('/sim', methods=['POST'])",
+        "detail": "app.routes.games",
+        "documentation": {}
+    },
+    {
+        "label": "list_sim_games",
+        "kind": 2,
+        "importPath": "app.routes.games",
+        "description": "app.routes.games",
+        "peekOfCode": "def list_sim_games():\n    \"\"\"Retorna todos los juegos tipo simulación\"\"\"\n    return jsonify(get_all_sim_games())\n@games_bp.route('/sim', methods=['POST'])\ndef new_sim_game():\n    \"\"\"Crea un nuevo juego tipo simulación\"\"\"\n    data = request.get_json()\n    return jsonify(create_sim_game(data))\n# === Rutas para la tabla juegos_extra ===\n@games_bp.route('/extra', methods=['GET'])",
+        "detail": "app.routes.games",
+        "documentation": {}
+    },
+    {
+        "label": "new_sim_game",
+        "kind": 2,
+        "importPath": "app.routes.games",
+        "description": "app.routes.games",
+        "peekOfCode": "def new_sim_game():\n    \"\"\"Crea un nuevo juego tipo simulación\"\"\"\n    data = request.get_json()\n    return jsonify(create_sim_game(data))\n# === Rutas para la tabla juegos_extra ===\n@games_bp.route('/extra', methods=['GET'])\ndef list_extra_games():\n    \"\"\"Retorna todos los juegos tipo extra\"\"\"\n    return jsonify(get_all_extra_games())\n@games_bp.route('/extra', methods=['POST'])",
+        "detail": "app.routes.games",
+        "documentation": {}
+    },
+    {
+        "label": "list_extra_games",
+        "kind": 2,
+        "importPath": "app.routes.games",
+        "description": "app.routes.games",
+        "peekOfCode": "def list_extra_games():\n    \"\"\"Retorna todos los juegos tipo extra\"\"\"\n    return jsonify(get_all_extra_games())\n@games_bp.route('/extra', methods=['POST'])\ndef new_extra_game():\n    \"\"\"Crea un nuevo juego tipo extra\"\"\"\n    data = request.get_json()\n    return jsonify(create_extra_game(data))",
+        "detail": "app.routes.games",
+        "documentation": {}
+    },
+    {
+        "label": "new_extra_game",
+        "kind": 2,
+        "importPath": "app.routes.games",
+        "description": "app.routes.games",
+        "peekOfCode": "def new_extra_game():\n    \"\"\"Crea un nuevo juego tipo extra\"\"\"\n    data = request.get_json()\n    return jsonify(create_extra_game(data))",
+        "detail": "app.routes.games",
+        "documentation": {}
+    },
+    {
+        "label": "games_bp",
+        "kind": 5,
+        "importPath": "app.routes.games",
+        "description": "app.routes.games",
+        "peekOfCode": "games_bp = Blueprint('games', __name__, url_prefix='/games')\n# === Rutas para la tabla juegos_quiz ===\n@games_bp.route('/quiz', methods=['GET'])\ndef list_quiz_games():\n    \"\"\"Retorna todos los juegos tipo quiz\"\"\"\n    return jsonify(get_all_quiz_games())\n@games_bp.route('/quiz', methods=['POST'])\ndef new_quiz_game():\n    \"\"\"Crea un nuevo juego tipo quiz\"\"\"\n    data = request.get_json()",
+        "detail": "app.routes.games",
         "documentation": {}
     },
     {
@@ -891,7 +1026,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego')\n@login_required\ndef juego():\n    return render_template('game/game.html', user=current_user)\n# ──────── API: FUNCIONES DEL USUARIO ────────\n@main_bp.route('/save-score', methods=['POST'])\n@login_required\ndef save_score():",
+        "peekOfCode": "def perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego')\n@login_required\ndef juego():\n    return render_template('game/game.html', user=current_user)\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#cambiar el codigo de save_score y save_user_score, el actual es incorrecto\n@main_bp.route('/save-score', methods=['POST'])\n@login_required",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -900,7 +1035,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def juego():\n    return render_template('game/game.html', user=current_user)\n# ──────── API: FUNCIONES DEL USUARIO ────────\n@main_bp.route('/save-score', methods=['POST'])\n@login_required\ndef save_score():\n    return UserController.save_score()\n@main_bp.route('/guardar-puntuacion', methods=['POST'])\n@login_required\ndef guardar_puntuacion():",
+        "peekOfCode": "def juego():\n    return render_template('game/game.html', user=current_user)\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#cambiar el codigo de save_score y save_user_score, el actual es incorrecto\n@main_bp.route('/save-score', methods=['POST'])\n@login_required\ndef save_score():\n    return UserController.save_score()\n#API sin uso\n@main_bp.route('/guardar-puntuacion', methods=['POST'])",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -909,7 +1044,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def save_score():\n    return UserController.save_score()\n@main_bp.route('/guardar-puntuacion', methods=['POST'])\n@login_required\ndef guardar_puntuacion():\n    return UserController.save_score()\n@main_bp.route('/actualizar_perfil', methods=['POST'])\n@login_required\ndef actualizar_perfil():\n    return UserController.update_profile()",
+        "peekOfCode": "def save_score():\n    return UserController.save_score()\n#API sin uso\n@main_bp.route('/guardar-puntuacion', methods=['POST'])\n@login_required\ndef guardar_puntuacion():\n    return UserController.save_score()\n#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña\n@main_bp.route('/actualizar_perfil', methods=['POST'])\n@login_required",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -918,7 +1053,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def guardar_puntuacion():\n    return UserController.save_score()\n@main_bp.route('/actualizar_perfil', methods=['POST'])\n@login_required\ndef actualizar_perfil():\n    return UserController.update_profile()",
+        "peekOfCode": "def guardar_puntuacion():\n    return UserController.save_score()\n#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña\n@main_bp.route('/actualizar_perfil', methods=['POST'])\n@login_required\ndef actualizar_perfil():\n    return UserController.update_profile()",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1161,7 +1296,7 @@
         "kind": 5,
         "importPath": "wsgi",
         "description": "wsgi",
-        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True, host=\"0.0.0.0\", port=5000)",
+        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    #app.run(debug=True)\n    app.run(debug=True, host=\"0.0.0.0\", port=5000)",
         "detail": "wsgi",
         "documentation": {}
     }

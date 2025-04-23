@@ -50,16 +50,20 @@ def juego():
 
 # ──────── API: FUNCIONES DEL USUARIO ────────
 
+#cambiar el codigo de save_score y save_user_score, el actual es incorrecto
 @main_bp.route('/save-score', methods=['POST'])
 @login_required
 def save_score():
     return UserController.save_score()
 
+
+#API sin uso
 @main_bp.route('/guardar-puntuacion', methods=['POST'])
 @login_required
 def guardar_puntuacion():
     return UserController.save_score()
 
+#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña
 @main_bp.route('/actualizar_perfil', methods=['POST'])
 @login_required
 def actualizar_perfil():

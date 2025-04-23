@@ -7,6 +7,7 @@ import secrets
 from sqlalchemy import event
 from sqlalchemy.schema import DDL
 
+#   Clase para User
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     
@@ -19,44 +20,56 @@ class User(UserMixin, db.Model):
     # reset_token = db.Column(db.String(100), nullable=True)
     # reset_token_expires = db.Column(db.DateTime, nullable=True)
     
-
-    # Método para cambiar la contraseña directamente
+    # Método para cambiar la contraseña directamente sin usar un token
     def change_password_direct(self, new_password):
         """Cambia la contraseña del usuario directamente sin token"""
-        self.set_password(new_password)
-        db.session.commit()
+        self.set_password(new_password)  # Cifra y guarda la nueva contraseña
+        db.session.commit()  # Guarda los cambios en la base de datos
 
+    # Método para cifrar una contraseña antes de guardarla
     def set_password(self, password):
         """Encripta la contraseña antes de guardarla"""
-        self.password_hash = bcrypt.hashpw(
-            password.encode('utf-8'), 
-            bcrypt.gensalt()
-        ).decode('utf-8')
-        
+        self.password_hash = bcrypt.hashpw(  # Genera un hash seguro con bcrypt
+            password.encode('utf-8'),        # Convierte la contraseña en bytes
+            bcrypt.gensalt()                 # Genera una sal aleatoria
+        ).decode('utf-8')                    # Guarda el hash como texto (string)
+
+    # Método para verificar que una contraseña coincida con el hash guardado
     def check_password(self, password):
         """Verifica si la contraseña proporcionada coincide con la almacenada"""
-        return bcrypt.checkpw(
-            password.encode('utf-8'),
-            self.password_hash.encode('utf-8')
+        return bcrypt.checkpw(  # Compara la contraseña proporcionada con el hash
+            password.encode('utf-8'),        # Convierte la contraseña en bytes
+            self.password_hash.encode('utf-8')  # Convierte el hash guardado en bytes
         )
-    
-    def generate_reset_token(self, expires_in=3600):
-        """Genera un token de restablecimiento de contraseña y lo almacena en la base de datos"""
-        self.reset_token = secrets.token_urlsafe(32)
-        self.reset_token_expires = datetime.utcnow() + timedelta(seconds=expires_in)
-        db.session.commit()  # Guardamos el token y la fecha de expiración en la base de datos
-        return self.reset_token
 
+    # Método para generar un token temporal para restablecer contraseña
+    def generate_reset_token(self, expires_in=3600):
+        """
+        Genera un token de restablecimiento de contraseña y lo almacena en la base de datos.
+        El token es válido por el tiempo definido en `expires_in` (por defecto: 3600 segundos).
+        """
+        self.reset_token = secrets.token_urlsafe(32)  # Crea un token seguro de 32 caracteres
+        self.reset_token_expires = datetime.utcnow() + timedelta(seconds=expires_in)  # Fecha de expiración
+        db.session.commit()  # Guarda el token y su expiración en la base de datos
+        return self.reset_token  # Devuelve el token para enviarlo al usuario (por correo, por ejemplo)
+
+    # Método estático para verificar si un token de reseteo es válido
     @staticmethod
     def verify_reset_token(token):
-        """Verifica si el token es válido y no ha expirado"""
+        """
+        Verifica si el token de restablecimiento proporcionado existe y no ha expirado.
+        Retorna el usuario asociado si es válido, o None si no lo es.
+        """
         return User.query.filter(
-            User.reset_token == token,
-            User.reset_token_expires > datetime.utcnow()
-        ).first()
+            User.reset_token == token,  # Compara con el token almacenado
+            User.reset_token_expires > datetime.utcnow()  # Asegura que aún no haya expirado
+        ).first()  # Devuelve el primer usuario que cumpla con las condiciones
 
+    # Método especial para mostrar el objeto de usuario como una cadena
     def __repr__(self) -> str:
-        return f'<User {self.username}>'
+        return f'<User {self.username}>'  # Útil para depuración: muestra el nombre de usuario
+
+    
     
 
 # Clases adicionales como Perfil, intentos, juegos_quiz, juegos_sim, y juegos_extra

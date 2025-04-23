@@ -70,6 +70,7 @@ class UserService:
             user.email = email
 
             # Verificar si hay una nueva contraseña
+            #Aunque es una funcion basica podemos dejarla en un solo archivo y solo acceder a la funcion
             new_pw = data.get('new_password', '')
             if new_pw:
                 if len(new_pw) < 8:
