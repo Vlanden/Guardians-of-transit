@@ -1,17 +1,34 @@
 <footer class="bg-dark text-white py-4 mt-5">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h5>Guardianes de la Vía</h5>
-                <p class="text-muted">Proyecto educativo para la seguridad vial</p>
+        <div class="row text-center text-md-start">
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Guardianes de la Vía</h5>
+                <p class="text-muted">Promovemos una cultura vial segura e inclusiva mediante herramientas digitales interactivas para todos los ciudadanos de Guadalajara.</p>
             </div>
-            <div class="col-md-6 text-md-end">
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Enlaces rápidos</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ url_for('main.inicio') }}" class="text-white text-decoration-none">Inicio</a></li>
+                    <li><a href="{{ url_for('main.juego') }}" class="text-white text-decoration-none">Simuladores</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Videos educativos</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Contáctanos</h5>
+                <p class="text-muted">Email: contacto@educacionvialgdl.mx</p>
+                <p class="text-muted">Tel: (33) 1234 5678</p>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
                 <a href="{{ url_for('main.terminos') }}" class="text-white me-3">Términos</a>
                 <a href="{{ url_for('main.privacidad') }}" class="text-white">Privacidad</a>
             </div>
-        </div>
-        <div class="text-center mt-3">
-            <small class="text-muted">© 2023 Guardianes de la Vía</small>
+            <div class="col-md-6 text-md-end text-center">
+                <small class="text-muted">© 2025 Guardianes de la Vía</small>
+            </div>
         </div>
     </div>
 </footer>
