@@ -1,41 +1,19 @@
+from flask import flash
 from flask import request, redirect, url_for, flash, render_template, Blueprint
+from flask import current_app
 from flask_login import login_user, current_user, logout_user
 from app import limiter, db
-from app.models.user import User
+from app.models.user import User, Perfil
 from app.services.auth_service import (
     is_valid_email, is_valid_username, is_strong_password, send_reset_email
 )
-from flask import current_app
 import bcrypt
 from sqlalchemy.exc import SQLAlchemyError, OperationalError
 from contextlib import contextmanager
-from flask import flash
+from datetime import datetime, timedelta
+from app.utils.database import session_scope
 
 auth = Blueprint('auth', __name__)
-
-
-# Contexto para manejo seguro de sesiones
-# Permite manejar sesiones de base de datos asegurando commit o rollback según sea necesario
-@contextmanager
-def session_scope():
-    session = db.session
-    try:
-        yield session
-        session.commit()
-    except:
-        session.rollback()
-        raise
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Funcion para iniciar la sesión del usuario
@@ -83,44 +61,22 @@ def login():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Funcion para terminar la sesion
-#Agregar que antes de cerrar la sesion se guarde la fecha o hora en la tabla de perfil
 @auth.route('/logout', methods=['GET'], endpoint='logout')
 def logout():
+    if current_user.is_authenticated:
+        try:
+            with session_scope() as session:
+                perfil = session.query(Perfil).filter_by(username=current_user.username).first()
+                if perfil:
+                    perfil.ultima_conexion = datetime.now()  # Asegúrate que exista este campo
+        except SQLAlchemyError as e:
+            flash('No se pudo guardar la hora de cierre de sesión', 'error')
+            current_app.logger.error(f"Error al guardar logout: {str(e)}")
+
     logout_user()
     flash('Has cerrado sesión correctamente', 'success')
     return redirect(url_for('main.index'))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -130,6 +86,8 @@ def logout():
 @auth.route('/register', methods=['GET', 'POST'], endpoint="register")
 @limiter.limit("10 per minute")
 def register():
+    from flask import flash
+
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
 
@@ -140,7 +98,6 @@ def register():
         confirm_password = request.form.get('confirm_password', '').strip()
 
         errors = []
-        # Validaciones de campos
         if not all([username, email, password, confirm_password]):
             errors.append("Todos los campos son requeridos")
         if not is_valid_username(username):
@@ -157,7 +114,6 @@ def register():
                 flash(error, 'error')
             return render_template('auth/sign-up.html', username=username, email=email)
 
-        # Validar que usuario y correo no estén registrados
         if User.query.filter_by(username=username).first():
             flash('Nombre de usuario ya registrado', 'error')
             return render_template('auth/sign-up.html', username=username, email=email)
@@ -165,35 +121,27 @@ def register():
             flash('Correo electrónico ya registrado', 'error')
             return render_template('auth/sign-up.html', username=username, email=email)
 
-        # Crear nuevo usuario con contraseña encriptada
         hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        new_user = User(username=username, email=email, password_hash=hashed_pw)
 
         try:
-            # Inserta el nuevo usuario usando el contexto seguro
             with session_scope() as session:
+                new_user = User(username=username, email=email, password_hash=hashed_pw)
                 session.add(new_user)
+                session.flush()
+
+                new_perfil = Perfil(username=new_user.username, fecha_registro=datetime.now())
+                session.add(new_perfil)
+
+            flash("Usuario registrado exitosamente", "success")
+            return redirect(url_for("auth.login"))
 
         except SQLAlchemyError as e:
-            flash('Hubo un error al registrar el usuario. Intente nuevamente.', 'error')
+            flash('Hubo un error al registrar el usuario y su perfil. Intente nuevamente.', 'error')
             current_app.logger.error(f"Error de base de datos: {str(e)}")
             return render_template('auth/sign-up.html', username=username, email=email)
 
-        flash('Registro exitoso. Ahora puedes iniciar sesión.', 'success')
-        return redirect(url_for('auth.login'))
-
+    # Para GET
     return render_template('auth/sign-up.html')
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -239,17 +187,6 @@ def new_password(token):
             current_app.logger.error(f"Error de base de datos: {str(e)}")
     
     return render_template('auth/new-password.html', token=token)  # Mostrar formulario si es GET o hay errores
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -299,16 +236,6 @@ def reset_password():
             flash('No hay cuenta asociada a este correo', 'error')  # Usuario no encontrado
     
     return render_template('auth/reset-password.html')  # Mostrar formulario por defecto
-
-
-
-
-
-
-
-
-
-
 
 
 # Función para enviar el correo con el enlace para restablecer la contraseña

@@ -1,5 +1,13 @@
 [
     {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "request",
         "importPath": "flask",
         "description": "flask",
@@ -49,14 +57,6 @@
     },
     {
         "label": "current_app",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "flash",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -304,6 +304,14 @@
         "documentation": {}
     },
     {
+        "label": "db",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
         "label": "create_app",
         "importPath": "app",
         "description": "app",
@@ -313,6 +321,14 @@
     },
     {
         "label": "User",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "Perfil",
         "importPath": "app.models.user",
         "description": "app.models.user",
         "isExtraImport": true,
@@ -425,6 +441,70 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "session_scope",
+        "importPath": "app.utils.database",
+        "description": "app.utils.database",
+        "isExtraImport": true,
+        "detail": "app.utils.database",
+        "documentation": {}
+    },
+    {
         "label": "UserService",
         "importPath": "app.services.user_service",
         "description": "app.services.user_service",
@@ -446,46 +526,6 @@
         "description": "werkzeug.security",
         "isExtraImport": true,
         "detail": "werkzeug.security",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timedelta",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timedelta",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timedelta",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -761,15 +801,6 @@
         "documentation": {}
     },
     {
-        "label": "session_scope",
-        "kind": 2,
-        "importPath": "app.controllers.auth_controller",
-        "description": "app.controllers.auth_controller",
-        "peekOfCode": "def session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()\n        raise",
-        "detail": "app.controllers.auth_controller",
-        "documentation": {}
-    },
-    {
         "label": "login",
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
@@ -783,7 +814,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def logout():\n    logout_user()\n    flash('Has cerrado sesión correctamente', 'success')\n    return redirect(url_for('main.index'))",
+        "peekOfCode": "def logout():\n    if current_user.is_authenticated:\n        try:\n            with session_scope() as session:\n                perfil = session.query(Perfil).filter_by(username=current_user.username).first()\n                if perfil:\n                    perfil.ultima_conexion = datetime.now()  # Asegúrate que exista este campo\n        except SQLAlchemyError as e:\n            flash('No se pudo guardar la hora de cierre de sesión', 'error')\n            current_app.logger.error(f\"Error al guardar logout: {str(e)}\")",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -792,7 +823,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def register():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        email = request.form.get('email', '').strip()\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()\n        errors = []\n        # Validaciones de campos",
+        "peekOfCode": "def register():\n    from flask import flash\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()\n        email = request.form.get('email', '').strip()\n        password = request.form.get('password', '').strip()\n        confirm_password = request.form.get('confirm_password', '').strip()\n        errors = []",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -828,7 +859,7 @@
         "kind": 5,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "auth = Blueprint('auth', __name__)\n# Contexto para manejo seguro de sesiones\n# Permite manejar sesiones de base de datos asegurando commit o rollback según sea necesario\n@contextmanager\ndef session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:",
+        "peekOfCode": "auth = Blueprint('auth', __name__)\n# Funcion para iniciar la sesión del usuario\n@auth.route('/login', methods=['GET', 'POST'], endpoint='login')\n@limiter.limit(\"10 per minute\")  # Límite de intentos por seguridad\ndef login():\n    # Si ya está autenticado, redirige al índice\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username', '').strip()",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },

@@ -1,5 +1,8 @@
 import os
+from app import db
 
+
+#Esta funcion solo funciona en la db local
 def ensure_db_exists(app):
     """Asegura que el archivo de base de datos existe y tiene permisos adecuados."""
     db_path = os.path.join(app.instance_path, 'app.db')
