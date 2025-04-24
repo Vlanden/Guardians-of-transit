@@ -31,7 +31,7 @@
                     </li>
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('main.juego') }}">Juego</a>
+                        <a class="nav-link" href="{{ url_for('main.juego') }}">Temarios</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -50,10 +50,10 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.login_view') }}">Iniciar Sesión</a>
+                        <a class="nav-link" href="{{ url_for('auth.login_view') }}">Iniciar sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.register_view') }}">Registrarse</a>
+                        <a class="nav-link" href="{{ url_for('auth.register_view') }}">Registro</a>
                     </li>
                     {% endif %}
                 </ul>
