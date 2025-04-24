@@ -24,7 +24,63 @@
         "documentation": {}
     },
     {
-        "label": "UserMixin",
+        "label": "login_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "logout_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "current_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "current_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "logout_user",
         "importPath": "flask_login",
         "description": "flask_login",
         "isExtraImport": true,
@@ -64,6 +120,22 @@
         "documentation": {}
     },
     {
+        "label": "limiter",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
         "label": "jwt",
         "importPath": "app",
         "description": "app",
@@ -72,6 +144,14 @@
         "documentation": {}
     },
     {
+        "label": "db",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
         "label": "create_app",
         "importPath": "app",
         "description": "app",
@@ -85,6 +165,55 @@
         "description": "app",
         "isExtraImport": true,
         "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "bcrypt",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "bcrypt",
+        "description": "bcrypt",
+        "detail": "bcrypt",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "event",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "DDL",
+        "importPath": "sqlalchemy.schema",
+        "description": "sqlalchemy.schema",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.schema",
         "documentation": {}
     },
     {
@@ -129,6 +258,62 @@
     },
     {
         "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -184,6 +369,78 @@
         "documentation": {}
     },
     {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "make_response",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "create_access_token",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
         "label": "create_access_token",
         "importPath": "flask_jwt_extended",
         "description": "flask_jwt_extended",
@@ -200,12 +457,54 @@
         "documentation": {}
     },
     {
-        "label": "bcrypt",
+        "label": "User",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "re",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "bcrypt",
-        "description": "bcrypt",
-        "detail": "bcrypt",
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "secrets",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "secrets",
+        "description": "secrets",
+        "detail": "secrets",
+        "documentation": {}
+    },
+    {
+        "label": "smtplib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "smtplib",
+        "description": "smtplib",
+        "detail": "smtplib",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEText",
+        "importPath": "email.mime.text",
+        "description": "email.mime.text",
+        "isExtraImport": true,
+        "detail": "email.mime.text",
         "documentation": {}
     },
     {
@@ -213,16 +512,88 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    password_hash = db.Column(db.String(200), nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    def set_password(self, password):\n        self.password_hash = generate_password_hash(password)\n    def check_password(self, password):\n        return check_password_hash(self.password_hash, password)",
+        "peekOfCode": "class User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(200), nullable=False)\n    def set_password(self, password):\n        self.password_hash = bcrypt.hashpw(\n            password.encode('utf-8'), \n            bcrypt.gensalt()",
         "detail": "app.models.user",
         "documentation": {}
     },
     {
-        "label": "load_user",
+        "label": "Perfil",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class Perfil(UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime)\n    ultima_conexion = db.Column(db.DateTime)\n    juegos_jugados = db.Column(db.Integer, default=0) \nclass intentos(UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "intentos",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class intentos(UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)\n    juego_id = db.Column(db.Integer, nullable=False)\n    puntaje = db.Column(db.Integer, nullable=False)\n    fecha_inicio = db.Column(db.DateTime)\n    fecha_fin = db.Column(db.DateTime)\nclass juegos_quiz(UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_quiz",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class juegos_quiz(UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'\n    id_quiz = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)\n    descripcion = db.Column(db.String(255), nullable=False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nclass juegos_sim(UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_sim",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class juegos_sim(UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)\n    descripcion = db.Column(db.String(255), nullable=False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_sim.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_sim AUTO_INCREMENT = 100000;\")",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_extra",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class juegos_extra(UserMixin, db.Model):\n    __tablename__ = 'juegos_extra'\n    id_extra = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)\n    descripcion = db.Column(db.String(255), nullable=False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_extra.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_extra AUTO_INCREMENT = 200000;\")",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "is_valid_email",
         "kind": 2,
         "importPath": "app.auth",
         "description": "app.auth",
-        "peekOfCode": "def load_user(user_id):\n    return User.query.get(int(user_id))\nauth_bp = Blueprint('auth', __name__, template_folder='templates')\n@auth_bp.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        data = request.get_json()\n        user = User.query.filter_by(username=data['username']).first()\n        if user and user.check_password(data['password']):\n            access_token = create_access_token(identity=user.id)",
+        "peekOfCode": "def is_valid_email(email):\n    return bool(re.match(r'^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$', email))\ndef is_valid_username(username):\n    return bool(re.match(r'^[a-zA-Z0-9_]{3,20}$', username))\ndef is_strong_password(password):\n    return len(password) >= 8 and any(c.isupper() for c in password) and any(c.isdigit() for c in password)\ndef send_reset_email(user):\n    # Configuración básica del correo (debes completar con tus credenciales)\n    token = secrets.token_urlsafe(32)\n    user.reset_token = token",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "is_valid_username",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def is_valid_username(username):\n    return bool(re.match(r'^[a-zA-Z0-9_]{3,20}$', username))\ndef is_strong_password(password):\n    return len(password) >= 8 and any(c.isupper() for c in password) and any(c.isdigit() for c in password)\ndef send_reset_email(user):\n    # Configuración básica del correo (debes completar con tus credenciales)\n    token = secrets.token_urlsafe(32)\n    user.reset_token = token\n    user.token_expiration = datetime.utcnow() + timedelta(hours=1)\n    db.session.commit()",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "is_strong_password",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def is_strong_password(password):\n    return len(password) >= 8 and any(c.isupper() for c in password) and any(c.isdigit() for c in password)\ndef send_reset_email(user):\n    # Configuración básica del correo (debes completar con tus credenciales)\n    token = secrets.token_urlsafe(32)\n    user.reset_token = token\n    user.token_expiration = datetime.utcnow() + timedelta(hours=1)\n    db.session.commit()\n    msg = MIMEText(f\"\"\"\n    Para restablecer tu contraseña, visita el siguiente enlace:",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "send_reset_email",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def send_reset_email(user):\n    # Configuración básica del correo (debes completar con tus credenciales)\n    token = secrets.token_urlsafe(32)\n    user.reset_token = token\n    user.token_expiration = datetime.utcnow() + timedelta(hours=1)\n    db.session.commit()\n    msg = MIMEText(f\"\"\"\n    Para restablecer tu contraseña, visita el siguiente enlace:\n    {url_for('auth.reset_password', token=token, _external=True)}\n    Este enlace expirará en 1 hora.",
         "detail": "app.auth",
         "documentation": {}
     },
@@ -231,7 +602,7 @@
         "kind": 2,
         "importPath": "app.auth",
         "description": "app.auth",
-        "peekOfCode": "def login():\n    if request.method == 'POST':\n        data = request.get_json()\n        user = User.query.filter_by(username=data['username']).first()\n        if user and user.check_password(data['password']):\n            access_token = create_access_token(identity=user.id)\n            return jsonify(access_token=access_token), 200\n        return jsonify({\"error\": \"Credenciales inválidas\"}), 401\n    return render_template('InicioDeSesion.html')\n@auth_bp.route('/register', methods=['GET', 'POST'])",
+        "peekOfCode": "def login():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username')\n        password = request.form.get('password')\n        if not username or not password:\n            flash('Por favor complete todos los campos', 'error')\n            return redirect(url_for('auth.login'))\n        user = User.query.filter_by(username=username).first()",
         "detail": "app.auth",
         "documentation": {}
     },
@@ -240,7 +611,43 @@
         "kind": 2,
         "importPath": "app.auth",
         "description": "app.auth",
-        "peekOfCode": "def register():\n    if request.method == 'POST':\n        data = request.get_json()\n        if User.query.filter_by(username=data['username']).first():\n            return jsonify({\"error\": \"Usuario ya existe\"}), 400\n        new_user = User(\n            username=data['username'],\n            email=data['email']\n        )\n        new_user.set_password(data['password'])",
+        "peekOfCode": "def register():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        username = request.form.get('username')\n        email = request.form.get('email')\n        password = request.form.get('password')\n        confirm_password = request.form.get('confirm_password')\n        errors = []\n        if not all([username, email, password, confirm_password]):",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "reset_password_request",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def reset_password_request():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        email = request.form.get('email')\n        user = User.query.filter_by(email=email).first()\n        if user:\n            if send_reset_email(user):\n                flash('Se ha enviado un correo con instrucciones para restablecer tu contraseña', 'info')\n            else:",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "reset_password",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def reset_password(token):\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    user = User.query.filter_by(reset_token=token).first()\n    if not user or user.token_expiration < datetime.utcnow():\n        flash('El enlace de recuperación es inválido o ha expirado', 'error')\n        return redirect(url_for('auth.reset_password_request'))\n    if request.method == 'POST':\n        password = request.form.get('password')\n        confirm_password = request.form.get('confirm_password')",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "recover",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def recover():  # Cambiado de reset_password_request a recover\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':\n        email = request.form.get('email')\n        user = User.query.filter_by(email=email).first()\n        if user:\n            if send_reset_email(user):\n                flash('Se ha enviado un correo con instrucciones', 'info')\n            else:",
+        "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "logout",
+        "kind": 2,
+        "importPath": "app.auth",
+        "description": "app.auth",
+        "peekOfCode": "def logout():\n    logout_user()\n    return redirect(url_for('main.inicio'))",
         "detail": "app.auth",
         "documentation": {}
     },
@@ -249,8 +656,62 @@
         "kind": 5,
         "importPath": "app.auth",
         "description": "app.auth",
-        "peekOfCode": "auth_bp = Blueprint('auth', __name__, template_folder='templates')\n@auth_bp.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        data = request.get_json()\n        user = User.query.filter_by(username=data['username']).first()\n        if user and user.check_password(data['password']):\n            access_token = create_access_token(identity=user.id)\n            return jsonify(access_token=access_token), 200\n        return jsonify({\"error\": \"Credenciales inválidas\"}), 401",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__)\ndef is_valid_email(email):\n    return bool(re.match(r'^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$', email))\ndef is_valid_username(username):\n    return bool(re.match(r'^[a-zA-Z0-9_]{3,20}$', username))\ndef is_strong_password(password):\n    return len(password) >= 8 and any(c.isupper() for c in password) and any(c.isdigit() for c in password)\ndef send_reset_email(user):\n    # Configuración básica del correo (debes completar con tus credenciales)\n    token = secrets.token_urlsafe(32)",
         "detail": "app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "validacion_registro",
+        "kind": 2,
+        "importPath": "app.Registro",
+        "description": "app.Registro",
+        "peekOfCode": "def validacion_registro(username, email, password, password1):\n    if len(username) < 8 and len(password) < 8:\n        return \"El usuario y la contraseña deben tener al menos 8 caracteres\"\n    if password != password1:\n        #Hacer aviso al usuario\n        return \"Las contraseñas no coinciden\"\n    if User.query.filter_by(username=username).first():\n        return \"Ese usuario ya existe\"\n    if User.query.filter_by(email=email).first():\n        return \"Ese email ya está registrado\"",
+        "detail": "app.Registro",
+        "documentation": {}
+    },
+    {
+        "label": "inyeccion",
+        "kind": 2,
+        "importPath": "app.Registro",
+        "description": "app.Registro",
+        "peekOfCode": "def inyeccion(username, email, password):\n    new_user = User(username=username, email=email)\n    new_user.set_password(password)\n    db.session.add(new_user)\n    db.session.commit()\n@auth_bp.route('/registro', methods=['GET', 'POST'])\ndef registrar():\n    if request.method == \"POST\":\n        username = request.form[\"username\"]\n        email = request.form[\"email\"]",
+        "detail": "app.Registro",
+        "documentation": {}
+    },
+    {
+        "label": "registrar",
+        "kind": 2,
+        "importPath": "app.Registro",
+        "description": "app.Registro",
+        "peekOfCode": "def registrar():\n    if request.method == \"POST\":\n        username = request.form[\"username\"]\n        email = request.form[\"email\"]\n        password = request.form[\"password\"]\n        password1 = request.form[\"confirm_password\"]\n        val = validacion_registro(username, email, password, password1)\n        if val:\n            #Generar mensaje de error\n            print(val)",
+        "detail": "app.Registro",
+        "documentation": {}
+    },
+    {
+        "label": "validar_login",
+        "kind": 2,
+        "importPath": "app.Registro",
+        "description": "app.Registro",
+        "peekOfCode": "def validar_login(username, password):\n    user = User.query.filter_by(username=username).first()\n    if user:\n        if user.check_password(password):\n            login_user(user)\n            return redirect(url_for(\"main.terminos\"))\n        else:\n            flash(\"Usuario o contraseña incorrectos\", \"danger\")\n    else:\n        flash(\"El usuario no esta registrado\")",
+        "detail": "app.Registro",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "app.Registro",
+        "description": "app.Registro",
+        "peekOfCode": "def login():\n    if request.method == \"POST\":\n        username = request.form[\"username\"]\n        password = request.form[\"password\"]\n        validar_login(username, password)\n    return render_template(\"/auth/log-in.html\")",
+        "detail": "app.Registro",
+        "documentation": {}
+    },
+    {
+        "label": "auth_bp",
+        "kind": 5,
+        "importPath": "app.Registro",
+        "description": "app.Registro",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__, template_folder='templates')\n#funcion de validacion:\n#valida que el largo del username y la contraseña sea mayor a 8\n#Que el usuario no exista en la bd(libera posibles inyecciones sql)\n#Que las contraseñas coincidan\ndef validacion_registro(username, email, password, password1):\n    if len(username) < 8 and len(password) < 8:\n        return \"El usuario y la contraseña deben tener al menos 8 caracteres\"\n    if password != password1:\n        #Hacer aviso al usuario",
+        "detail": "app.Registro",
         "documentation": {}
     },
     {
@@ -258,7 +719,7 @@
         "kind": 2,
         "importPath": "app.routes",
         "description": "app.routes",
-        "peekOfCode": "def inicio():\n    return render_template('Inicio.html')\n# Página de inicio de sesión\n@main_bp.route('/iniciar-sesion')\ndef iniciodesesion():\n    return render_template('InicioDeSesion.html')\n# Página de registro\n@main_bp.route('/registro')\ndef registro():\n    return render_template('Registro.html')",
+        "peekOfCode": "def inicio():\n    return render_template('/main/main-page.html')\n@main_bp.route('/iniciar-sesion')\ndef iniciodesesion():\n    return render_template(\"/auth/log-in.html\")\n@main_bp.route('/registro')\ndef registro():\n    return render_template('Registro.html')\n@main_bp.route('/terminos')\ndef terminos():",
         "detail": "app.routes",
         "documentation": {}
     },
@@ -267,7 +728,7 @@
         "kind": 2,
         "importPath": "app.routes",
         "description": "app.routes",
-        "peekOfCode": "def iniciodesesion():\n    return render_template('InicioDeSesion.html')\n# Página de registro\n@main_bp.route('/registro')\ndef registro():\n    return render_template('Registro.html')\n# Página de recuperación de contraseña\n@main_bp.route('/recuperacion', methods=['GET', 'POST'])\ndef recuperacion():\n    if request.method == 'POST':",
+        "peekOfCode": "def iniciodesesion():\n    return render_template(\"/auth/log-in.html\")\n@main_bp.route('/registro')\ndef registro():\n    return render_template('Registro.html')\n@main_bp.route('/terminos')\ndef terminos():\n    return render_template('main/terminos.html')\n@main_bp.route('/privacidad')\ndef privacidad():",
         "detail": "app.routes",
         "documentation": {}
     },
@@ -276,34 +737,7 @@
         "kind": 2,
         "importPath": "app.routes",
         "description": "app.routes",
-        "peekOfCode": "def registro():\n    return render_template('Registro.html')\n# Página de recuperación de contraseña\n@main_bp.route('/recuperacion', methods=['GET', 'POST'])\ndef recuperacion():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        # Aquí puedes implementar el envío de correo de recuperación\n        flash('Si el correo existe, se han enviado las instrucciones para recuperar la contraseña.', 'info')\n        return redirect(url_for('main.iniciodesesion'))",
-        "detail": "app.routes",
-        "documentation": {}
-    },
-    {
-        "label": "recuperacion",
-        "kind": 2,
-        "importPath": "app.routes",
-        "description": "app.routes",
-        "peekOfCode": "def recuperacion():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        # Aquí puedes implementar el envío de correo de recuperación\n        flash('Si el correo existe, se han enviado las instrucciones para recuperar la contraseña.', 'info')\n        return redirect(url_for('main.iniciodesesion'))\n    return render_template('Recuperacion.html')\n# Página protegida - solo si el usuario está autenticado\n@main_bp.route('/index')\n@login_required",
-        "detail": "app.routes",
-        "documentation": {}
-    },
-    {
-        "label": "index",
-        "kind": 2,
-        "importPath": "app.routes",
-        "description": "app.routes",
-        "peekOfCode": "def index():\n    return render_template('Index.html', user=current_user)\n# Perfil del usuario\n@main_bp.route('/perfil')\n@login_required\ndef perfil():\n    return render_template('Perfil.html', user=current_user)\n# Términos y Condiciones\n@main_bp.route('/terminos')\ndef terminos():",
-        "detail": "app.routes",
-        "documentation": {}
-    },
-    {
-        "label": "perfil",
-        "kind": 2,
-        "importPath": "app.routes",
-        "description": "app.routes",
-        "peekOfCode": "def perfil():\n    return render_template('Perfil.html', user=current_user)\n# Términos y Condiciones\n@main_bp.route('/terminos')\ndef terminos():\n    return render_template('terminos.html')\n# Políticas de Privacidad\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('politicas.html')",
+        "peekOfCode": "def registro():\n    return render_template('Registro.html')\n@main_bp.route('/terminos')\ndef terminos():\n    return render_template('main/terminos.html')\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('main/politicas.html')\n@main_bp.route('/index')\n@login_required",
         "detail": "app.routes",
         "documentation": {}
     },
@@ -312,7 +746,7 @@
         "kind": 2,
         "importPath": "app.routes",
         "description": "app.routes",
-        "peekOfCode": "def terminos():\n    return render_template('terminos.html')\n# Políticas de Privacidad\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('politicas.html')",
+        "peekOfCode": "def terminos():\n    return render_template('main/terminos.html')\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('main/politicas.html')\n@main_bp.route('/index')\n@login_required\ndef index():\n    return render_template('main/menu.html', user=current_user)\n@main_bp.route('/perfil')",
         "detail": "app.routes",
         "documentation": {}
     },
@@ -321,7 +755,79 @@
         "kind": 2,
         "importPath": "app.routes",
         "description": "app.routes",
-        "peekOfCode": "def privacidad():\n    return render_template('politicas.html')",
+        "peekOfCode": "def privacidad():\n    return render_template('main/politicas.html')\n@main_bp.route('/index')\n@login_required\ndef index():\n    return render_template('main/menu.html', user=current_user)\n@main_bp.route('/perfil')\n@login_required\ndef perfil():\n    return render_template('main/profile.html', user=current_user)",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def index():\n    return render_template('main/menu.html', user=current_user)\n@main_bp.route('/perfil')\n@login_required\ndef perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego')\n@login_required\ndef juego():\n    return render_template('game/game.html', user=current_user)",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "perfil",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego')\n@login_required\ndef juego():\n    return render_template('game/game.html', user=current_user)\n# Página de recuperación de contraseña\n@main_bp.route('/recuperacion', methods=['GET', 'POST'])\ndef recuperacion():\n    if request.method == 'POST':",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "juego",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def juego():\n    return render_template('game/game.html', user=current_user)\n# Página de recuperación de contraseña\n@main_bp.route('/recuperacion', methods=['GET', 'POST'])\ndef recuperacion():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        # Aquí puedes implementar el envío de correo de recuperación\n        flash('Si el correo existe, se han enviado las instrucciones para recuperar la contraseña.', 'info')\n        return redirect(url_for('main.iniciodesesion'))",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "recuperacion",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def recuperacion():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        # Aquí puedes implementar el envío de correo de recuperación\n        flash('Si el correo existe, se han enviado las instrucciones para recuperar la contraseña.', 'info')\n        return redirect(url_for('main.iniciodesesion'))\n    return render_template('Recuperacion.html')\n@main_bp.route('/save-score', methods=['POST'])\n@login_required\ndef save_score():",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "save_score",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def save_score():\n    if request.method == 'POST':\n        score = request.form.get('score')\n        if score is None:\n            return make_response('Falta puntuación', 400)\n        try:\n            current_user.score = int(score)\n            db.session.commit()\n            return make_response('Puntuación guardada', 200)\n        except Exception as e:",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "guardar_puntuacion",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def guardar_puntuacion():\n    if request.method == 'POST':\n        puntuacion = request.form.get('puntuacion')\n        if puntuacion is None:\n            return make_response('Puntuación faltante', 400)\n        try:\n            current_user.score = int(puntuacion)\n            db.session.commit()\n            return make_response('¡Puntuación guardada con éxito!', 200)\n        except Exception as e:",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "cerrar_secion",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def cerrar_secion():\n    logout_user()\n    return render_template('/InicioDeSesion.html')\n@main_bp.route('/actualizar_perfil', methods=['POST'])\n@login_required\ndef actualizar_perfil():\n    if request.method == 'POST':\n        try:\n            username = request.form.get('username')\n            email = request.form.get('email')",
+        "detail": "app.routes",
+        "documentation": {}
+    },
+    {
+        "label": "actualizar_perfil",
+        "kind": 2,
+        "importPath": "app.routes",
+        "description": "app.routes",
+        "peekOfCode": "def actualizar_perfil():\n    if request.method == 'POST':\n        try:\n            username = request.form.get('username')\n            email = request.form.get('email')\n            current_password = request.form.get('current_password')\n            new_password = request.form.get('new_password')\n            if not username or not email:\n                flash('Nombre de usuario y email son requeridos', 'error')\n                return redirect(url_for('main.perfil'))",
         "detail": "app.routes",
         "documentation": {}
     },
@@ -330,7 +836,7 @@
         "kind": 5,
         "importPath": "app.routes",
         "description": "app.routes",
-        "peekOfCode": "main_bp = Blueprint('main', __name__)\n# Página pública de bienvenida\n@main_bp.route('/')\ndef inicio():\n    return render_template('Inicio.html')\n# Página de inicio de sesión\n@main_bp.route('/iniciar-sesion')\ndef iniciodesesion():\n    return render_template('InicioDeSesion.html')\n# Página de registro",
+        "peekOfCode": "main_bp = Blueprint('main', __name__)\n# Página pública de bienvenida\n@main_bp.route('/')\ndef inicio():\n    return render_template('/main/main-page.html')\n@main_bp.route('/iniciar-sesion')\ndef iniciodesesion():\n    return render_template(\"/auth/log-in.html\")\n@main_bp.route('/registro')\ndef registro():",
         "detail": "app.routes",
         "documentation": {}
     },
