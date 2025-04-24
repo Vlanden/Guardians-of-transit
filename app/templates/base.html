@@ -10,43 +10,55 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bs_css/bootstrap.min.css') }}">
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-    
 
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+    {% if request.endpoint == 'main.juego' %}
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+    {% else %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% endif %}
+
     {% block extra_css %}{% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
+
     <!-- Header -->
     {% include 'partials/header.html' %}
 
     <!-- Contenido principal -->
-    <main class="container mt-4 flex-grow-1">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        
-        {% block content %}{% endblock %}
+    <main class="mt-4 flex-grow-1">
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
     <!-- Footer -->
     {% include 'partials/footer.html' %}
 
-
-    
     <!-- Scripts personalizados -->
-    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+    {% if request.endpoint == 'main.index' %}
+    <script src="{{ url_for('static', filename='js/menu.js') }}"defer></script>
+    {% endif %}
+    {% if request.endpoint == 'main.juego' %}
+    <script>
+        const juego_id = parseInt("{{ juego_id }}");
+      </script>
+    <script src="{{ url_for('static', filename='js/game.js') }}"defer></script>
+    {% endif %}
 
-    <!-- Bootstrap 5 JS Bundle con Popper -->
-    <script src="{{ url_for('static', filename='js/bs_js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Bootstrap JS Bundle con Popper -->
+    <script src="{{ url_for('static', filename='js/bs_js/bootstrap.bundle.min.js') }}"defer></script>
 
     {% block extra_js %}{% endblock %}
 </body>

@@ -136,6 +136,14 @@
         "documentation": {}
     },
     {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -305,6 +313,14 @@
     },
     {
         "label": "db",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "create_app",
         "importPath": "app",
         "description": "app",
         "isExtraImport": true,
@@ -1048,7 +1064,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def index():\n    return render_template('main/menu.html', user=current_user)\n@main_bp.route('/perfil')\n@login_required\n@limiter.limit(\"30 per minute\")\ndef perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego')\n@login_required\ndef juego():",
+        "peekOfCode": "def index():\n    return render_template('main/menu.html', user=current_user)\n@main_bp.route('/perfil')\n@login_required\n@limiter.limit(\"30 per minute\")\ndef perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego/', defaults={'juego_id': None})\n@main_bp.route('/juego/<int:juego_id>')\n@login_required",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1057,7 +1073,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego')\n@login_required\ndef juego():\n    return render_template('game/game.html', user=current_user)\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#cambiar el codigo de save_score y save_user_score, el actual es incorrecto\n@main_bp.route('/save-score', methods=['POST'])\n@login_required",
+        "peekOfCode": "def perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego/', defaults={'juego_id': None})\n@main_bp.route('/juego/<int:juego_id>')\n@login_required\ndef juego(juego_id):\n    if juego_id not in range(1, 8):  # acepta del 1 al 7\n        return render_template('errors/404.html'), 404\n    return render_template('game/game.html', juego_id=juego_id, user=current_user)#, request=request\n# ──────── API: FUNCIONES DEL USUARIO ────────",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1066,7 +1082,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def juego():\n    return render_template('game/game.html', user=current_user)\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#cambiar el codigo de save_score y save_user_score, el actual es incorrecto\n@main_bp.route('/save-score', methods=['POST'])\n@login_required\ndef save_score():\n    return UserController.save_score()\n#API sin uso\n@main_bp.route('/guardar-puntuacion', methods=['POST'])",
+        "peekOfCode": "def juego(juego_id):\n    if juego_id not in range(1, 8):  # acepta del 1 al 7\n        return render_template('errors/404.html'), 404\n    return render_template('game/game.html', juego_id=juego_id, user=current_user)#, request=request\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#cambiar el codigo de save_score y save_user_score, el actual es incorrecto\n@main_bp.route('/save-score', methods=['POST'])\n@login_required\ndef save_score():\n    return UserController.save_score()",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1269,57 +1285,66 @@
         "documentation": {}
     },
     {
-        "label": "get_venv_python",
-        "kind": 2,
+        "label": "app",
+        "kind": 5,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "def get_venv_python():\n    \"\"\"Retorna la ruta del ejecutable Python dentro del entorno virtual.\"\"\"\n    if platform.system() == \"Windows\":\n        return os.path.join(\"venv\", \"Scripts\", \"python.exe\")\n    else:\n        return os.path.join(\"venv\", \"bin\", \"python\")\nVENV_PATH = os.path.join(os.path.dirname(__file__), 'venv')  # Ruta del entorno virtual\nPYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"",
+        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True)\n    #app.run(debug=True, host=\"0.0.0.0\", port=5000)",
         "detail": "run",
+        "documentation": {}
+    },
+    {
+        "label": "get_venv_python",
+        "kind": 2,
+        "importPath": "run_env",
+        "description": "run_env",
+        "peekOfCode": "def get_venv_python():\n    \"\"\"Retorna la ruta del ejecutable Python dentro del entorno virtual.\"\"\"\n    if platform.system() == \"Windows\":\n        return os.path.join(\"venv\", \"Scripts\", \"python.exe\")\n    else:\n        return os.path.join(\"venv\", \"bin\", \"python\")\nVENV_PATH = os.path.join(os.path.dirname(__file__), 'venv')  # Ruta del entorno virtual\nPYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"",
+        "detail": "run_env",
         "documentation": {}
     },
     {
         "label": "is_using_virtualenv",
         "kind": 2,
-        "importPath": "run",
-        "description": "run",
+        "importPath": "run_env",
+        "description": "run_env",
         "peekOfCode": "def is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef create_virtualenv():\n    \"\"\"Crea un entorno virtual si no existe.\"\"\"\n    print(\"Entorno virtual no encontrado. Creando entorno virtual...\")\n    subprocess.check_call([sys.executable, '-m', 'venv', VENV_PATH])\ndef install_requirements():\n    \"\"\"Instala las dependencias desde requirements.txt.\"\"\"\n    print(\"Instalando dependencias desde requirements.txt...\")",
-        "detail": "run",
+        "detail": "run_env",
         "documentation": {}
     },
     {
         "label": "create_virtualenv",
         "kind": 2,
-        "importPath": "run",
-        "description": "run",
+        "importPath": "run_env",
+        "description": "run_env",
         "peekOfCode": "def create_virtualenv():\n    \"\"\"Crea un entorno virtual si no existe.\"\"\"\n    print(\"Entorno virtual no encontrado. Creando entorno virtual...\")\n    subprocess.check_call([sys.executable, '-m', 'venv', VENV_PATH])\ndef install_requirements():\n    \"\"\"Instala las dependencias desde requirements.txt.\"\"\"\n    print(\"Instalando dependencias desde requirements.txt...\")\n    pip_executable = os.path.join(VENV_PATH, 'Scripts', 'pip') if os.name == 'nt' else os.path.join(VENV_PATH, 'bin', 'pip')\n    subprocess.check_call([pip_executable, 'install', '-r', 'requirements.txt'])\nif __name__ == \"__main__\":",
-        "detail": "run",
+        "detail": "run_env",
         "documentation": {}
     },
     {
         "label": "install_requirements",
         "kind": 2,
-        "importPath": "run",
-        "description": "run",
+        "importPath": "run_env",
+        "description": "run_env",
         "peekOfCode": "def install_requirements():\n    \"\"\"Instala las dependencias desde requirements.txt.\"\"\"\n    print(\"Instalando dependencias desde requirements.txt...\")\n    pip_executable = os.path.join(VENV_PATH, 'Scripts', 'pip') if os.name == 'nt' else os.path.join(VENV_PATH, 'bin', 'pip')\n    subprocess.check_call([pip_executable, 'install', '-r', 'requirements.txt'])\nif __name__ == \"__main__\":\n    if not is_using_virtualenv():\n        if not os.path.exists(VENV_PATH):\n            create_virtualenv()\n        # Activar el entorno virtual en Windows",
-        "detail": "run",
+        "detail": "run_env",
         "documentation": {}
     },
     {
         "label": "VENV_PATH",
         "kind": 5,
-        "importPath": "run",
-        "description": "run",
+        "importPath": "run_env",
+        "description": "run_env",
         "peekOfCode": "VENV_PATH = os.path.join(os.path.dirname(__file__), 'venv')  # Ruta del entorno virtual\nPYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef create_virtualenv():\n    \"\"\"Crea un entorno virtual si no existe.\"\"\"\n    print(\"Entorno virtual no encontrado. Creando entorno virtual...\")\n    subprocess.check_call([sys.executable, '-m', 'venv', VENV_PATH])\ndef install_requirements():",
-        "detail": "run",
+        "detail": "run_env",
         "documentation": {}
     },
     {
         "label": "PYTHON_BIN",
         "kind": 5,
-        "importPath": "run",
-        "description": "run",
+        "importPath": "run_env",
+        "description": "run_env",
         "peekOfCode": "PYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef create_virtualenv():\n    \"\"\"Crea un entorno virtual si no existe.\"\"\"\n    print(\"Entorno virtual no encontrado. Creando entorno virtual...\")\n    subprocess.check_call([sys.executable, '-m', 'venv', VENV_PATH])\ndef install_requirements():\n    \"\"\"Instala las dependencias desde requirements.txt.\"\"\"",
-        "detail": "run",
+        "detail": "run_env",
         "documentation": {}
     },
     {
@@ -1327,7 +1352,7 @@
         "kind": 5,
         "importPath": "wsgi",
         "description": "wsgi",
-        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    #app.run(debug=True)\n    app.run(debug=True, host=\"0.0.0.0\", port=5000)",
+        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True)\n    #app.run(debug=True, host=\"0.0.0.0\", port=5000)",
         "detail": "wsgi",
         "documentation": {}
     }

@@ -1,3 +1,4 @@
+/* Contenedor principal */
 .game-container {
   max-width: 800px;
   margin: 0 auto;
@@ -5,51 +6,129 @@
   font-family: Arial, sans-serif;
 }
 
-.pregunta {
+/* Estilo de la pregunta */
+#pregunta {
   font-size: 24px;
   margin-bottom: 30px;
   font-weight: bold;
   color: #333;
+  text-align: center;
+  padding: 15px 0;
 }
 
-.respuestas {
+/* Grid de respuestas */
+#respuestas {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
 }
 
-.opcion {
+/* Estilo BASE para los botones - IMPORTANTE: Sobreescribe Bootstrap */
+#respuestas button.opcion {
   padding: 15px;
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
   transition: all 0.3s;
   font-size: 18px;
+  background-color: #f7fff7;
+  color: black;
+  border: 1px solid #ddd;
+  margin: 0;
+  /* Reset de estilos de Bootstrap */
+  display: block;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
-.opcion:hover {
+/* Efecto hover */
+#respuestas button.opcion:hover {
   transform: scale(1.03);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  /* Anulamos hover de Bootstrap */
+  background-color: #f7fff7 !important;
+  color: black !important;
 }
 
-.rojo { background-color: #ff6b6b; color: white; }
-.amarillo { background-color: #ffd166; color: black; }
-.negro { background-color: #333; color: white; }
-.blanco { background-color: #f7fff7; color: black; border: 1px solid #ddd; }
+/* Colores específicos - Sobreescriben todo */
+#respuestas button.opcion.rojo {
+  background-color: #ff6b6b !important;
+  color: white !important;
+  border: none !important;
+}
 
-.correcta {
+#respuestas button.opcion.amarillo {
+  background-color: #ffd166 !important;
+  color: black !important;
+  border: none !important;
+}
+
+#respuestas button.opcion.negro {
+  background-color: #333 !important;
+  color: white !important;
+  border: none !important;
+}
+
+#respuestas button.opcion.blanco {
+  background-color: #f7fff7 !important;
+  color: black !important;
+  border: 1px solid #ddd !important;
+}
+
+/* Estado correcto */
+#respuestas button.opcion.correcta {
   background-color: #06d6a0 !important;
   color: white !important;
 }
 
-.desactivada {
+/* Estado deshabilitado */
+#respuestas button.opcion:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.resultado {
+/* Resto de estilos... */
+#resultado {
   margin-top: 30px;
   padding: 20px;
   background-color: #f8f9fa;
   border-radius: 8px;
   font-size: 20px;
+  border-left: 5px solid #6c757d;
+}
+
+#progress {
+  text-align: right;
+  margin-bottom: 20px;
+  color: #6c757d;
+  font-size: 16px;
+}
+
+#puntuacion-actual {
+  color: #2a9d8f;
+  font-weight: bold;
+}
+
+#high-score {
+  color: #e76f51;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #respuestas {
+    grid-template-columns: 1fr;
+  }
+  
+  #respuestas button.opcion {
+    padding: 12px;
+    font-size: 16px;
+  }
+  
+  #pregunta {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
 }

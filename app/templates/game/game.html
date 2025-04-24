@@ -1,18 +1,26 @@
 {% extends "base.html" %}
 
-{% block title %}Quiz Educación Vial{% endblock %}
+{% block title %}Juego {{ juego_id }} - Guardianes de la Vía{% endblock %}
 
 {% block content %}
-<div class="game-container container my-4">
-    <div id="pregunta" class="pregunta card p-4 mb-4"></div>
-    <div id="respuestas" class="respuestas row g-3"></div>
-    <div id="resultado" class="resultado card mt-4 p-3" style="display: none"></div>
-</div>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-    const GUARDAR_URL = "{{ url_for('main.guardar_puntuacion') }}";
-</script>
-<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+<div class="game-container">
+    <div id="gameDetails" data-juego-id="{{ juego_id }}"></div>
+    
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h3 id="pregunta" class="text-center mb-0"></h3>
+        </div>
+        <div class="card-body">
+            <div id="progress" class="text-end mb-3"></div>
+            <div id="respuestas" class="d-grid"></div>
+            <div id="resultado" class="alert" style="display: none;"></div>
+        </div>
+        <div class="card-footer bg-light">
+            <div class="d-flex justify-content-between align-items-center">
+                <span>Puntuación: <strong id="puntuacion-actual">0</strong> puntos</span>
+                <span id="high-score">Récord: 0 puntos</span>
+            </div>
+        </div>
+    </div>
+</div><br>
 {% endblock %}

@@ -1,3 +1,4 @@
+from flask import request
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from app import limiter
@@ -42,10 +43,13 @@ def index():
 def perfil():
     return render_template('main/profile.html', user=current_user)
 
-@main_bp.route('/juego')
+@main_bp.route('/juego/', defaults={'juego_id': None})
+@main_bp.route('/juego/<int:juego_id>')
 @login_required
-def juego():
-    return render_template('game/game.html', user=current_user)
+def juego(juego_id):
+    if juego_id not in range(1, 8):  # acepta del 1 al 7
+        return render_template('errors/404.html'), 404
+    return render_template('game/game.html', juego_id=juego_id, user=current_user)#, request=request
 
 
 # ──────── API: FUNCIONES DEL USUARIO ────────
