@@ -8,6 +8,10 @@ Aplicación web construida con Flask. Lista para desplegar en local o en un VPS 
 pip install -r requirements.txt
 python run.py
 ```
+```bash
+Con un ambiente 
+python run_env.py
+```
 
 ## Desplegar en VPS con Gunicorn
 
