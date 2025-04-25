@@ -10,7 +10,7 @@
         </section>
         
         <section class="col bg-black p-5 rounded-end-3">
-            <form method="post" action="{{ url_for('auth.login') }}">
+            <form method="post" action="{{ url_for('auth_web.login') }}">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <h2 class="text-center py-4 text-white">¡Inicia sesión!</h2>
                 
@@ -28,11 +28,11 @@
                     <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
                     <p class="fw-bold text-center mt-3 text-white">
                         ¿No tienes una cuenta? 
-                        <a href="{{ url_for('auth.register') }}" class="text-primary">Regístrate aquí</a>
+                        <a href="{{ url_for('auth_web.register') }}" class="text-primary">Regístrate aquí</a>
                     </p>
                     <p class="fw-bold text-center mt-1 text-white">
                         ¿Olvidaste tu contraseña? 
-                        <a href="{{ url_for('auth.reset_password') }}" class="text-primary">Recupérala aquí</a>
+                        <a href="{{ url_for('auth_web.reset_password') }}" class="text-primary">Recupérala aquí</a>
                     </p>                    
                 </div>
             </form>

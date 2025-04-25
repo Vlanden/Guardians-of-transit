@@ -13,10 +13,11 @@
 
     <!-- Estilos personalizados -->
     {% if request.endpoint == 'main.juego' %}
-            <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
     {% else %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     {% endif %}
+
 
     {% block extra_css %}{% endblock %}
 </head>
@@ -53,7 +54,7 @@
     {% if request.endpoint == 'main.juego' %}
     <script>
         const juego_id = parseInt("{{ juego_id }}");
-      </script>
+    </script>
     <script src="{{ url_for('static', filename='js/game.js') }}"defer></script>
     {% endif %}
 

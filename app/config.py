@@ -43,3 +43,11 @@ class Config:
     #LOG_FILE = 'app.log'
     #LOG_MAX_BYTES = 1024 * 1024  # 1MB
     #LOG_BACKUP_COUNT = 5
+    UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), '..', 'static', 'uploads')
+    ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
+    
+    @staticmethod
+    def init_app(app):
+        # Crear directorio de uploads si no existe
+        if not os.path.exists(Config.UPLOAD_FOLDER):
+            os.makedirs(Config.UPLOAD_FOLDER)

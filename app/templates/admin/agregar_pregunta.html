@@ -1,0 +1,48 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Agregar Pregunta al Quiz: {{ quiz.titulo }}</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        
+        <div class="mb-3">
+            {{ form.pregunta.label(class="form-label") }}
+            {{ form.pregunta(class="form-control") }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.opcion_correcta.label(class="form-label") }}
+            {{ form.opcion_correcta(class="form-control") }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.opcion2.label(class="form-label") }}
+            {{ form.opcion2(class="form-control") }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.opcion3.label(class="form-label") }}
+            {{ form.opcion3(class="form-control") }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.opcion4.label(class="form-label") }}
+            {{ form.opcion4(class="form-control") }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.explicacion.label(class="form-label") }}
+            {{ form.explicacion(class="form-control", rows=2) }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.orden.label(class="form-label") }}
+            {{ form.orden(class="form-control") }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Agregar Pregunta</button>
+        <a href="{{ url_for('quiz_admin.listar_quizzes') }}" class="btn btn-secondary">Volver</a>
+    </form>
+</div>
+{% endblock %}

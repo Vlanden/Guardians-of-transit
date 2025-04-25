@@ -23,13 +23,6 @@ def is_strong_password(password: str) -> bool:
         any(c.isdigit() for c in password)
     )
 
-
-
-
-
-
-
-
 def send_reset_email(user) -> bool:
     """Envía un correo de restablecimiento de contraseña al usuario."""
     token = secrets.token_urlsafe(32)

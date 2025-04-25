@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from app import db
+from app.extensions import db
 import bcrypt
 from datetime import datetime, timedelta
 import secrets
@@ -72,7 +72,10 @@ class User(UserMixin, db.Model):
     
     
 
-# Clases adicionales como Perfil, intentos, juegos_quiz, juegos_sim, y juegos_extra
+# Clases adicionales como QuizPregunta,Perfil, intentos, juegos_quiz, juegos_sim, y juegos_extra
+
+
+    
 
 class Perfil(UserMixin, db.Model):
     __tablename__ = 'perfil'  
@@ -95,8 +98,6 @@ class intentos(UserMixin, db.Model):
     fecha_inicio = db.Column(db.DateTime)
     fecha_fin = db.Column(db.DateTime)
 
-
-
 class juegos_quiz(UserMixin, db.Model):
     __tablename__ = 'juegos_quiz'
 
@@ -104,6 +105,9 @@ class juegos_quiz(UserMixin, db.Model):
     titulo = db.Column(db.String(255), nullable = False)
     descripcion = db.Column(db.String(255), nullable=False)
     img_referencia = db.Column(db.String(255), nullable=False)
+    
+    preguntas = db.relationship('QuizPregunta', backref='juego', lazy=True, cascade='all, delete-orphan')
+        
 
 class juegos_sim(UserMixin, db.Model):
     __tablename__ = 'juegos_sim'
@@ -131,3 +135,16 @@ event.listen(
     'after_create',
     DDL("ALTER TABLE juegos_extra AUTO_INCREMENT = 200000;")
 )
+
+class QuizPregunta(db.Model):
+    __tablename__ = 'quiz_preguntas'
+    
+    id_pregunta = db.Column(db.Integer, primary_key=True)
+    id_quiz = db.Column(db.Integer, db.ForeignKey('juegos_quiz.id_quiz'))  # FK al juego
+    q_pregunta = db.Column(db.String(500), nullable=False)
+    opcioncorrecta = db.Column(db.String(200), nullable=False)  # Correcta
+    opcion2 = db.Column(db.String(200), nullable=False)
+    opcion3 = db.Column(db.String(200), nullable=False)
+    opcion4 = db.Column(db.String(200), nullable=False)
+    explicacion = db.Column(db.String(500))
+    

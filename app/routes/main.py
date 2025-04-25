@@ -1,4 +1,3 @@
-from flask import request
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from app import limiter
@@ -15,11 +14,13 @@ def inicio():
 
 @main_bp.route('/iniciar-sesion')
 def iniciodesesion():
-    return redirect(url_for('auth.login'))
+    # Redirigir a la ruta de login dentro del Blueprint 'auth_web'
+    return redirect(url_for('auth_web.login'))
 
 @main_bp.route('/registro')
 def registro():
-    return redirect(url_for('auth.register'))
+    # Redirigir a la ruta de registro dentro del Blueprint 'auth_web'
+    return redirect(url_for('auth_web.register'))
 
 @main_bp.route('/terminos')
 def terminos():

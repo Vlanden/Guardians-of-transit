@@ -18,7 +18,7 @@
         <div class="col">
             <a href="{{ url_for('main.juego', juego_id=i) }}" class="text-decoration-none text-dark">
                 <div class="game-card card h-100" id="juego{{ i }}">
-                    <img src="{{ url_for('static', filename='images/game' + i|string + '.jpg') }}" class="card-img-top game-img" alt="Juego {{ i }}">
+                    <img src="{{ url_for('static', filename='images/game' + i|string + '.jpg') }}" class="card-img-top game-img" alt="Imagen del juego {{ i }}">
                     <div class="card-body">
                         <h5 class="card-title text-center">Juego {{ i }}</h5>
                     </div>

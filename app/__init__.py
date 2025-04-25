@@ -1,22 +1,38 @@
 # app/__init__.py
 import os
-from flask import Flask
+from flask import Flask, flash , redirect,url_for
+from app.routes.games import games_bp
 from .config import Config
 from .extensions import db, login_manager, jwt, csrf, limiter, talisman
 from .utils.logging import configure_logging
 from sqlalchemy.exc import OperationalError
-
+from flask_talisman import Talisman
 
 def create_app(config_class=Config):
     app = Flask(__name__)
+    # Configuración de CSP más permisiva pero segura
+    csp = {
+        'default-src': "'self'",
+        'style-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        'script-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        'img-src': ["'self'", "data:", "https://*"],
+        'font-src': ["'self'", "https://cdn.jsdelivr.net"]
+    }
+
+    Talisman(app, content_security_policy=csp)
+
     app.config.from_object(config_class)
 
     # Configurar procesadores de contexto
     configure_context_processors(app)
-
+    
     # Inicializar extensiones —> esto registra 'app' con SQLAlchemy
     initialize_extensions(app)
 
+    # 2. Inicializar Flask-Migrate INMEDIATAMENTE después de db
+    #from flask_migrate import Migrate
+    #migrate = Migrate(app, db)  # <-- Esta línea debe estar aquí
+    
     # Configurar logging (si decides activarlo)
     # configure_logging(app)
 
@@ -54,8 +70,8 @@ def initialize_extensions(app):
     
     db.init_app(app)
     login_manager.init_app(app)
-    ##Pendiente de checar
-    login_manager.login_view = 'auth.login'
+    ##Es el manejador de la ventana de logeo
+    login_manager.login_view = 'auth_web.login'
     jwt.init_app(app)
     limiter.init_app(app)
     csrf.init_app(app)
@@ -79,10 +95,15 @@ def configure_user_loader(app):
 def register_blueprints(app):
     """Registra todos los blueprints de la aplicación"""
     from app.routes.main import main_bp
-    from app.routes.auth import auth_bp
-    
+    from app.routes.auth import auth_api
+    from app.controllers.auth_controller import auth_web 
+    from app.routes.games import games_bp
+    from app.controllers.admin.quiz_controller import quiz_admin
     app.register_blueprint(main_bp)
-    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(quiz_admin, url_prefix='/admin/quizzes')
+    app.register_blueprint(games_bp, url_prefix='/games')
+    app.register_blueprint(auth_web, url_prefix='/auth')
+    app.register_blueprint(auth_api, url_prefix='/api/auth')
 
 def configure_context_processors(app):
     """Configura los context processors"""

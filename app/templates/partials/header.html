@@ -10,9 +10,15 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.inicio') }}">Inicio</a>
+                </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('main.index') }}">Menu de juegos</a>
                 </li>
+                {% endif %}
             </ul>
+
             <ul class="navbar-nav">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item dropdown">
@@ -22,17 +28,15 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                         <li><a class="dropdown-item" href="{{ url_for('main.perfil') }}">Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Cerrar Sesión</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('auth_web.logout') }}">Cerrar Sesión</a></li>
                     </ul>
                 </li>
-
-                
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('auth.login') }}">Iniciar Sesión</a>
+                    <a class="nav-link" href="{{ url_for('auth_web.login') }}">Iniciar Sesión</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('auth.register') }}">Registrarse</a>
+                    <a class="nav-link" href="{{ url_for('auth_web.register') }}">Registrarse</a>
                 </li>
                 {% endif %}
             </ul>
