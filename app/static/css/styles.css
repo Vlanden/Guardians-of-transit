@@ -315,3 +315,82 @@ footer a:hover {
     font-size: 2rem;
   }
 }
+
+/*:root{
+    --color1: #000000;
+    --color2: #FFFFFF;
+    --color3: #FF0000;
+    --color4: #00FF00;
+    --color5: #0000FF;
+}*/
+
+*{
+  padding: 0px;
+  margin: 0px;
+
+}*
+
+.bg-primary {
+  background-color: #000 !important;
+}
+.bg-black{
+  background-color: #363636 !important;
+}
+body{
+  font-weight: 16px;
+  font-family: Source Serif 4, serif;
+  color: white;
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../Imagenes/Vialidad.jpeg);
+  background-size:cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg{
+  background-image: url(../Imagenes/Calles.jpg);
+  background-position: center center;
+  background-size: cover;  
+}
+
+.inputs{
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.btn{
+  background-color: #ff9900;
+  color: white;
+  width: 104px !important;
+  transition: all 0.5s ease;
+}
+
+.btn:hover{
+  background-color: #FF0000;
+  color: white;
+  transform: scale(1.15);
+  transition: all 0.5s ease;
+  font-weight: bold;
+}
+
+.inputs:focus{
+  background-color: transparent;
+  color: white;
+  border: 1px solid #ff9900;
+  outline: none;
+  box-shadow: none;
+  font-weight: bold;
+}
+
+.reg-links{
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease; 
+}
+
+.reg-links:hover{
+  color: #ff9900;
+  text-decoration: none;
+  transition: color 0.3s ease; 
+}
