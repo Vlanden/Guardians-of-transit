@@ -396,3 +396,33 @@ footer a:hover {
     padding-top: 1rem;
   }
 }
+
+/* Carrusel scroll-snap */
+.carruseles-scroll {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+.carruseles-scroll > .flex-shrink-0 {
+  scroll-snap-align: start;
+}
+
+/* Game-card básico */
+.game-card {
+  width: 220px;
+}
+
+/* Ocultar scrollbar en móviles */
+@media (max-width: 768px) {
+  .carrusel-track::-webkit-scrollbar { display: none; }
+}
+
+/* Aumentar la “×” del clearSearch */
+#clearSearch {
+  font-size: 1.25rem;    /* tamaño de la cruz */
+  padding: 0.25rem 0.75rem; /* más espacio clicable */
+}
+/* el “track” del carrusel siempre oculta el contenido que desborda */
+.carrusel-track {
+  overflow: hidden;
+}
+

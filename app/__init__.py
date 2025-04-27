@@ -1,7 +1,11 @@
 # app/__init__.py
+import logging.handlers
 import os
+import logging
+import sqlalchemy 
+from logging.handlers import RotatingFileHandler
 from flask import Flask, flash , redirect,url_for
-from app.routes.games import games_bp
+from sqlalchemy import text
 from .config import Config
 from .extensions import db, login_manager, jwt, csrf, limiter, talisman
 from .utils.logging import configure_logging
@@ -22,13 +26,20 @@ def create_app(config_class=Config):
     Talisman(app, content_security_policy=csp)
 
     app.config.from_object(config_class)
-
+    
+    #app.config.from_object(Config)
+    
     # Configurar procesadores de contexto
     configure_context_processors(app)
     
     # Inicializar extensiones —> esto registra 'app' con SQLAlchemy
     initialize_extensions(app)
 
+    with app.app_context():
+        # Configurar timezone UTC para todas las conexiones
+        with db.engine.connect() as connection:
+            connection.execute(text("SET time_zone = '+00:00';"))
+            
     # 2. Inicializar Flask-Migrate INMEDIATAMENTE después de db
     #from flask_migrate import Migrate
     #migrate = Migrate(app, db)  # <-- Esta línea debe estar aquí
@@ -49,6 +60,16 @@ def create_app(config_class=Config):
         'max_overflow': 5,      # Conexiones adicionales permitidas
         'pool_timeout': 30      # Tiempo de espera para obtener conexión
     }
+    # En la configuración de SQLAlchemy (funcion de init create_app):
+    # En app/__init__.py
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+            'pool_size': 5,
+            'pool_recycle': 280,  # Menor que el wait_timeout de MySQL (generalmente 300s)
+            'pool_pre_ping': True,  # Verifica conexiones antes de usarlas
+            'max_overflow': 2
+    }
+
+
 
     # ✅ AHORA SÍ: crear la base de datos una vez que db ya está registrado con app
     configure_database(app)
@@ -58,6 +79,12 @@ def create_app(config_class=Config):
         db.session.rollback()
         flash('Error temporal con la base de datos. Por favor intente nuevamente.', 'error')
         return redirect(url_for('main.index'))
+    
+     # Configurar logs
+    handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=3)
+    handler.setLevel(logging.INFO)
+    app.logger.addHandler(handler)
+
 
     return app
 
@@ -76,6 +103,7 @@ def initialize_extensions(app):
     limiter.init_app(app)
     csrf.init_app(app)
     talisman.init_app(app)
+    
 
 def configure_user_loader(app):
     """Configura el user_loader para Flask-Login"""
@@ -115,6 +143,9 @@ def configure_context_processors(app):
 
 def configure_database(app):
     """Configuración segura de la base de datos"""
+    
+
+
     with app.app_context():
         try:
             # Verificar permisos de escritura

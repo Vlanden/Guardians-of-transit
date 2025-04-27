@@ -1,5 +1,9 @@
 import os
 from app import db
+from sqlalchemy.exc import OperationalError, SQLAlchemyError
+from time import sleep
+from app.extensions import db
+from contextlib import contextmanager
 
 
 #Esta funcion solo funciona en la db local
@@ -24,8 +28,7 @@ def ensure_db_exists(app):
         app.logger.error(f"No se pudo crear el archivo de BD: {str(e)}")
         raise  # Re-lanzar la excepción después de loguearla
 
-from contextlib import contextmanager
-from sqlalchemy.exc import SQLAlchemyError
+
 
 @contextmanager
 def session_scope():
@@ -39,3 +42,17 @@ def session_scope():
         raise e
     finally:
         session.close()
+        
+        
+
+def safe_db_operation(func, max_retries=3):
+    """Ejecuta operaciones con reintentos automáticos"""
+    for attempt in range(max_retries):
+        try:
+            return func()
+        except OperationalError as e:
+            if "2006" in str(e) and attempt < max_retries - 1:
+                db.session.rollback()
+                sleep(0.5 * (attempt + 1))
+                continue
+            raise

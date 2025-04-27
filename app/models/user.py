@@ -83,9 +83,7 @@ class Perfil(UserMixin, db.Model):
     username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)
     fecha_registro = db.Column(db.DateTime)
     ultima_conexion = db.Column(db.DateTime)
-    juegos_jugados = db.Column(db.Integer, default=0) 
-
-
+    juegos_jugados = db.Column(db.String(80), default=0) 
 
 
 class intentos(UserMixin, db.Model):

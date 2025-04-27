@@ -4,63 +4,53 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guardianes de la Vía - {% block title %}{% endblock %}</title>
-    
+    <title>Guardianes de la Vía – {% block title %}{% endblock %}</title>
+
     <!-- Bootstrap 5 CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bs_css/bootstrap.min.css') }}">
-    <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 
     <!-- Estilos personalizados -->
-    {% if request.endpoint == 'main.juego' %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+    {% if request.endpoint == 'main.ver_juego' %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
     {% else %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     {% endif %}
-
-
     {% block extra_css %}{% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- Header -->
     {% include 'partials/header.html' %}
 
-    <!-- Contenido principal -->
     <main class="mt-4 flex-grow-1">
-        <div class="container">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-
-            {% block content %}{% endblock %}
-        </div>
+      <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, msg in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ msg }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+      </div>
     </main>
 
-    <!-- Footer -->
     {% include 'partials/footer.html' %}
 
     <!-- Scripts personalizados -->
     {% if request.endpoint == 'main.index' %}
-    <script src="{{ url_for('static', filename='js/menu.js') }}"defer></script>
+      <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+      <script src="{{ url_for('static', filename='js/buscar.js') }}" defer></script>
     {% endif %}
-    {% if request.endpoint == 'main.juego' %}
-    <script>
-        const juego_id = parseInt("{{ juego_id }}");
-    </script>
-    <script src="{{ url_for('static', filename='js/game.js') }}"defer></script>
+    {% if request.endpoint == 'main.ver_juego' %}
+      <script>const juego_id = parseInt("{{ juego_id }}");</script>
+      <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
     {% endif %}
 
-    <!-- Bootstrap JS Bundle con Popper -->
-    <script src="{{ url_for('static', filename='js/bs_js/bootstrap.bundle.min.js') }}"defer></script>
-
+    <script src="{{ url_for('static', filename='js/bs_js/bootstrap.bundle.min.js') }}" defer></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

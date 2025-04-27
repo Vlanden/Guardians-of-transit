@@ -80,19 +80,11 @@
         "documentation": {}
     },
     {
-        "label": "DataRequired",
-        "importPath": "wtforms.validators",
-        "description": "wtforms.validators",
+        "label": "validators",
+        "importPath": "wtforms",
+        "description": "wtforms",
         "isExtraImport": true,
-        "detail": "wtforms.validators",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "wtforms.validators",
-        "description": "wtforms.validators",
-        "isExtraImport": true,
-        "detail": "wtforms.validators",
+        "detail": "wtforms",
         "documentation": {}
     },
     {
@@ -121,6 +113,14 @@
     },
     {
         "label": "FileAllowed",
+        "importPath": "flask_wtf.file",
+        "description": "flask_wtf.file",
+        "isExtraImport": true,
+        "detail": "flask_wtf.file",
+        "documentation": {}
+    },
+    {
+        "label": "FileRequired",
         "importPath": "flask_wtf.file",
         "description": "flask_wtf.file",
         "isExtraImport": true,
@@ -224,7 +224,7 @@
         "documentation": {}
     },
     {
-        "label": "jsonify",
+        "label": "current_app",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -232,7 +232,7 @@
         "documentation": {}
     },
     {
-        "label": "request",
+        "label": "app",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -352,6 +352,22 @@
         "documentation": {}
     },
     {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "abort",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "url_for",
         "importPath": "flask",
         "description": "flask",
@@ -400,6 +416,14 @@
         "documentation": {}
     },
     {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
         "label": "current_user",
         "importPath": "flask_login",
         "description": "flask_login",
@@ -433,6 +457,14 @@
     },
     {
         "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "current_user",
         "importPath": "flask_login",
         "description": "flask_login",
         "isExtraImport": true,
@@ -536,6 +568,38 @@
         "documentation": {}
     },
     {
+        "label": "User",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "Perfil",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "intentos",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
         "label": "juegos_quiz",
         "importPath": "app.models.user",
         "description": "app.models.user",
@@ -545,6 +609,70 @@
     },
     {
         "label": "QuizPregunta",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_extra",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_sim",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_quiz",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "QuizPregunta",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_extra",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_sim",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "intentos",
         "importPath": "app.models.user",
         "description": "app.models.user",
         "isExtraImport": true,
@@ -569,6 +697,30 @@
     },
     {
         "label": "limiter",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "limiter",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "create_app",
         "importPath": "app",
         "description": "app",
         "isExtraImport": true,
@@ -706,6 +858,39 @@
         "documentation": {}
     },
     {
+        "label": "sqlalchemy.exc",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemyError",
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
+        "label": "OperationalError",
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemyError",
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
         "label": "SQLAlchemyError",
         "importPath": "sqlalchemy.exc",
         "description": "sqlalchemy.exc",
@@ -770,6 +955,30 @@
         "documentation": {}
     },
     {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -807,6 +1016,30 @@
         "description": "datetime",
         "isExtraImport": true,
         "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "werkzeug.exceptions",
+        "description": "werkzeug.exceptions",
+        "isExtraImport": true,
+        "detail": "werkzeug.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "app.extensions",
+        "description": "app.extensions",
+        "isExtraImport": true,
+        "detail": "app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "app.extensions",
+        "description": "app.extensions",
+        "isExtraImport": true,
+        "detail": "app.extensions",
         "documentation": {}
     },
     {
@@ -867,11 +1100,36 @@
         "documentation": {}
     },
     {
+        "label": "text",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "event",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "DDL",
         "importPath": "sqlalchemy.schema",
         "description": "sqlalchemy.schema",
         "isExtraImport": true,
         "detail": "sqlalchemy.schema",
+        "documentation": {}
+    },
+    {
+        "label": "click",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "click",
+        "description": "click",
+        "detail": "click",
         "documentation": {}
     },
     {
@@ -915,6 +1173,22 @@
         "documentation": {}
     },
     {
+        "label": "login_required",
+        "importPath": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
+        "description": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
+        "isExtraImport": true,
+        "detail": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "current_user",
+        "importPath": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
+        "description": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
+        "isExtraImport": true,
+        "detail": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
+        "documentation": {}
+    },
+    {
         "label": "guardar_puntuacion",
         "importPath": "app.controllers.game_controller",
         "description": "app.controllers.game_controller",
@@ -928,6 +1202,46 @@
         "description": "app.controllers.game_controller",
         "isExtraImport": true,
         "detail": "app.controllers.game_controller",
+        "documentation": {}
+    },
+    {
+        "label": "ver_juego",
+        "importPath": "app.routes.main",
+        "description": "app.routes.main",
+        "isExtraImport": true,
+        "detail": "app.routes.main",
+        "documentation": {}
+    },
+    {
+        "label": "CSRFProtect",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "validate_csrf",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "CSRFProtect",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
         "documentation": {}
     },
     {
@@ -982,6 +1296,14 @@
         "documentation": {}
     },
     {
+        "label": "sleep",
+        "importPath": "time",
+        "description": "time",
+        "isExtraImport": true,
+        "detail": "time",
+        "documentation": {}
+    },
+    {
         "label": "RotatingFileHandler",
         "importPath": "logging.handlers",
         "description": "logging.handlers",
@@ -1019,14 +1341,6 @@
         "description": "flask_jwt_extended",
         "isExtraImport": true,
         "detail": "flask_jwt_extended",
-        "documentation": {}
-    },
-    {
-        "label": "CSRFProtect",
-        "importPath": "flask_wtf.csrf",
-        "description": "flask_wtf.csrf",
-        "isExtraImport": true,
-        "detail": "flask_wtf.csrf",
         "documentation": {}
     },
     {
@@ -1157,7 +1471,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def logout():\n    logout_user()\n    flash('Has cerrado sesión correctamente', 'success')\n    return redirect(url_for('main.index'))\n@auth_web.route('/register', methods=['GET', 'POST'], endpoint='register')\n@limiter.limit(\"10 per minute\")\ndef register():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':",
+        "peekOfCode": "def logout():\n    logout_user()\n    flash('Has cerrado sesión correctamente', 'success')\n    return redirect(url_for('auth_web.login'))  \n@auth_web.route('/register', methods=['GET', 'POST'], endpoint='register')\n@limiter.limit(\"10 per minute\")\ndef register():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -1211,7 +1525,7 @@
         "kind": 2,
         "importPath": "app.controllers.game_controller",
         "description": "app.controllers.game_controller",
-        "peekOfCode": "def obtener_quiz(juego_id):\n    juego = juegos_quiz.query.get_or_404(juego_id)\n    preguntas = QuizPregunta.query.filter_by(id_quiz=juego_id).all()\n    preguntas_formateadas = []\n    for p in preguntas:\n        opciones = [p.opcioncorrecta, p.opcion2]\n        if p.opcion3: opciones.append(p.opcion3)\n        if p.opcion4: opciones.append(p.opcion4)\n        preguntas_formateadas.append({\n            'texto': p.q_pregunta,",
+        "peekOfCode": "def obtener_quiz(juego_id):\n    \"\"\"\n    Obtiene las preguntas de un quiz específico\n    Args:\n        juego_id (int): ID del juego a buscar\n    Returns:\n        dict: Diccionario con título y preguntas del quiz\n        tuple: (dict, int) en caso de error (mensaje, código HTTP)\n    \"\"\"\n    try:",
         "detail": "app.controllers.game_controller",
         "documentation": {}
     },
@@ -1220,7 +1534,7 @@
         "kind": 2,
         "importPath": "app.controllers.game_controller",
         "description": "app.controllers.game_controller",
-        "peekOfCode": "def guardar_puntuacion(data):\n    nuevo_intento = intentos(\n        username=current_user.username,\n        juego_id=data['juego_id'],\n        puntaje=data['puntuacion'],\n        fecha_inicio=datetime.utcnow(),\n        fecha_fin=datetime.utcnow()\n    )\n    db.session.add(nuevo_intento)\n    # Actualizar perfil",
+        "peekOfCode": "def guardar_puntuacion(data):\n    try:\n        required_keys = ['juego_id', 'puntuacion', 'fecha_inicio', 'fecha_fin']\n        missing = [key for key in required_keys if key not in data]\n        if missing:\n            return {'error': 'Datos incompletos', 'campos_faltantes': missing}, 400\n        try:\n            # Convertir fechas a UTC correctamente\n            juego_id = str(int(data['juego_id']))\n            puntuacion = int(data['puntuacion'])",
         "detail": "app.controllers.game_controller",
         "documentation": {}
     },
@@ -1229,7 +1543,7 @@
         "kind": 6,
         "importPath": "app.controllers.user_controller",
         "description": "app.controllers.user_controller",
-        "peekOfCode": "class UserController:\n    @staticmethod\n    @login_required  # Asegura que el usuario esté autenticado\n    @limiter.limit(\"10 per minute\")  # Limita a 10 solicitudes por minuto para evitar abuso\n    def save_score():\n        \"\"\"Endpoint para guardar puntuación del usuario actual.\"\"\"\n        if request.method == 'POST':\n            # Intenta obtener la puntuación desde el formulario (compatibilidad con 'score' o 'puntuacion')\n            score = request.form.get('score') or request.form.get('puntuacion')\n            score = score.strip() if score else None  # Elimina espacios en blanco",
+        "peekOfCode": "class UserController:\n    @staticmethod\n    @login_required  # Requiere que el usuario esté logueado\n    @limiter.limit(\"3 per minute\")  # Limita a 3 solicitudes por minuto\n    def update_profile():\n        \"\"\"Endpoint para actualizar el perfil del usuario actual.\"\"\"\n        if request.method == 'POST':\n            # Extrae y limpia los datos del formulario\n            data = {\n                'username': request.form.get('username', '').strip(),",
         "detail": "app.controllers.user_controller",
         "documentation": {}
     },
@@ -1238,7 +1552,7 @@
         "kind": 6,
         "importPath": "app.forms.quiz_forms",
         "description": "app.forms.quiz_forms",
-        "peekOfCode": "class QuizForm(FlaskForm):\n    titulo = StringField('Título', validators=[DataRequired()])\n    descripcion = TextAreaField('Descripción', validators=[DataRequired()])\n    imagen = FileField('Imagen del Quiz', validators=[\n        Optional(),\n        FileAllowed(['jpg', 'jpeg', 'png'], 'Solo imágenes JPG/PNG')\n    ])\nclass PreguntaForm(FlaskForm):\n    pregunta = StringField('Texto de la pregunta', validators=[DataRequired()])\n    opcion_correcta = StringField('Opción correcta', validators=[DataRequired()])",
+        "peekOfCode": "class QuizForm(FlaskForm):\n    titulo = StringField('Título del Quiz', validators=[\n        validators.DataRequired(message=\"El título es obligatorio\"),\n        validators.Length(min=3, max=255, message=\"El título debe tener entre 3 y 255 caracteres\")\n    ])\n    descripcion = TextAreaField('Descripción', validators=[\n        validators.DataRequired(message=\"La descripción es obligatoria\"),\n        validators.Length(min=10, max=500, message=\"La descripción debe tener entre 10 y 500 caracteres\")\n    ])\n    imagen = FileField('Imagen del Quiz', validators=[",
         "detail": "app.forms.quiz_forms",
         "documentation": {}
     },
@@ -1247,7 +1561,7 @@
         "kind": 6,
         "importPath": "app.forms.quiz_forms",
         "description": "app.forms.quiz_forms",
-        "peekOfCode": "class PreguntaForm(FlaskForm):\n    pregunta = StringField('Texto de la pregunta', validators=[DataRequired()])\n    opcion_correcta = StringField('Opción correcta', validators=[DataRequired()])\n    opcion2 = StringField('Opción 2', validators=[DataRequired()])\n    opcion3 = StringField('Opción 3', validators=[Optional()])\n    opcion4 = StringField('Opción 4', validators=[Optional()])\n    explicacion = TextAreaField('Explicación', validators=[Optional()])\n    orden = IntegerField('Orden de la pregunta', validators=[DataRequired()])",
+        "peekOfCode": "class PreguntaForm(FlaskForm):\n    pregunta = TextAreaField('Texto de la pregunta', validators=[\n        validators.DataRequired(message=\"El texto de la pregunta es obligatorio\"),\n        validators.Length(min=10, max=500, message=\"La pregunta debe tener entre 10 y 500 caracteres\")\n    ])\n    opcioncorrecta = StringField('Opción Correcta', validators=[\n        validators.DataRequired(message=\"Esta opción es obligatoria\"),\n        validators.Length(min=1, max=200, message=\"Máximo 200 caracteres\")\n    ])\n    opcion2 = StringField('Opción 2', validators=[",
         "detail": "app.forms.quiz_forms",
         "documentation": {}
     },
@@ -1265,7 +1579,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class Perfil(UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime)\n    ultima_conexion = db.Column(db.DateTime)\n    juegos_jugados = db.Column(db.Integer, default=0) \nclass intentos(UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
+        "peekOfCode": "class Perfil(UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime)\n    ultima_conexion = db.Column(db.DateTime)\n    juegos_jugados = db.Column(db.String(80), default=0) \nclass intentos(UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1315,6 +1629,15 @@
         "documentation": {}
     },
     {
+        "label": "create_admin",
+        "kind": 2,
+        "importPath": "app.models.user_admin_crate",
+        "description": "app.models.user_admin_crate",
+        "peekOfCode": "def create_admin():\n    \"\"\"Crear un usuario administrador\"\"\"\n    username = input(\"Nombre de usuario: \")\n    email = input(\"Email: \")\n    password = getpass.getpass(\"Contraseña: \")\n    admin = User(\n        username=username,\n        email=email,\n        is_admin=True\n    )",
+        "detail": "app.models.user_admin_crate",
+        "documentation": {}
+    },
+    {
         "label": "auth_api",
         "kind": 5,
         "importPath": "app.routes.auth",
@@ -1324,56 +1647,47 @@
         "documentation": {}
     },
     {
-        "label": "get_quiz",
+        "label": "obtener_juegos",
         "kind": 2,
         "importPath": "app.routes.games",
         "description": "app.routes.games",
-        "peekOfCode": "def get_quiz(juego_id):\n    try:\n        current_app.logger.info(f\"Buscando juego con ID {juego_id}\")\n        juego = juegos_quiz.query.get_or_404(juego_id)\n        current_app.logger.info(\"Juego encontrado. Buscando preguntas...\")\n        preguntas = QuizPregunta.query.filter_by(id_quiz=juego_id).all()\n        current_app.logger.info(f\"{len(preguntas)} preguntas encontradas.\")\n        data = {\n                \"titulo\": juego.titulo,\n                \"preguntas\": [",
+        "peekOfCode": "def obtener_juegos():\n    categorias = {\n        'quiz': juegos_quiz.query.all(),\n        'simulacion': juegos_sim.query.all(),\n        'extra': juegos_extra.query.all()\n    }\n    return jsonify({\n        cat: [juego.to_dict() for juego in juegos] \n        for cat, juegos in categorias.items()\n    })",
         "detail": "app.routes.games",
         "documentation": {}
     },
     {
-        "label": "list_sim_games",
+        "label": "buscar",
         "kind": 2,
         "importPath": "app.routes.games",
         "description": "app.routes.games",
-        "peekOfCode": "def list_sim_games():\n    #juegos = get_all_sim_games()\n    #salida = \"\\n\".join([f\"- {juego['titulo']}\" for juego in juegos])\n    return f\"Juegos tipo simulación:\\n{salida}\"\n@games_bp.route('/sim', methods=['POST'])\ndef new_sim_game():\n    data = request.form or {}\n    #create_sim_game(data)\n    return \"Nuevo juego tipo simulación creado correctamente.\"\n# === Rutas para la tabla juegos_extra ===",
+        "peekOfCode": "def buscar():\n    termino = request.args.get('q', '')\n    if not termino:\n        return jsonify([])\n    results = []\n    # Buscar en todos los tipos de juegos\n    for model in [juegos_quiz, juegos_sim, juegos_extra]:\n        query = text(f\"SELECT * FROM {model.__tablename__} WHERE titulo LIKE :term OR descripcion LIKE :term\")\n        results.extend(db.session.execute(query, {'term': f'%{termino}%'}).fetchall())\n    return jsonify([dict(row) for row in results])",
         "detail": "app.routes.games",
         "documentation": {}
     },
     {
-        "label": "new_sim_game",
+        "label": "obtener_quiz",
         "kind": 2,
         "importPath": "app.routes.games",
         "description": "app.routes.games",
-        "peekOfCode": "def new_sim_game():\n    data = request.form or {}\n    #create_sim_game(data)\n    return \"Nuevo juego tipo simulación creado correctamente.\"\n# === Rutas para la tabla juegos_extra ===\n@games_bp.route('/extra', methods=['GET'])\ndef list_extra_games():\n    #juegos = get_all_extra_games()\n    #salida = \"\\n\".join([f\"- {juego['titulo']}\" for juego in juegos])\n    return f\"Juegos tipo extra:\\n{salida}\"",
+        "peekOfCode": "def obtener_quiz(juego_id):\n    try:\n        # Verificar existencia del juego\n        juego = juegos_quiz.query.get_or_404(juego_id)\n        # Obtener preguntas\n        preguntas = QuizPregunta.query.filter_by(id_quiz=juego_id).all()\n        # Validar preguntas\n        if not preguntas:\n            current_app.logger.warning(f\"Quiz {juego_id} sin preguntas\")\n            return jsonify({\"error\": \"El quiz no tiene preguntas configuradas\"}), 404",
         "detail": "app.routes.games",
         "documentation": {}
     },
     {
-        "label": "list_extra_games",
+        "label": "guardar_puntuacion",
         "kind": 2,
         "importPath": "app.routes.games",
         "description": "app.routes.games",
-        "peekOfCode": "def list_extra_games():\n    #juegos = get_all_extra_games()\n    #salida = \"\\n\".join([f\"- {juego['titulo']}\" for juego in juegos])\n    return f\"Juegos tipo extra:\\n{salida}\"\n@games_bp.route('/extra', methods=['POST'])\ndef new_extra_game():\n    data = request.form or {}\n    #create_extra_game(data)\n    return \"Nuevo juego tipo extra creado correctamente.\"\n# === Ruta para guardar puntuación ===",
+        "peekOfCode": "def guardar_puntuacion():\n    try:\n        # obtenemos y validamos el token CSRF lanzando si no es válido\n        csrf_token = request.headers.get('X-CSRFToken', '')\n        try:\n            validate_csrf(csrf_token)\n        except ValidationError as ve:\n            current_app.logger.warning(f\"CSRF inválido: {ve}\")\n            return jsonify({\"error\": \"Token CSRF inválido\"}), 403\n        data = request.get_json()",
         "detail": "app.routes.games",
         "documentation": {}
     },
     {
-        "label": "new_extra_game",
-        "kind": 2,
+        "label": "csrf",
+        "kind": 5,
         "importPath": "app.routes.games",
         "description": "app.routes.games",
-        "peekOfCode": "def new_extra_game():\n    data = request.form or {}\n    #create_extra_game(data)\n    return \"Nuevo juego tipo extra creado correctamente.\"\n# === Ruta para guardar puntuación ===\n@games_bp.route('/guardar-puntuacion', methods=['POST'])\n@login_required\ndef save_score():\n    data = request.form or {}\n    guardar_puntuacion(data)",
-        "detail": "app.routes.games",
-        "documentation": {}
-    },
-    {
-        "label": "save_score",
-        "kind": 2,
-        "importPath": "app.routes.games",
-        "description": "app.routes.games",
-        "peekOfCode": "def save_score():\n    data = request.form or {}\n    guardar_puntuacion(data)\n    return \"Puntuación guardada correctamente.\"",
+        "peekOfCode": "csrf = CSRFProtect()  # Inicialización en tu aplicación\ngames_bp = Blueprint('games', __name__, url_prefix='/games')\n# === Rutas para la tabla juegos_quiz ===\n@games_bp.route('/api/juegos')\n@limiter.limit(\"10 per minute\")\ndef obtener_juegos():\n    categorias = {\n        'quiz': juegos_quiz.query.all(),\n        'simulacion': juegos_sim.query.all(),\n        'extra': juegos_extra.query.all()",
         "detail": "app.routes.games",
         "documentation": {}
     },
@@ -1382,7 +1696,7 @@
         "kind": 5,
         "importPath": "app.routes.games",
         "description": "app.routes.games",
-        "peekOfCode": "games_bp = Blueprint('games', __name__, url_prefix='/games')\n# === Rutas para la tabla juegos_quiz ===\n#@games_bp.route('/quiz', methods=['GET'])\n#def list_quiz_games():\n  #  \"\"\"Retorna una lista simple de juegos tipo quiz\"\"\"\n    #juegos = get_all_quiz_games()\n    #salida = \"\\n\".join([f\"- {juego['titulo']}\" for juego in juegos])\n    #return f\"Juegos tipo quiz:\\n{salida}\"\n#@games_bp.route('/quiz', methods=['POST'])\n#def new_quiz_game():",
+        "peekOfCode": "games_bp = Blueprint('games', __name__, url_prefix='/games')\n# === Rutas para la tabla juegos_quiz ===\n@games_bp.route('/api/juegos')\n@limiter.limit(\"10 per minute\")\ndef obtener_juegos():\n    categorias = {\n        'quiz': juegos_quiz.query.all(),\n        'simulacion': juegos_sim.query.all(),\n        'extra': juegos_extra.query.all()\n    }",
         "detail": "app.routes.games",
         "documentation": {}
     },
@@ -1391,7 +1705,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def inicio():\n    return render_template('main/main-page.html')\n@main_bp.route('/iniciar-sesion')\ndef iniciodesesion():\n    # Redirigir a la ruta de login dentro del Blueprint 'auth_web'\n    return redirect(url_for('auth_web.login'))\n@main_bp.route('/registro')\ndef registro():\n    # Redirigir a la ruta de registro dentro del Blueprint 'auth_web'\n    return redirect(url_for('auth_web.register'))",
+        "peekOfCode": "def inicio():\n    return render_template('main/main-page.html')\n@main_bp.route('/iniciar-sesion')\n@limiter.limit(\"100 per minute\")\ndef iniciodesesion():\n    # Redirigir a la ruta de login dentro del Blueprint 'auth_web'\n    return redirect(url_for('auth_web.login'))\n@main_bp.route('/registro')\n@limiter.limit(\"20 per minute\")\ndef registro():",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1400,7 +1714,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def iniciodesesion():\n    # Redirigir a la ruta de login dentro del Blueprint 'auth_web'\n    return redirect(url_for('auth_web.login'))\n@main_bp.route('/registro')\ndef registro():\n    # Redirigir a la ruta de registro dentro del Blueprint 'auth_web'\n    return redirect(url_for('auth_web.register'))\n@main_bp.route('/terminos')\ndef terminos():\n    return render_template('main/terminos.html')",
+        "peekOfCode": "def iniciodesesion():\n    # Redirigir a la ruta de login dentro del Blueprint 'auth_web'\n    return redirect(url_for('auth_web.login'))\n@main_bp.route('/registro')\n@limiter.limit(\"20 per minute\")\ndef registro():\n    # Redirigir a la ruta de registro dentro del Blueprint 'auth_web'\n    return redirect(url_for('auth_web.register'))\n@main_bp.route('/terminos')\ndef terminos():",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1418,7 +1732,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def terminos():\n    return render_template('main/terminos.html')\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('main/politicas.html')\n# ──────── RUTAS PRIVADAS ────────\n@main_bp.route('/index')\n@login_required\ndef index():\n    return render_template('main/menu.html', user=current_user)",
+        "peekOfCode": "def terminos():\n    return render_template('main/terminos.html')\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('main/politicas.html')\n# ──────── RUTAS PRIVADAS ────────\n@main_bp.route('/index')\ndef index():\n    quiz_games = juegos_quiz.query.all()\n    sim_games = juegos_sim.query.all()",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1427,7 +1741,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def privacidad():\n    return render_template('main/politicas.html')\n# ──────── RUTAS PRIVADAS ────────\n@main_bp.route('/index')\n@login_required\ndef index():\n    return render_template('main/menu.html', user=current_user)\n@main_bp.route('/perfil')\n@login_required\n@limiter.limit(\"30 per minute\")",
+        "peekOfCode": "def privacidad():\n    return render_template('main/politicas.html')\n# ──────── RUTAS PRIVADAS ────────\n@main_bp.route('/index')\ndef index():\n    quiz_games = juegos_quiz.query.all()\n    sim_games = juegos_sim.query.all()\n    extra_games = juegos_extra.query.all()\n    return render_template('main/menu.html',\n                           user=current_user,",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1436,7 +1750,16 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def index():\n    return render_template('main/menu.html', user=current_user)\n@main_bp.route('/perfil')\n@login_required\n@limiter.limit(\"30 per minute\")\ndef perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego/', defaults={'juego_id': None})\n@main_bp.route('/juego/<int:juego_id>')\n@login_required",
+        "peekOfCode": "def index():\n    quiz_games = juegos_quiz.query.all()\n    sim_games = juegos_sim.query.all()\n    extra_games = juegos_extra.query.all()\n    return render_template('main/menu.html',\n                           user=current_user,\n                           quiz_games=quiz_games,\n                           sim_games=sim_games,\n                           extra_games=extra_games)\n@main_bp.route('/juego')",
+        "detail": "app.routes.main",
+        "documentation": {}
+    },
+    {
+        "label": "ver_juego",
+        "kind": 2,
+        "importPath": "app.routes.main",
+        "description": "app.routes.main",
+        "peekOfCode": "def ver_juego(juego_id=None):\n    if juego_id is None:\n        abort(400, description=\"ID de juego no proporcionado\")\n    if juego_id < 100000:\n        juego = juegos_quiz.query.get(juego_id)\n        tipo = 'quiz'\n    elif juego_id < 200000:\n        juego = juegos_sim.query.get(juego_id)\n        tipo = 'simulacion'\n    else:",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1445,34 +1768,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def perfil():\n    return render_template('main/profile.html', user=current_user)\n@main_bp.route('/juego/', defaults={'juego_id': None})\n@main_bp.route('/juego/<int:juego_id>')\n@login_required\ndef juego(juego_id):\n    if juego_id not in range(1, 8):  # acepta del 1 al 7\n        return render_template('errors/404.html'), 404\n    return render_template('game/game.html', juego_id=juego_id, user=current_user)#, request=request\n# ──────── API: FUNCIONES DEL USUARIO ────────",
-        "detail": "app.routes.main",
-        "documentation": {}
-    },
-    {
-        "label": "juego",
-        "kind": 2,
-        "importPath": "app.routes.main",
-        "description": "app.routes.main",
-        "peekOfCode": "def juego(juego_id):\n    if juego_id not in range(1, 8):  # acepta del 1 al 7\n        return render_template('errors/404.html'), 404\n    return render_template('game/game.html', juego_id=juego_id, user=current_user)#, request=request\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#cambiar el codigo de save_score y save_user_score, el actual es incorrecto\n@main_bp.route('/save-score', methods=['POST'])\n@login_required\ndef save_score():\n    return UserController.save_score()",
-        "detail": "app.routes.main",
-        "documentation": {}
-    },
-    {
-        "label": "save_score",
-        "kind": 2,
-        "importPath": "app.routes.main",
-        "description": "app.routes.main",
-        "peekOfCode": "def save_score():\n    return UserController.save_score()\n#API sin uso\n@main_bp.route('/guardar-puntuacion', methods=['POST'])\n@login_required\ndef guardar_puntuacion():\n    return UserController.save_score()\n#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña\n@main_bp.route('/actualizar_perfil', methods=['POST'])\n@login_required",
-        "detail": "app.routes.main",
-        "documentation": {}
-    },
-    {
-        "label": "guardar_puntuacion",
-        "kind": 2,
-        "importPath": "app.routes.main",
-        "description": "app.routes.main",
-        "peekOfCode": "def guardar_puntuacion():\n    return UserController.save_score()\n#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña\n@main_bp.route('/actualizar_perfil', methods=['POST'])\n@login_required\ndef actualizar_perfil():\n    return UserController.update_profile()",
+        "peekOfCode": "def perfil():\n    return render_template('main/profile.html', user=current_user)\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña\n@main_bp.route('/actualizar_perfil', methods=['POST'])\n@limiter.limit(\"10 per minute\")\n@login_required\ndef actualizar_perfil():\n    return UserController.update_profile()",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1490,7 +1786,7 @@
         "kind": 5,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "main_bp = Blueprint('main', __name__)\n# ──────── RUTAS PÚBLICAS ────────\n@main_bp.route('/')\n@limiter.limit(\"100 per minute\")\ndef inicio():\n    return render_template('main/main-page.html')\n@main_bp.route('/iniciar-sesion')\ndef iniciodesesion():\n    # Redirigir a la ruta de login dentro del Blueprint 'auth_web'\n    return redirect(url_for('auth_web.login'))",
+        "peekOfCode": "main_bp = Blueprint('main', __name__)\n# ──────── RUTAS PÚBLICAS ────────\n@main_bp.route('/')\n@limiter.limit(\"100 per minute\")\ndef inicio():\n    return render_template('main/main-page.html')\n@main_bp.route('/iniciar-sesion')\n@limiter.limit(\"100 per minute\")\ndef iniciodesesion():\n    # Redirigir a la ruta de login dentro del Blueprint 'auth_web'",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1567,6 +1863,15 @@
         "documentation": {}
     },
     {
+        "label": "safe_db_operation",
+        "kind": 2,
+        "importPath": "app.utils.database",
+        "description": "app.utils.database",
+        "peekOfCode": "def safe_db_operation(func, max_retries=3):\n    \"\"\"Ejecuta operaciones con reintentos automáticos\"\"\"\n    for attempt in range(max_retries):\n        try:\n            return func()\n        except OperationalError as e:\n            if \"2006\" in str(e) and attempt < max_retries - 1:\n                db.session.rollback()\n                sleep(0.5 * (attempt + 1))\n                continue",
+        "detail": "app.utils.database",
+        "documentation": {}
+    },
+    {
         "label": "configure_logging",
         "kind": 2,
         "importPath": "app.utils.logging",
@@ -1598,7 +1903,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\nlimiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",",
+        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1607,7 +1912,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\nlimiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",",
+        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1616,7 +1921,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\nlimiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True",
+        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1625,16 +1930,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "csrf = CSRFProtect()\nlimiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)",
-        "detail": "app.extensions",
-        "documentation": {}
-    },
-    {
-        "label": "limiter",
-        "kind": 5,
-        "importPath": "app.extensions",
-        "description": "app.extensions",
-        "peekOfCode": "limiter = Limiter(key_func=get_remote_address)\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)\ndef configure_db_engine(app):",
+        "peekOfCode": "csrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)\ndef configure_db_engine(app):",
         "detail": "app.extensions",
         "documentation": {}
     },

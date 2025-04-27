@@ -43,8 +43,9 @@ class Config:
     #LOG_FILE = 'app.log'
     #LOG_MAX_BYTES = 1024 * 1024  # 1MB
     #LOG_BACKUP_COUNT = 5
-    UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), '..', 'static', 'uploads')
-    ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
+    UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'static', 'uploads')
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB
     
     @staticmethod
     def init_app(app):

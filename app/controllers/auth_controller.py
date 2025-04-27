@@ -57,8 +57,7 @@ def login():
 def logout():
     logout_user()
     flash('Has cerrado sesión correctamente', 'success')
-    return redirect(url_for('main.index'))
-
+    return redirect(url_for('auth_web.login'))  
 
 @auth_web.route('/register', methods=['GET', 'POST'], endpoint='register')
 @limiter.limit("10 per minute")
@@ -104,7 +103,7 @@ def register():
                 session.add(new_user)
             flash('Registro exitoso. Ahora puedes iniciar sesión.', 'success')
             return redirect(url_for('auth_web.login'))
-
+            
         except SQLAlchemyError as e:
             current_app.logger.error(f"Error al registrar usuario: {e}")
             flash('Error al registrar. Inténtalo de nuevo.', 'error')
