@@ -18,9 +18,9 @@
 
 </head>
 <body class="d-flex justify-content-center align-items-center min-vh-100 bg-dark">
-    <header>
+   <!-- <header>
         {% include 'partials/header.html' %}
-    </header>
+    </header>-->
 
     <main class="main-container container w-75 bg-primary rounded-3 shadow">
         <article class="row align-items-stretch">
@@ -46,20 +46,20 @@
                         <button type="submit" class="register btn btn-primary">Iniciar Sesión</button>
                         <p class="fw-bold text-center mt-3 text-white">
                             ¿No tienes una cuenta? 
-                            <a href="{{ url_for('auth.registrar') }}" class="text-primary">Regístrate aquí</a>
+                            <a href="{{ url_for('auth.sign-up') }}" class="reg-links text-primary">Regístrate aquí</a>
                         </p>
                         <p class="fw-bold text-center mt-1 text-white">
                             ¿Olvidaste tu contraseña? 
-                            <a href="{{ url_for('auth.login') }}" class="text-primary">Recupérala aquí</a>                        </p>
+                            <a href="{{ url_for('auth.reset-password') }}" class="reg-links text-primary">Recupérala aquí</a>                        </p>
                     </div>
                 </form>
             </section>
         </article>
     </main>
 
-    <footer>
+    <!--<footer>
         {% include 'partials/footer.html' %}
-    </footer>
+    </footer>-->
 
     <!-- Bootstrap JS  Bundle-->
     <script src="{{ url_for('static', filename='js/bs_js/bootstrap.bundle.min.js') }}"></script>

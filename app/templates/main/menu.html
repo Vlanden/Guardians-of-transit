@@ -27,7 +27,7 @@
         {% for i in range(1, 8) %}
         <div class="game-card" id="juego{{ i }}">
             <center>
-                <img src="{{ url_for('static', filename='images/game' + i|string + '.jpg') }}" class="game-img">
+                <img src="{{ url_for('static', filename='images/game' + i|string + '.jpg') }}" class="game-img" alt="Juego {{ i }}">
             </center>
             <span class="game-name">Nombre</span>
         </div>

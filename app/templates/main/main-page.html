@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Meta datos -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap.min.css') }}">
-    <!-- Estilos propios -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
+    
+    <!-- Bootstrap y fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&family=Oswald&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Estilo propio -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Styles2.css') }}" type="text/css">
+    
+    <!-- Título -->
+    <title>Página principal</title>
 </head>
-<body>
+
+<body class="min-vh-100 bg-dark">
     <header>
         {% include 'partials/header.html' %}
     </header>
-    
+
     <main>
         <article class="Elements pt-3">
             <section class="container-xl mb-5 mt-5">
-                <div class="row"> 
+                <div class="row">
                     <h1 class="pb-3">¿Quiénes somos?</h1>
                     <p>Somos un equipo multidisciplinario de educadores, diseñadores, desarrolladores y especialistas en movilidad urbana comprometidos con transformar la forma en que se aprende y se vive la educación vial en Guadalajara.</p>
                     <p>Nuestra plataforma nace de la necesidad de fomentar una cultura vial más responsable, dinámica y participativa, utilizando medios interactivos que conecten con todas las edades y niveles de conocimiento.</p>
                     <p>Creemos que la educación vial no debe ser aburrida ni limitada a teorías: por eso desarrollamos contenidos visuales, juegos, simuladores, videos y recursos multimedia que permiten a los usuarios aprender de manera práctica, divertida y significativa.
-                        Trabajamos en colaboración con instituciones locales, expertos en tránsito y organizaciones civiles para asegurar que nuestros contenidos estén actualizados, sean inclusivos y reflejen la realidad vial de nuestra ciudad.</p>
+                    Trabajamos en colaboración con instituciones locales, expertos en tránsito y organizaciones civiles para asegurar que nuestros contenidos estén actualizados, sean inclusivos y reflejen la realidad vial de nuestra ciudad.</p>
                     <p>Más que un sitio web, somos una comunidad comprometida con construir un entorno vial más seguro para todos.</p>
                 </div>
             </section>
+
             <section class="container-xl mb-5 mt-5">
                 <div class="row">
                     <h1 class="pb-3">Misión</h1>
                     <p>Brindar a la comunidad de Guadalajara una plataforma web innovadora y accesible que utilice herramientas interactivas —como simuladores, juegos, videos educativos y evaluaciones dinámicas para fomentar una cultura vial responsable, inclusiva y segura, contribuyendo a la reducción de accidentes y al respeto mutuo entre peatones, ciclistas, motociclistas y automovilistas.</p>
+
                     <h1 class="pb-3">Visión</h1>
                     <p>Ser el referente principal en educación vial digital en Guadalajara y zonas metropolitanas, reconocida por su impacto positivo en la formación ciudadana, el uso efectivo de recursos tecnológicos y la promoción de una movilidad urbana más consciente, segura y sostenible para todos los sectores de la sociedad.</p>
                 </div>
             </section>
+
             <section class="py5 m-5" id="features">
                 <div class="container">
                     <div class="row g-5">
@@ -43,7 +56,7 @@
                         </div>
                         <div class="col-md-3 bg-dark rounded-3 p-4 m-5">
                             <h5 class="fw-bold text-danger">Simulaciones</h5>
-                            <p class="text-light">Pon aprueba tus conocimientos en la simulacion de un problema real</p>
+                            <p class="text-light">Pon a prueba tus conocimientos en la simulación de un problema real</p>
                         </div>
                         <div class="col-md-3 bg-dark rounded-3 p-4 m-5">
                             <h5 class="fw-bold text-danger">Ahorcado</h5>
@@ -60,6 +73,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="{{ url_for('static', filename='static/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
