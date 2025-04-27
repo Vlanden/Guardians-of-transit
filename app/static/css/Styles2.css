@@ -14,7 +14,7 @@ body{
     font-weight: 16px;
     font-family: Source Serif 4, serif;
     color: white;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(..\templates\Media\Vialidad.jpeg);
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(app\static\Media\Vialidad.jpeg);
     background-size:cover;
     background-attachment: fixed;
     background-position: center;
@@ -22,7 +22,7 @@ body{
 }
 
 .bg{
-    background-image: url(..templates\Media\Calles.jpg);
+    background-image: url(app\static\MediaCalles.jpg);
     background-position: center center;
     background-size: cover;  
 }
