@@ -39,6 +39,7 @@ def privacidad():
 
 
 @main_bp.route('/index')
+@login_required
 def index():
     quiz_games = juegos_quiz.query.all()
     sim_games = juegos_sim.query.all()
@@ -52,6 +53,7 @@ def index():
 @main_bp.route('/juego')
 @main_bp.route('/juego/<int:juego_id>')
 @limiter.limit("100 per minute")
+@login_required
 def ver_juego(juego_id=None):
     if juego_id is None:
         abort(400, description="ID de juego no proporcionado")
@@ -74,7 +76,6 @@ def ver_juego(juego_id=None):
 
 
 @main_bp.route('/perfil')
-@limiter.limit("100 per minute")
 @login_required
 @limiter.limit("30 per minute")
 def perfil():

@@ -376,6 +376,22 @@
         "documentation": {}
     },
     {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "login_required",
         "importPath": "flask_login",
         "description": "flask_login",
@@ -768,14 +784,6 @@
         "documentation": {}
     },
     {
-        "label": "db",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
         "label": "create_app",
         "importPath": "app",
         "description": "app",
@@ -988,6 +996,14 @@
     },
     {
         "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
@@ -1287,6 +1303,54 @@
         "documentation": {}
     },
     {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TypeVar",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Generator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "logging",
         "kind": 6,
         "isExtraImport": true,
@@ -1301,6 +1365,22 @@
         "description": "time",
         "isExtraImport": true,
         "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "run",
+        "description": "run",
+        "isExtraImport": true,
+        "detail": "run",
         "documentation": {}
     },
     {
@@ -1566,6 +1646,15 @@
         "documentation": {}
     },
     {
+        "label": "BaseModelMixin",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class BaseModelMixin:\n    def to_dict(self):\n        \"\"\"Convierte todas las columnas del modelo a un diccionario\"\"\"\n        return {c.name: getattr(self, c.name) for c in self.__table__.columns}\n#   Clase para User\nclass User(UserMixin, db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
         "label": "User",
         "kind": 6,
         "importPath": "app.models.user",
@@ -1579,7 +1668,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class Perfil(UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime)\n    ultima_conexion = db.Column(db.DateTime)\n    juegos_jugados = db.Column(db.String(80), default=0) \nclass intentos(UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
+        "peekOfCode": "class Perfil(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime)\n    ultima_conexion = db.Column(db.DateTime)\n    juegos_jugados = db.Column(db.String(80), default=0) \nclass intentos(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1588,7 +1677,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class intentos(UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)\n    juego_id = db.Column(db.Integer, nullable=False)\n    puntaje = db.Column(db.Integer, nullable=False)\n    fecha_inicio = db.Column(db.DateTime)\n    fecha_fin = db.Column(db.DateTime)\nclass juegos_quiz(UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'",
+        "peekOfCode": "class intentos(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)\n    juego_id = db.Column(db.Integer, nullable=False)\n    puntaje = db.Column(db.Integer, nullable=False)\n    fecha_inicio = db.Column(db.DateTime)\n    fecha_fin = db.Column(db.DateTime)\nclass juegos_quiz(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1597,7 +1686,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class juegos_quiz(UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'\n    id_quiz = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)\n    descripcion = db.Column(db.String(255), nullable=False)\n    img_referencia = db.Column(db.String(255), nullable=False)\n    preguntas = db.relationship('QuizPregunta', backref='juego', lazy=True, cascade='all, delete-orphan')\nclass juegos_sim(UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)",
+        "peekOfCode": "class juegos_quiz(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'\n    id_quiz = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), index=True, nullable = False)\n    descripcion = db.Column(db.String(255), index=True, nullable = False)\n    img_referencia = db.Column(db.String(255), nullable=False)\n    preguntas = db.relationship('QuizPregunta', backref='juego', lazy=True, cascade='all, delete-orphan')\nclass juegos_sim(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1606,7 +1695,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class juegos_sim(UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)\n    descripcion = db.Column(db.String(255), nullable=False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_sim.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_sim AUTO_INCREMENT = 100000;\")",
+        "peekOfCode": "class juegos_sim(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), index=True, nullable = False)\n    descripcion = db.Column(db.String(255), index=True, nullable = False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_sim.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_sim AUTO_INCREMENT = 100000;\")",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1615,7 +1704,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class juegos_extra(UserMixin, db.Model):\n    __tablename__ = 'juegos_extra'\n    id_extra = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), nullable = False)\n    descripcion = db.Column(db.String(255), nullable=False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_extra.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_extra AUTO_INCREMENT = 200000;\")",
+        "peekOfCode": "class juegos_extra(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'juegos_extra'\n    id_extra = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), index=True, nullable = False)\n    descripcion = db.Column(db.String(255), index=True, nullable = False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_extra.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_extra AUTO_INCREMENT = 200000;\")",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1624,7 +1713,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class QuizPregunta(db.Model):\n    __tablename__ = 'quiz_preguntas'\n    id_pregunta = db.Column(db.Integer, primary_key=True)\n    id_quiz = db.Column(db.Integer, db.ForeignKey('juegos_quiz.id_quiz'))  # FK al juego\n    q_pregunta = db.Column(db.String(500), nullable=False)\n    opcioncorrecta = db.Column(db.String(200), nullable=False)  # Correcta\n    opcion2 = db.Column(db.String(200), nullable=False)\n    opcion3 = db.Column(db.String(200), nullable=False)\n    opcion4 = db.Column(db.String(200), nullable=False)\n    explicacion = db.Column(db.String(500))",
+        "peekOfCode": "class QuizPregunta(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'quiz_preguntas'\n    id_pregunta = db.Column(db.Integer, primary_key=True)\n    id_quiz = db.Column(db.Integer, db.ForeignKey('juegos_quiz.id_quiz'))  # FK al juego\n    q_pregunta = db.Column(db.String(500), nullable=False)\n    opcioncorrecta = db.Column(db.String(200), nullable=False)  # Correcta\n    opcion2 = db.Column(db.String(200), nullable=False)\n    opcion3 = db.Column(db.String(200), nullable=False)\n    opcion4 = db.Column(db.String(200), nullable=False)\n    explicacion = db.Column(db.String(500))",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1660,7 +1749,7 @@
         "kind": 2,
         "importPath": "app.routes.games",
         "description": "app.routes.games",
-        "peekOfCode": "def buscar():\n    termino = request.args.get('q', '')\n    if not termino:\n        return jsonify([])\n    results = []\n    # Buscar en todos los tipos de juegos\n    for model in [juegos_quiz, juegos_sim, juegos_extra]:\n        query = text(f\"SELECT * FROM {model.__tablename__} WHERE titulo LIKE :term OR descripcion LIKE :term\")\n        results.extend(db.session.execute(query, {'term': f'%{termino}%'}).fetchall())\n    return jsonify([dict(row) for row in results])",
+        "peekOfCode": "def buscar():\n    termino = request.args.get('q', '').strip().lower()\n    # if len(termino) < 2:\n    #     return jsonify({\"quiz\": [], \"simulacion\": [], \"extra\": []})\n    try:\n        # Función auxiliar para búsqueda en cualquier modelo\n        def buscar_en_modelo(modelo):\n            return modelo.query.filter(\n                db.or_(\n                    modelo.titulo.ilike(f'%{termino}%'),",
         "detail": "app.routes.games",
         "documentation": {}
     },
@@ -1732,7 +1821,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def terminos():\n    return render_template('main/terminos.html')\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('main/politicas.html')\n# ──────── RUTAS PRIVADAS ────────\n@main_bp.route('/index')\ndef index():\n    quiz_games = juegos_quiz.query.all()\n    sim_games = juegos_sim.query.all()",
+        "peekOfCode": "def terminos():\n    return render_template('main/terminos.html')\n@main_bp.route('/privacidad')\ndef privacidad():\n    return render_template('main/politicas.html')\n# ──────── RUTAS PRIVADAS ────────\n@main_bp.route('/index')\n@login_required\ndef index():\n    quiz_games = juegos_quiz.query.all()",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1741,7 +1830,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def privacidad():\n    return render_template('main/politicas.html')\n# ──────── RUTAS PRIVADAS ────────\n@main_bp.route('/index')\ndef index():\n    quiz_games = juegos_quiz.query.all()\n    sim_games = juegos_sim.query.all()\n    extra_games = juegos_extra.query.all()\n    return render_template('main/menu.html',\n                           user=current_user,",
+        "peekOfCode": "def privacidad():\n    return render_template('main/politicas.html')\n# ──────── RUTAS PRIVADAS ────────\n@main_bp.route('/index')\n@login_required\ndef index():\n    quiz_games = juegos_quiz.query.all()\n    sim_games = juegos_sim.query.all()\n    extra_games = juegos_extra.query.all()\n    return render_template('main/menu.html',",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -1849,7 +1938,7 @@
         "kind": 2,
         "importPath": "app.utils.database",
         "description": "app.utils.database",
-        "peekOfCode": "def ensure_db_exists(app):\n    \"\"\"Asegura que el archivo de base de datos existe y tiene permisos adecuados.\"\"\"\n    db_path = os.path.join(app.instance_path, 'app.db')\n    try:\n        # Asegurarse de que el directorio de la base de datos exista\n        if not os.path.exists(app.instance_path):\n            os.makedirs(app.instance_path, exist_ok=True)\n        # Si el archivo de la base de datos no existe, lo creamos\n        if not os.path.exists(db_path):\n            with open(db_path, 'w'):  # Abrir con 'with' asegura que el archivo se cierre adecuadamente",
+        "peekOfCode": "def ensure_db_exists(app: Flask) -> None:\n    \"\"\"\n    Asegura que el archivo de base de datos SQLite existe y tiene los permisos adecuados.\n    Args:\n        app: Instancia de la aplicación Flask\n    Raises:\n        OSError: Si no se pueden crear los directorios o archivos necesarios\n        Exception: Para otros errores inesperados\n    \"\"\"\n    db_path = os.path.join(app.instance_path, 'app.db')",
         "detail": "app.utils.database",
         "documentation": {}
     },
@@ -1858,7 +1947,7 @@
         "kind": 2,
         "importPath": "app.utils.database",
         "description": "app.utils.database",
-        "peekOfCode": "def session_scope():\n    \"\"\"Proporciona un ámbito transaccional seguro\"\"\"\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except SQLAlchemyError as e:\n        session.rollback()\n        raise e\n    finally:",
+        "peekOfCode": "def session_scope() -> Generator[Session, None, None]:\n    \"\"\"\n    Proporciona un ámbito transaccional seguro para operaciones con la base de datos.\n    Uso:\n        with session_scope() as session:\n            # operaciones con la sesión\n    Yields:\n        Session: Sesión de SQLAlchemy\n    Raises:\n        SQLAlchemyError: Si ocurre algún error durante la transacción",
         "detail": "app.utils.database",
         "documentation": {}
     },
@@ -1867,7 +1956,16 @@
         "kind": 2,
         "importPath": "app.utils.database",
         "description": "app.utils.database",
-        "peekOfCode": "def safe_db_operation(func, max_retries=3):\n    \"\"\"Ejecuta operaciones con reintentos automáticos\"\"\"\n    for attempt in range(max_retries):\n        try:\n            return func()\n        except OperationalError as e:\n            if \"2006\" in str(e) and attempt < max_retries - 1:\n                db.session.rollback()\n                sleep(0.5 * (attempt + 1))\n                continue",
+        "peekOfCode": "def safe_db_operation(func: Callable[[], T], max_retries: int = 3) -> T:\n    \"\"\"\n    Ejecuta operaciones de base de datos con reintentos automáticos para errores transitorios.\n    Args:\n        func: Función que realiza la operación de base de datos\n        max_retries: Número máximo de reintentos (default: 3)\n    Returns:\n        El resultado de la función si es exitosa\n    Raises:\n        OperationalError: Si persisten los errores después de los reintentos",
+        "detail": "app.utils.database",
+        "documentation": {}
+    },
+    {
+        "label": "T",
+        "kind": 5,
+        "importPath": "app.utils.database",
+        "description": "app.utils.database",
+        "peekOfCode": "T = TypeVar('T')\ndef ensure_db_exists(app: Flask) -> None:\n    \"\"\"\n    Asegura que el archivo de base de datos SQLite existe y tiene los permisos adecuados.\n    Args:\n        app: Instancia de la aplicación Flask\n    Raises:\n        OSError: Si no se pueden crear los directorios o archivos necesarios\n        Exception: Para otros errores inesperados\n    \"\"\"",
         "detail": "app.utils.database",
         "documentation": {}
     },
@@ -1885,7 +1983,7 @@
         "kind": 6,
         "importPath": "app.config",
         "description": "app.config",
-        "peekOfCode": "class Config:\n    # Configuración básica\n    SECRET_KEY = os.getenv('FLASK_SECRET_KEY', secrets.token_urlsafe(64))\n    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', secrets.token_urlsafe(64))\n    # Base de datos\n    #BASE_DIR = Path(__file__).parent.parent\n    #INSTANCE_PATH = os.path.join(BASE_DIR, 'instance')\n    #DB_PATH = BASE_DIR / 'database.db'  # En el directorio del proyecto\n    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') \n    ##Pendiente de checar   ",
+        "peekOfCode": "class Config:\n    \"\"\"Configuración base de la aplicación Flask\"\"\"\n    # -------------------------------\n    # Configuración de Seguridad\n    # -------------------------------\n    SECRET_KEY = os.getenv('FLASK_SECRET_KEY', secrets.token_urlsafe(64))\n    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', secrets.token_urlsafe(64))\n    # Configuración de cookies seguras\n    SESSION_COOKIE_SECURE = True  # Requiere HTTPS en producción\n    SESSION_COOKIE_HTTPONLY = True",
         "detail": "app.config",
         "documentation": {}
     },
@@ -1894,7 +1992,16 @@
         "kind": 2,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "def configure_db_engine(app):\n    \"\"\"Configura el motor de la base de datos con manejo de reconexión\"\"\"\n    engine = db.engine\n    # Configuración para manejar reconexiones\n    @event.listens_for(engine, \"engine_connect\")\n    def ping_connection(connection, branch):\n        if branch:\n            return\n        try:\n            # Ejecuta un ping simple para verificar la conexión",
+        "peekOfCode": "def configure_db_engine(app: Flask) -> None:\n    \"\"\"\n    Configura el motor de la base de datos con manejo avanzado de conexiones.\n    Parámetros:\n        app (Flask): Instancia de la aplicación Flask\n    Características:\n        - Ping periódico para verificar conexiones activas\n        - Reconexión automática en caso de fallos\n        - Manejo de errores de conexión\n    \"\"\"",
+        "detail": "app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "configure_extensions",
+        "kind": 2,
+        "importPath": "app.extensions",
+        "description": "app.extensions",
+        "peekOfCode": "def configure_extensions(app: Flask) -> None:\n    \"\"\"\n    Configura todas las extensiones de la aplicación.\n    Parámetros:\n        app (Flask): Instancia de la aplicación Flask\n    \"\"\"\n    # Configuración básica de Flask-Login\n    login_manager.login_view = 'auth.login'  # Ruta a la vista de login\n    login_manager.session_protection = \"strong\"  # Protección de sesión\n    # Configuración de JWT",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1903,7 +2010,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",",
+        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1912,7 +2019,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True",
+        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo\n    strategy=\"fixed-window\",  # Estrategia de ventana fija",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1921,7 +2028,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)",
+        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo\n    strategy=\"fixed-window\",  # Estrategia de ventana fija\n    headers_enabled=True  # Mostrar headers de límites en respuestas",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1930,7 +2037,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "csrf = CSRFProtect()\ntalisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)\ndef configure_db_engine(app):",
+        "peekOfCode": "csrf = CSRFProtect()\ntalisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo\n    strategy=\"fixed-window\",  # Estrategia de ventana fija\n    headers_enabled=True  # Mostrar headers de límites en respuestas\n)",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1939,7 +2046,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "talisman = Talisman()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)\ndef configure_db_engine(app):\n    \"\"\"Configura el motor de la base de datos con manejo de reconexión\"\"\"",
+        "peekOfCode": "talisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo\n    strategy=\"fixed-window\",  # Estrategia de ventana fija\n    headers_enabled=True  # Mostrar headers de límites en respuestas\n)\n# --------------------------------------------------",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1948,7 +2055,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "limiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\",\n    strategy=\"fixed-window\",\n    headers_enabled=True\n)\ndef configure_db_engine(app):\n    \"\"\"Configura el motor de la base de datos con manejo de reconexión\"\"\"\n    engine = db.engine",
+        "peekOfCode": "limiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo\n    strategy=\"fixed-window\",  # Estrategia de ventana fija\n    headers_enabled=True  # Mostrar headers de límites en respuestas\n)\n# --------------------------------------------------\n# Configuración avanzada de la base de datos\n# --------------------------------------------------",
         "detail": "app.extensions",
         "documentation": {}
     },

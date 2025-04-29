@@ -7,6 +7,12 @@ import secrets
 from sqlalchemy import event
 from sqlalchemy.schema import DDL
 
+class BaseModelMixin:
+    def to_dict(self):
+        """Convierte todas las columnas del modelo a un diccionario"""
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
 #   Clase para User
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -77,7 +83,7 @@ class User(UserMixin, db.Model):
 
     
 
-class Perfil(UserMixin, db.Model):
+class Perfil(BaseModelMixin,UserMixin, db.Model):
     __tablename__ = 'perfil'  
 
     username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)
@@ -86,7 +92,7 @@ class Perfil(UserMixin, db.Model):
     juegos_jugados = db.Column(db.String(80), default=0) 
 
 
-class intentos(UserMixin, db.Model):
+class intentos(BaseModelMixin,UserMixin, db.Model):
     __tablename__ = 'intentos'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -96,23 +102,23 @@ class intentos(UserMixin, db.Model):
     fecha_inicio = db.Column(db.DateTime)
     fecha_fin = db.Column(db.DateTime)
 
-class juegos_quiz(UserMixin, db.Model):
+class juegos_quiz(BaseModelMixin,UserMixin, db.Model):
     __tablename__ = 'juegos_quiz'
 
     id_quiz = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    titulo = db.Column(db.String(255), nullable = False)
-    descripcion = db.Column(db.String(255), nullable=False)
+    titulo = db.Column(db.String(255), index=True, nullable = False)
+    descripcion = db.Column(db.String(255), index=True, nullable = False)
     img_referencia = db.Column(db.String(255), nullable=False)
     
     preguntas = db.relationship('QuizPregunta', backref='juego', lazy=True, cascade='all, delete-orphan')
         
 
-class juegos_sim(UserMixin, db.Model):
+class juegos_sim(BaseModelMixin,UserMixin, db.Model):
     __tablename__ = 'juegos_sim'
 
     id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    titulo = db.Column(db.String(255), nullable = False)
-    descripcion = db.Column(db.String(255), nullable=False)
+    titulo = db.Column(db.String(255), index=True, nullable = False)
+    descripcion = db.Column(db.String(255), index=True, nullable = False)
     img_referencia = db.Column(db.String(255), nullable=False)
 event.listen(
     juegos_sim.__table__,
@@ -121,12 +127,12 @@ event.listen(
 )
 
 
-class juegos_extra(UserMixin, db.Model):
+class juegos_extra(BaseModelMixin, UserMixin, db.Model):
     __tablename__ = 'juegos_extra'
 
     id_extra = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    titulo = db.Column(db.String(255), nullable = False)
-    descripcion = db.Column(db.String(255), nullable=False)
+    titulo = db.Column(db.String(255), index=True, nullable = False)
+    descripcion = db.Column(db.String(255), index=True, nullable = False)
     img_referencia = db.Column(db.String(255), nullable=False)
 event.listen(
     juegos_extra.__table__,
@@ -134,7 +140,7 @@ event.listen(
     DDL("ALTER TABLE juegos_extra AUTO_INCREMENT = 200000;")
 )
 
-class QuizPregunta(db.Model):
+class QuizPregunta(BaseModelMixin, UserMixin, db.Model):
     __tablename__ = 'quiz_preguntas'
     
     id_pregunta = db.Column(db.Integer, primary_key=True)

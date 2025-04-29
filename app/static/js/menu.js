@@ -1,40 +1,6 @@
 const estadosCarrusel = {};
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Función de búsqueda mejorada
-    function buscarJuego() {
-        const input = document.getElementById("searchInput").value.trim().toLowerCase();
-        const contenedores = document.querySelectorAll('.carrusel-container');
-
-        contenedores.forEach(contenedor => {
-            const juegos = contenedor.querySelectorAll('.game-card');
-            let resultadosVisibles = 0;
-
-            juegos.forEach(juego => {
-                const id = juego.dataset.juegoId.toLowerCase();
-                const titulo = juego.dataset.gameTitle.toLowerCase();
-                const coincide = id.includes(input) || titulo.includes(input);
-
-                // Modificar solo clases de Bootstrap
-                juego.classList.toggle('d-none', !coincide);
-                juego.classList.toggle('search-match', coincide);
-
-                if (coincide) resultadosVisibles++;
-            });
-
-            // Actualizar visibilidad del contenedor
-            const contenedorPadre = contenedor.closest('.mb-5');
-            contenedorPadre.style.display = resultadosVisibles > 0 ? 'block' : 'none';
-            
-            // Reiniciar índice del carrusel
-            const prefix = contenedor.querySelector('.game-card').dataset.juegoTipo;
-            estadosCarrusel[prefix] = 0;
-            mostrarJuego(prefix, 0);
-        });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
     // 1. Función para mostrar el juego activo
     const mostrarJuego = (prefix, index) => {
         const contenedor = document.querySelector(`[data-carrusel="${prefix}"]`);
@@ -84,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             cambiarJuego(prefix, direccion);
         });
     });
+
 
     // 4. Inicializar carruseles
     document.querySelectorAll('[data-carrusel]').forEach(contenedor => {

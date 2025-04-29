@@ -61,9 +61,9 @@ def guardar_puntuacion(data):
             # Convertir fechas a UTC correctamente
             juego_id = str(int(data['juego_id']))
             puntuacion = int(data['puntuacion'])
-            fecha_inicio = datetime.strptime(data['fecha_inicio'])
-            #fecha_inicio = datetime.strptime(data['fecha_inicio'], '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
-            fecha_fin = datetime.strptime(data['fecha_fin'])
+            #Calcular las fechas en otra funcion 
+            fecha_inicio = datetime.strptime(data['fecha_inicio'], '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
+            fecha_fin = datetime.strptime(data['fecha_inicio'], '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
         except (ValueError, TypeError) as e:
             return {'error': 'Datos inválidos', 'detalle': str(e)}, 400
 
@@ -79,6 +79,7 @@ def guardar_puntuacion(data):
             fecha_fin=fecha_fin
         )
         db.session.add(nuevo_intento)
+        
         
         perfil = Perfil.query.filter_by(username=current_user.username).first()
         if not perfil:

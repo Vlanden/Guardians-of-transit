@@ -20,19 +20,20 @@
     </div>
     <!-- Popup convertido en carrusel -->
     <div id="searchResultsPopup" class="card mt-2 d-none w-100">
-        
-      <div class="card-header bg-primary text-white">Resultados</div>
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+          <span>Resultados de Búsqueda</span>
+          <small id="resultCount" class="badge bg-light text-dark">0 encontrados</small>
+      </div>
       <div class="card-body">
-        <div class="carrusel-container d-flex align-items-center">
-          <button class="carrusel-arrow carrusel-prev" data-carrusel-prefix="search">⬅</button>
-          <div class="carrusel-track flex-grow-1" data-carrusel="search">
-            <div id="searchResultsContent" class="d-flex"></div>
+          <div class="carrusel-container d-flex align-items-center">
+            <button class="carrusel-prev" data-carrusel-prefix="search">⬅</button>
+              <div class="carrusel-track flex-grow-1" data-carrusel="search">
+                  <div id="searchResultsContent" class="d-flex gap-3"></div>
+              </div>
+              <button class="carrusel-arrow carrusel-next" data-carrusel-prefix="search">➡</button>
           </div>
-          <button class="carrusel-arrow carrusel-next" data-carrusel-prefix="search">➡</button>
-        </div>
       </div>
     </div>
-  </div>
 
 
 
@@ -89,8 +90,8 @@
                 </div>
                 
                 <div class="d-flex justify-content-center gap-3 mt-3">
-                    <button class="carrusel-prev" data-carrusel-prefix="{{ carrusel.prefix }}">
-                        ⬅ Anterior
+                  <button class="carrusel-prev" data-carrusel-prefix="quiz">
+                  ⬅ Anterior
                     </button>
 
                     <button class="carrusel-next" data-carrusel-prefix="{{ carrusel.prefix }}">

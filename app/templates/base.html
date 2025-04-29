@@ -42,8 +42,10 @@
 
     <!-- Scripts personalizados -->
     {% if request.endpoint == 'main.index' %}
+    <script src="{{ url_for('static', filename='js/B_y_M_C.js') }}" defer></script>
+    <!--<script src="{{ url_for('static', filename='js/No.js') }}" defer></script>
       <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
-      <script src="{{ url_for('static', filename='js/buscar.js') }}" defer></script>
+      <script src="{{ url_for('static', filename='js/buscar.js') }}" defer></script>-->
     {% endif %}
     {% if request.endpoint == 'main.ver_juego' %}
       <script>const juego_id = parseInt("{{ juego_id }}");</script>

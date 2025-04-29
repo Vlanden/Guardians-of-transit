@@ -22,12 +22,14 @@ def create_app(config_class=Config):
         'img-src': ["'self'", "data:", "https://*"],
         'font-src': ["'self'", "https://cdn.jsdelivr.net"]
     }
+    
+    #Aqui va un extra para los stylr-src y el script-src
 
     Talisman(app, content_security_policy=csp)
 
     app.config.from_object(config_class)
     
-    #app.config.from_object(Config)
+    app.config.from_object(Config)
     
     # Configurar procesadores de contexto
     configure_context_processors(app)
@@ -35,10 +37,7 @@ def create_app(config_class=Config):
     # Inicializar extensiones —> esto registra 'app' con SQLAlchemy
     initialize_extensions(app)
 
-    with app.app_context():
-        # Configurar timezone UTC para todas las conexiones
-        with db.engine.connect() as connection:
-            connection.execute(text("SET time_zone = '+00:00';"))
+    
             
     # 2. Inicializar Flask-Migrate INMEDIATAMENTE después de db
     #from flask_migrate import Migrate
@@ -62,12 +61,12 @@ def create_app(config_class=Config):
     }
     # En la configuración de SQLAlchemy (funcion de init create_app):
     # En app/__init__.py
-    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-            'pool_size': 5,
-            'pool_recycle': 280,  # Menor que el wait_timeout de MySQL (generalmente 300s)
-            'pool_pre_ping': True,  # Verifica conexiones antes de usarlas
-            'max_overflow': 2
-    }
+    #app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    #        'pool_size': 5,
+    #        'pool_recycle': 280,  # Menor que el wait_timeout de MySQL (generalmente 300s)
+    #        'pool_pre_ping': True,  # Verifica conexiones antes de usarlas
+    #        'max_overflow': 2
+    #}
 
 
 
@@ -80,10 +79,10 @@ def create_app(config_class=Config):
         flash('Error temporal con la base de datos. Por favor intente nuevamente.', 'error')
         return redirect(url_for('main.index'))
     
-     # Configurar logs
-    handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=3)
-    handler.setLevel(logging.INFO)
-    app.logger.addHandler(handler)
+    # Configurar logs
+    #handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=3)
+    #handler.setLevel(logging.INFO)
+    #app.logger.addHandler(handler)
 
 
     return app

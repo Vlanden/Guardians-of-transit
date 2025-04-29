@@ -4,51 +4,61 @@ from datetime import timedelta
 from dotenv import load_dotenv
 from pathlib import Path
 
-# Cargar las variables de entorno
+# Cargar variables de entorno desde el archivo .env
 load_dotenv()
 
 class Config:
-    # Configuración básica
+    """Configuración base de la aplicación Flask"""
+    
+    # -------------------------------
+    # Configuración de Seguridad
+    # -------------------------------
     SECRET_KEY = os.getenv('FLASK_SECRET_KEY', secrets.token_urlsafe(64))
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', secrets.token_urlsafe(64))
     
-    # Base de datos
-    #BASE_DIR = Path(__file__).parent.parent
-    #INSTANCE_PATH = os.path.join(BASE_DIR, 'instance')
-    #DB_PATH = BASE_DIR / 'database.db'  # En el directorio del proyecto
-    
-
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') 
-    ##Pendiente de checar   
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    
-    # Seguridad
-    SESSION_COOKIE_SECURE = True  # Asegúrate de que esté en True en producción con HTTPS
+    # Configuración de cookies seguras
+    SESSION_COOKIE_SECURE = True  # Requiere HTTPS en producción
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = 'Lax'  # Protección contra CSRF
     PERMANENT_SESSION_LIFETIME = timedelta(days=7)
     
-    ##Pendiente de checar
-    # Email
-    MAIL_SERVER = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
-    MAIL_PORT = int(os.getenv('MAIL_PORT', 587))
-    MAIL_USE_TLS = os.getenv('MAIL_USE_TLS', 'true').lower() == 'true'
-    MAIL_USERNAME = os.getenv('MAIL_USERNAME')  # Asegúrate de que esta variable esté en el .env
-    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')  # Asegúrate de que esta variable esté en el .env
-    MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER', 'no-reply@superiorteam.site')
-    ##########################
+    # -------------------------------
+    # Configuración de Base de Datos
+    # -------------------------------
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False  # Desactiva el tracking de modificaciones
     
-    # Logging
-    #LOG_FOLDER = 'logs'
-    #LOG_FILE = 'app.log'
-    #LOG_MAX_BYTES = 1024 * 1024  # 1MB
-    #LOG_BACKUP_COUNT = 5
-    UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'static', 'uploads')
+    # -------------------------------
+    # Configuración de Archivos
+    # -------------------------------
+    # Directorio para uploads (relativo al directorio del paquete)
+    BASE_DIR = Path(__file__).parent.parent
+    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
+    
+    # Extensiones permitidas para uploads
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # Límite de 16MB para uploads
     
-    @staticmethod
-    def init_app(app):
+    # -------------------------------
+    # Métodos de Clase
+    # -------------------------------
+    @classmethod
+    def init_app(cls, app):
+        """Inicialización adicional para la aplicación"""
+        
         # Crear directorio de uploads si no existe
-        if not os.path.exists(Config.UPLOAD_FOLDER):
-            os.makedirs(Config.UPLOAD_FOLDER)
+        if not os.path.exists(cls.UPLOAD_FOLDER):
+            try:
+                os.makedirs(cls.UPLOAD_FOLDER, exist_ok=True)
+                app.logger.info(f"Directorio de uploads creado: {cls.UPLOAD_FOLDER}")
+            except OSError as e:
+                app.logger.error(f"No se pudo crear el directorio de uploads: {e}")
+                raise
+
+    @classmethod
+    def check_config(cls):
+        """Verifica que la configuración esencial esté establecida"""
+        required_keys = ['SECRET_KEY', 'JWT_SECRET_KEY', 'SQLALCHEMY_DATABASE_URI']
+        for key in required_keys:
+            if not getattr(cls, key):
+                raise ValueError(f"La configuración requerida {key} no está establecida")

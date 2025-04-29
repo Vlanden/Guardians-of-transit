@@ -13,7 +13,7 @@ from app.models.user import  (User, Perfil, intentos, juegos_quiz, QuizPregunta,
 from app.routes.main import ver_juego
 from flask_login import login_required,current_user
 from flask_wtf.csrf import CSRFProtect, validate_csrf, ValidationError
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from app import limiter
 
 
@@ -35,22 +35,36 @@ def obtener_juegos():
         cat: [juego.to_dict() for juego in juegos] 
         for cat, juegos in categorias.items()
     })
-    
+
 
 @games_bp.route('/buscar')
 @limiter.limit("100 per minute")
 def buscar():
-    termino = request.args.get('q', '')
-    if not termino:
-        return jsonify([])
+    termino = request.args.get('q', '').strip().lower()
     
-    results = []
-    # Buscar en todos los tipos de juegos
-    for model in [juegos_quiz, juegos_sim, juegos_extra]:
-        query = text(f"SELECT * FROM {model.__tablename__} WHERE titulo LIKE :term OR descripcion LIKE :term")
-        results.extend(db.session.execute(query, {'term': f'%{termino}%'}).fetchall())
-    
-    return jsonify([dict(row) for row in results])
+    # if len(termino) < 2:
+    #     return jsonify({"quiz": [], "simulacion": [], "extra": []})
+
+
+    try:
+        # Función auxiliar para búsqueda en cualquier modelo
+        def buscar_en_modelo(modelo):
+            return modelo.query.filter(
+                db.or_(
+                    modelo.titulo.ilike(f'%{termino}%'),
+                    modelo.descripcion.ilike(f'%{termino}%')
+                )
+            ).all()
+
+        return jsonify({
+            "quiz": [j.to_dict() for j in buscar_en_modelo(juegos_quiz)],
+            "simulacion": [j.to_dict() for j in buscar_en_modelo(juegos_sim)],
+            "extra": [j.to_dict() for j in buscar_en_modelo(juegos_extra)]
+        }), 200, {'Content-Type': 'application/json'}
+
+    except Exception as e:
+        current_app.logger.error(f"Error en búsqueda: {str(e)}")
+        return jsonify({"error": str(e)}), 500
 
 
 
@@ -127,34 +141,70 @@ def guardar_puntuacion():
         data = request.get_json()
         juego_id = str(data.get('juego_id'))  # Convertir a string
         puntuacion = int(data.get('puntuacion'))
+        fecha_inicio = datetime.strptime(data.get('fecha_inicio'), '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
+        fecha_fin = datetime.strptime(data.get('fecha_fin'), '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
 
-        # Obtener o crear perfil
-        perfil = Perfil.query.get(current_user.username)
-        if not perfil:
-            perfil = Perfil(username=current_user.username)
-            db.session.add(perfil)
-
-        # Actualizar juegos_jugados (IDs separados por comas)
-        if perfil.juegos_jugados:
-            juegos_existentes = perfil.juegos_jugados.split(',')
-            if juego_id not in juegos_existentes:  # Evitar duplicados
-                perfil.juegos_jugados = f"{perfil.juegos_jugados},{juego_id}"
-        else:
-            perfil.juegos_jugados = juego_id  # Primer juego
-
-        # Guardar intento y actualizar perfil
-        nuevo_intento = intentos(
+        if juego_id < 100000:
+            if not juegos_quiz.query.get(juego_id):
+                return {"error": "Juego no existe"}, 404
+    
+        if not (0 <= puntuacion <= 100):
+                    return {'error': 'Puntuación inválida'}, 400
+                
+                # Guardar intento y actualizar perfil
+        with db.session.begin():
+            nuevo_intento = intentos(
             username=current_user.username,
             juego_id=juego_id,
             puntaje=puntuacion,
-            fecha_inicio=datetime.utcnow(),
-            fecha_fin=datetime.utcnow()
+            fecha_inicio=fecha_inicio,
+            fecha_fin=fecha_fin
         )
         db.session.add(nuevo_intento)
         db.session.commit()
 
-        return jsonify({"success": True, "juegos_jugados": perfil.juegos_jugados})
 
+        # Obtener o crear perfil
+        perfil = Perfil.query.filter_by(username=current_user.username).first()
+        if not perfil:
+            perfil = Perfil(username=current_user.username, juegos_jugados=None)  # Inicializar como None
+            db.session.add(perfil)
+            db.session.flush()
+
+        # Actualizar juegos_jugados (IDs separados por comas)
+        if perfil.juegos_jugados:
+            juegos_existentes = perfil.juegos_jugados.split(',')
+        else:
+            perfil.juegos_jugados = juego_id  # Primer juego
+            
+            
+        
+
+        # Filtrar elementos vacíos y espacios
+        juegos_actuales = (
+            [x.strip() for x in perfil.juegos_jugados.split(',') if x.strip()] 
+            if perfil.juegos_jugados 
+            else []
+        )
+        
+        juegos_actuales.append(juego_id)
+        if len(juegos_actuales) > 5:
+                juegos_actuales.pop(0)
+                
+        perfil.juegos_jugados = ','.join(juegos_actuales)
+        
+        perfil.ultima_conexion = datetime.now(timezone.utc)
+        
+        current_app.logger.info(f"Perfil actualizado: {perfil.username} | Juegos: {perfil.juegos_jugados}")
+
+        return {
+                'success': True,
+                'intento_id': nuevo_intento.id,
+                'juegos_jugados': perfil.juegos_jugados,
+                'fecha_inicio': nuevo_intento.fecha_inicio,
+                'fecha_fin': nuevo_intento.fecha_fin
+            }, 200  # ← Código HTTP explícito
+        
     except ValueError as e:
         return jsonify({"error": "Datos inválidos", "detalle": str(e)}), 400
     except SQLAlchemyError as e:
