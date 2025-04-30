@@ -54,11 +54,12 @@
                 <h4>{{ carrusel.titulo }}</h4>
                 
                 {% if carrusel.juegos %}
-                    <div id="{{ carrusel.prefix }}Container" 
-     class="position-relative carrusel-container"
-     data-carrusel="{{ carrusel.prefix }}">
+                <div id="{{ carrusel.prefix }}Container" 
+                class="position-relative carrusel-container"
+                data-carrusel="{{ carrusel.prefix }}">
+
                     {% for juego in carrusel.juegos %}
-                    <div class="game-card card mx-auto mb-3 {% if not loop.first %}d-none{% endif %}" 
+                    <div class="game-card card mx-auto mb-3" 
                     data-juego-id="{{ juego.id_quiz if carrusel.prefix == 'quiz' else 
                                     juego.id_sim if carrusel.prefix == 'simulacion' else 
                                     juego.id_extra }}"

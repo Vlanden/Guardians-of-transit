@@ -1,39 +1,34 @@
-//Busqueda y Mostrar carruseles
 // Estado global único para todos los carruseles
 const estadosCarrusel = {};
 
 function debounce(func, wait) {
     let timeout;
     return function(...args) {
+        const context = this;
         clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
+        timeout = setTimeout(() => func.apply(context, args), wait);
     };
 }
-
 
 // Función universal para mostrar juegos
 function mostrarJuego(prefix, index) {
     const contenedor = document.querySelector(`[data-carrusel="${prefix}"]`);
     if (!contenedor) return;
 
-    // Seleccionar solo tarjetas visibles para el carrusel de búsqueda
-    const selector = prefix === 'search' ? '.game-card:not(.d-none)' : '.game-card';
-    const tarjetas = contenedor.querySelectorAll(selector);
-    
+    const tarjetas = contenedor.querySelectorAll('.game-card');
     if (tarjetas.length === 0) return;
 
     // Manejo circular del índice
     index = (index + tarjetas.length) % tarjetas.length;
     
-    // Ocultar/mostrar tarjetas
-    tarjetas.forEach((card, i) => {
-        if (prefix === 'search') {
-            card.style.display = i === index ? 'block' : 'none';
-        } else {
-            card.classList.toggle('d-none', i !== index);
-        }
+    // Ocultar todas las tarjetas primero
+    tarjetas.forEach(card => {
+        card.style.display = 'none';
     });
-
+    
+    // Mostrar solo la tarjeta actual
+    tarjetas[index].style.display = 'block';
+    
     // Scroll suave
     tarjetas[index].scrollIntoView({
         behavior: 'smooth',
@@ -55,20 +50,17 @@ function cambiarJuego(prefix, direccion) {
 function inicializarCarruseles() {
     document.querySelectorAll('[data-carrusel]').forEach(contenedor => {
         const prefix = contenedor.dataset.carrusel;
-        estadosCarrusel[prefix] = 0;
-        mostrarJuego(prefix, 0);
+        if (!estadosCarrusel.hasOwnProperty(prefix)) {
+            estadosCarrusel[prefix] = 0;
+            mostrarJuego(prefix, 0);
+        }
     });
 }
 
 // Sistema de búsqueda (versión optimizada)
-async function handleSearch(term) {
+const buscarJuegos = debounce(async function(term) {
     const popup = document.getElementById('searchResultsPopup');
     const contenedor = document.getElementById('searchResultsContent');
-    
-    // if (term.length < 2) {
-    //     popup.classList.add('d-none');
-    //     return;
-    // }
     
     if (term.length === 0) {
         popup.classList.add('d-none');
@@ -81,19 +73,6 @@ async function handleSearch(term) {
         
         contenedor.innerHTML = '';
         
-        // Mostrar mensaje especial si no hay término de búsqueda
-        if (term.length === 0) {
-            contenedor.innerHTML = `
-                <div class="text-center py-4">
-                    <i class="bi bi-grid fs-1 text-muted"></i>
-                    <p class="mt-2">Ingresa un término de búsqueda</p>
-                </div>
-            `;
-            popup.classList.remove('d-none');
-            return;
-        }
-        
-        // Resto del código permanece igual...
         const resultados = [...quiz, ...simulacion, ...extra];
         
         if (resultados.length > 0) {
@@ -101,6 +80,7 @@ async function handleSearch(term) {
                 const tipo = juego.id_quiz ? 'quiz' : juego.id_sim ? 'simulacion' : 'extra';
                 const card = document.createElement('div');
                 card.className = 'game-card card mx-2';
+                card.style.display = 'none'; // Ocultar inicialmente
                 card.innerHTML = `
                     <div class="card h-100">
                         <img src="/static/images/${juego.img_referencia}" 
@@ -140,34 +120,26 @@ async function handleSearch(term) {
             <div class="alert alert-danger">Error al cargar resultados</div>
         `;
     }
-}
+}, 300);
 
-// Al cargar la página
-/*document.addEventListener('DOMContentLoaded', () => {
-    inicializarCarruseles();
-    handleSearch('');  // Muestra todos los juegos inicialmente
-});*/
-
-// Modifica el event listener:
-document.getElementById('searchInput')?.addEventListener('input', 
-    debounce((e) => handleSearch(e.target.value.trim()), 300));
+// Event listeners
+document.addEventListener('DOMContentLoaded', () => {
     inicializarCarruseles();
     
     // Búsqueda
     document.getElementById('searchInput')?.addEventListener('input', (e) => {
-        handleSearch(e.target.value.trim());
+        buscarJuegos(e.target.value.trim());
     });
     
     // Botón limpiar
     document.getElementById('clearSearch')?.addEventListener('click', () => {
         document.getElementById('searchInput').value = '';
-        document.getElementById('searchResultsContent').innerHTML = '';
         document.getElementById('searchResultsPopup').classList.add('d-none');
     });
     
     // Delegación para todos los botones de carrusel
     document.addEventListener('click', (e) => {
-        const btn = e.target.closest('.carrusel-prev, .carrusel-next');
+        const btn = e.target.closest('[data-carrusel-prefix]');
         if (btn) {
             e.preventDefault();
             const prefix = btn.dataset.carruselPrefix;
