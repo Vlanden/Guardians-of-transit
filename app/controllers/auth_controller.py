@@ -1,5 +1,5 @@
 from flask import Blueprint, request, redirect, url_for, flash, render_template, current_app
-from flask_login import login_user, current_user, logout_user
+import flask_login
 from app import limiter, db
 from app.models.user import User
 from app.services.auth_service import (
@@ -8,6 +8,9 @@ from app.services.auth_service import (
 import bcrypt
 from sqlalchemy.exc import SQLAlchemyError, OperationalError
 from contextlib import contextmanager
+from datetime import datetime, timezone
+from flask_login import logout_user, current_user, login_required, login_user
+from app.models.user import Perfil
 
 auth_web = Blueprint('auth_web', __name__, url_prefix='/auth')
 
@@ -54,10 +57,23 @@ def login():
 
 
 @auth_web.route('/logout', methods=['GET'], endpoint='logout')
+@login_required
 def logout():
+    if current_user.is_authenticated:
+        try:
+            # Actualizar última conexión
+            perfil = Perfil.query.filter_by(username=current_user.username).first()
+            if perfil:
+                perfil.ultima_conexion = datetime.now(timezone.utc)
+                db.session.commit()
+                current_app.logger.info(f"Actualizada última conexión para {current_user.username}")
+        except Exception as e:
+            db.session.rollback()
+            current_app.logger.error(f"Error al actualizar última conexión: {str(e)}")
+    
     logout_user()
     flash('Has cerrado sesión correctamente', 'success')
-    return redirect(url_for('auth_web.login'))  
+    return redirect(url_for('auth_web.login'))
 
 @auth_web.route('/register', methods=['GET', 'POST'], endpoint='register')
 @limiter.limit("10 per minute")
@@ -101,6 +117,13 @@ def register():
         try:
             with session_scope() as session:
                 session.add(new_user)
+                perfil = Perfil.query.filter_by(username=current_user.username).first()
+                if not perfil:
+                    perfil = Perfil(username=current_user.username, fecha_registro = datetime.now(timezone.utc), juegos_jugados=None)  # Inicializar como None
+                    db.session.add(perfil)
+                    db.session.flush()
+                db.session.commit()
+                flash('Se ha registrado correctamente', 'success')
             flash('Registro exitoso. Ahora puedes iniciar sesión.', 'success')
             return redirect(url_for('auth_web.login'))
             

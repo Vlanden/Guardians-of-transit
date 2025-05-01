@@ -88,7 +88,7 @@ class Perfil(BaseModelMixin,UserMixin, db.Model):
 
     username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)
     fecha_registro = db.Column(db.DateTime)
-    ultima_conexion = db.Column(db.DateTime)
+    ultima_conexion = db.Column(db.DateTime(timezone=True), nullable=True)
     juegos_jugados = db.Column(db.String(80), default=0) 
 
 
@@ -99,8 +99,8 @@ class intentos(BaseModelMixin,UserMixin, db.Model):
     username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)
     juego_id = db.Column(db.Integer, nullable=False)
     puntaje = db.Column(db.Integer, nullable=False)
-    fecha_inicio = db.Column(db.DateTime)
-    fecha_fin = db.Column(db.DateTime)
+    fecha_inicio = db.Column(db.DateTime(timezone=True), nullable=True)
+    fecha_fin = db.Column(db.DateTime(timezone=True), nullable=True)
 
 class juegos_quiz(BaseModelMixin,UserMixin, db.Model):
     __tablename__ = 'juegos_quiz'

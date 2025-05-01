@@ -144,7 +144,7 @@ def guardar_puntuacion():
         fecha_inicio = datetime.strptime(data.get('fecha_inicio'), '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
         fecha_fin = datetime.strptime(data.get('fecha_fin'), '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
 
-        if juego_id < 100000:
+        if int(data.get('juego_id')) < 100000:
             if not juegos_quiz.query.get(juego_id):
                 return {"error": "Juego no existe"}, 404
     
@@ -152,8 +152,7 @@ def guardar_puntuacion():
                     return {'error': 'Puntuación inválida'}, 400
                 
                 # Guardar intento y actualizar perfil
-        with db.session.begin():
-            nuevo_intento = intentos(
+        nuevo_intento = intentos(
             username=current_user.username,
             juego_id=juego_id,
             puntaje=puntuacion,
@@ -195,7 +194,9 @@ def guardar_puntuacion():
         
         perfil.ultima_conexion = datetime.now(timezone.utc)
         
-        current_app.logger.info(f"Perfil actualizado: {perfil.username} | Juegos: {perfil.juegos_jugados}")
+        current_app.logger.info(f"Perfil actualizado: {perfil.username} | Juegos: {perfil.juegos_jugados} | Ultima Conexion: {perfil.ultima_conexion}")
+        
+        db.session.commit()
 
         return {
                 'success': True,

@@ -392,6 +392,15 @@
         "documentation": {}
     },
     {
+        "label": "flask_login",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
         "label": "login_required",
         "importPath": "flask_login",
         "description": "flask_login",
@@ -408,7 +417,7 @@
         "documentation": {}
     },
     {
-        "label": "login_user",
+        "label": "logout_user",
         "importPath": "flask_login",
         "description": "flask_login",
         "isExtraImport": true,
@@ -424,7 +433,15 @@
         "documentation": {}
     },
     {
-        "label": "logout_user",
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_user",
         "importPath": "flask_login",
         "description": "flask_login",
         "isExtraImport": true,
@@ -545,6 +562,14 @@
     },
     {
         "label": "User",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "Perfil",
         "importPath": "app.models.user",
         "description": "app.models.user",
         "isExtraImport": true,
@@ -952,6 +977,22 @@
         "description": "contextlib",
         "isExtraImport": true,
         "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -1576,7 +1617,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def logout():\n    logout_user()\n    flash('Has cerrado sesión correctamente', 'success')\n    return redirect(url_for('auth_web.login'))  \n@auth_web.route('/register', methods=['GET', 'POST'], endpoint='register')\n@limiter.limit(\"10 per minute\")\ndef register():\n    if current_user.is_authenticated:\n        return redirect(url_for('main.index'))\n    if request.method == 'POST':",
+        "peekOfCode": "def logout():\n    if current_user.is_authenticated:\n        try:\n            # Actualizar última conexión\n            perfil = Perfil.query.filter_by(username=current_user.username).first()\n            if perfil:\n                perfil.ultima_conexion = datetime.now(timezone.utc)\n                db.session.commit()\n                current_app.logger.info(f\"Actualizada última conexión para {current_user.username}\")\n        except Exception as e:",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -1693,7 +1734,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class Perfil(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime)\n    ultima_conexion = db.Column(db.DateTime)\n    juegos_jugados = db.Column(db.String(80), default=0) \nclass intentos(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
+        "peekOfCode": "class Perfil(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime)\n    ultima_conexion = db.Column(db.DateTime(timezone=True), nullable=True)\n    juegos_jugados = db.Column(db.String(80), default=0) \nclass intentos(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1702,7 +1743,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class intentos(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)\n    juego_id = db.Column(db.Integer, nullable=False)\n    puntaje = db.Column(db.Integer, nullable=False)\n    fecha_inicio = db.Column(db.DateTime)\n    fecha_fin = db.Column(db.DateTime)\nclass juegos_quiz(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'",
+        "peekOfCode": "class intentos(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)\n    juego_id = db.Column(db.Integer, nullable=False)\n    puntaje = db.Column(db.Integer, nullable=False)\n    fecha_inicio = db.Column(db.DateTime(timezone=True), nullable=True)\n    fecha_fin = db.Column(db.DateTime(timezone=True), nullable=True)\nclass juegos_quiz(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'juegos_quiz'",
         "detail": "app.models.user",
         "documentation": {}
     },
