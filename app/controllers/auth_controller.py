@@ -104,29 +104,36 @@ def register():
                 flash(error, 'error')
             return render_template('auth/sign-up.html', username=username, email=email)
 
-        if User.query.filter_by(username=username).first():
-            flash('Nombre de usuario ya registrado', 'error')
+        # Verificar existencia de usuario/email usando la misma sesión
+        existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
+        if existing_user:
+            if existing_user.username == username:
+                flash('Nombre de usuario ya registrado', 'error')
+            else:
+                flash('Correo electrónico ya registrado', 'error')
             return render_template('auth/sign-up.html', username=username, email=email)
-        if User.query.filter_by(email=email).first():
-            flash('Correo electrónico ya registrado', 'error')
-            return render_template('auth/sign-up.html', username=username, email=email)
-
-        hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        new_user = User(username=username, email=email, password_hash=hashed_pw)
 
         try:
+            hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+            new_user = User(username=username, email=email, password_hash=hashed_pw)
+            
             with session_scope() as session:
                 session.add(new_user)
-                perfil = Perfil.query.filter_by(username=current_user.username).first()
-                if not perfil:
-                    perfil = Perfil(username=current_user.username, fecha_registro = datetime.now(timezone.utc), juegos_jugados=None)  # Inicializar como None
-                    db.session.add(perfil)
-                    db.session.flush()
-                db.session.commit()
-                flash('Se ha registrado correctamente', 'success')
+                # Forzar flush para obtener el ID del nuevo usuario
+                session.flush()  
+                
+                # Crear perfil asociado usando el mismo contexto de sesión
+                if not Perfil.query.filter_by(username=new_user.username).first():
+                    new_perfil = Perfil(
+                        username=new_user.username,
+                        fecha_registro=datetime.now(timezone.utc),
+                        juegos_jugados=0
+                    )
+                    session.add(new_perfil)
+
             flash('Registro exitoso. Ahora puedes iniciar sesión.', 'success')
             return redirect(url_for('auth_web.login'))
-            
+
         except SQLAlchemyError as e:
             current_app.logger.error(f"Error al registrar usuario: {e}")
             flash('Error al registrar. Inténtalo de nuevo.', 'error')
