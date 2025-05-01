@@ -1400,6 +1400,14 @@
         "documentation": {}
     },
     {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
         "label": "Path",
         "importPath": "pathlib",
         "description": "pathlib",
@@ -1472,6 +1480,23 @@
         "importPath": "platform",
         "description": "platform",
         "detail": "platform",
+        "documentation": {}
+    },
+    {
+        "label": "urlparse",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "pymysql",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pymysql",
+        "description": "pymysql",
+        "detail": "pymysql",
         "documentation": {}
     },
     {
@@ -2120,6 +2145,15 @@
         "description": "run_env",
         "peekOfCode": "PYTHON_BIN = get_venv_python()\ndef is_using_virtualenv():\n    \"\"\"Verifica si el entorno actual está usando el entorno virtual.\"\"\"\n    return os.path.commonpath([sys.prefix, VENV_PATH]) == VENV_PATH\ndef create_virtualenv():\n    \"\"\"Crea un entorno virtual si no existe.\"\"\"\n    print(\"Entorno virtual no encontrado. Creando entorno virtual...\")\n    subprocess.check_call([sys.executable, '-m', 'venv', VENV_PATH])\ndef install_requirements():\n    \"\"\"Instala las dependencias desde requirements.txt.\"\"\"",
         "detail": "run_env",
+        "documentation": {}
+    },
+    {
+        "label": "parse_db_url",
+        "kind": 2,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "def parse_db_url(db_url):\n    parsed = urlparse(db_url)\n    return {\n        \"host\": parsed.hostname,\n        \"port\": parsed.port or 3306,\n        \"user\": parsed.username,\n        \"password\": parsed.password,\n        \"database\": parsed.path.lstrip('/').split('?')[0]\n    }\ntry:",
+        "detail": "test",
         "documentation": {}
     },
     {

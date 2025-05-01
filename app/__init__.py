@@ -52,13 +52,6 @@ def create_app(config_class=Config):
     # Registrar blueprints
     register_blueprints(app)
 
-    SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_pre_ping': True,  # Verifica conexiones antes de usarlas
-        'pool_recycle': 3600,   # Recicla conexiones cada 1 hora
-        'pool_size': 10,        # Conexiones mantenidas abiertas
-        'max_overflow': 5,      # Conexiones adicionales permitidas
-        'pool_timeout': 30      # Tiempo de espera para obtener conexión
-    }
     # En la configuración de SQLAlchemy (funcion de init create_app):
     # En app/__init__.py
     #app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
@@ -78,6 +71,9 @@ def create_app(config_class=Config):
         db.session.rollback()
         flash('Error temporal con la base de datos. Por favor intente nuevamente.', 'error')
         return redirect(url_for('main.index'))
+    
+    
+    
     
     # Configurar logs
     #handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=3)

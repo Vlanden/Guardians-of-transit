@@ -26,6 +26,11 @@ class Config:
     # Configuración de Base de Datos
     # -------------------------------
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_pre_ping': True,
+        'pool_recycle': 3600,
+        'connect_args': {'connect_timeout': 10}
+    }
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # Desactiva el tracking de modificaciones
     
     # -------------------------------
