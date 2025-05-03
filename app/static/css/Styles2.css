@@ -1,0 +1,169 @@
+/* styles.css - Versión unificada y corregida */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.bg-primary {
+    background-color: #000 !important;
+}
+
+.bg-black {
+    background-color: #363636 !important;
+}
+
+body {
+    font-size: 16px; /* Corregido: font-weight -> font-size */
+    font-family: 'Source Serif 4', serif;
+    color: white;
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(app/static/Media/Vialidad.jpeg); /* Slashes corregidos */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Mejor práctica */
+}
+
+.bg {
+    background-image: url(app/static/MediaCalles.jpg); /* Slashes corregidos */
+    background-position: center center;
+    background-size: cover;
+}
+
+.inputs {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 0.5rem; /* Añadido para mejor usabilidad */
+}
+
+.btn {
+    background-color: #ff9900;
+    color: white;
+    width: 104px !important;
+    transition: all 0.5s ease;
+    border: none; /* Añadido para consistencia */
+    cursor: pointer; /* Mejor UX */
+    padding: 0.5rem 1rem;
+}
+
+.btn:hover {
+    background-color: #FF0000;
+    transform: scale(1.15);
+    font-weight: bold;
+}
+
+.inputs:focus {
+    border-color: #ff9900;
+    outline: none;
+    box-shadow: none;
+    font-weight: bold;
+}
+
+.reg-links {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.reg-links:hover {
+    color: #ff9900;
+}
+
+/* ---------------------------
+   Mejoras adicionales añadidas:
+   - box-sizing para mejor manejo de tamaños
+   - cursor: pointer en botones
+   - padding consistente en inputs y botones
+   - min-height en body para ocupar toda la pantalla
+--------------------------- */
+
+/* ---------------------------
+   Estilos para Carruseles
+--------------------------- */
+.carrusel-container {
+    position: relative;
+    padding: 0 2rem; /* Espacio para flechas */
+    overflow: hidden;
+}
+
+.carrusel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    overflow-x: auto; /* Permite scroll en móviles */
+    scroll-behavior: smooth;
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+/* Oculta scrollbar en navegadores WebKit */
+.carrusel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.game-card {
+    flex: 0 0 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+}
+
+.game-card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.carrusel-prev, .carrusel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 153, 0, 0.8);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.carrusel-prev {
+    left: 0;
+}
+
+.carrusel-next {
+    right: 0;
+}
+
+.carrusel-prev:hover, .carrusel-next:hover {
+    background: #FF0000;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .carrusel-track {
+        scroll-snap-type: x mandatory;
+    }
+    
+    .game-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+    }
+    
+    .carrusel-prev, .carrusel-next {
+        width: 35px;
+        height: 35px;
+    }
+}

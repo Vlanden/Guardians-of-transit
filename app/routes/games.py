@@ -1,19 +1,12 @@
 # app/routes/games.py
-from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from app.extensions import db
 from flask import Blueprint, request, current_app, jsonify
-import sqlalchemy.exc
-from werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login import login_required, current_user
-from app.controllers.game_controller import (
-    guardar_puntuacion,
-    obtener_quiz
-)
-from app.models.user import  (User, Perfil, intentos, juegos_quiz, QuizPregunta, juegos_extra, juegos_sim)
-from app.routes.main import ver_juego
+from werkzeug.exceptions import HTTPException
+from app.models.user import  ( Perfil, intentos, juegos_quiz, QuizPregunta, juegos_extra, juegos_sim)
 from flask_login import login_required,current_user
 from flask_wtf.csrf import CSRFProtect, validate_csrf, ValidationError
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from app import limiter
 
 

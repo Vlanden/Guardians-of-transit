@@ -7,7 +7,7 @@ from flask_limiter.util import get_remote_address
 from flask_talisman import Talisman
 from sqlalchemy.exc import DisconnectionError, OperationalError
 from sqlalchemy import event
-from typing import Optional, Any
+from typing import Any
 from flask import Flask
 
 # --------------------------------------------------

@@ -352,14 +352,6 @@
         "documentation": {}
     },
     {
-        "label": "request",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
         "label": "abort",
         "importPath": "flask",
         "description": "flask",
@@ -609,22 +601,6 @@
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "app.models.user",
-        "description": "app.models.user",
-        "isExtraImport": true,
-        "detail": "app.models.user",
-        "documentation": {}
-    },
-    {
-        "label": "User",
-        "importPath": "app.models.user",
-        "description": "app.models.user",
-        "isExtraImport": true,
-        "detail": "app.models.user",
-        "documentation": {}
-    },
-    {
         "label": "Perfil",
         "importPath": "app.models.user",
         "description": "app.models.user",
@@ -681,14 +657,6 @@
         "documentation": {}
     },
     {
-        "label": "QuizPregunta",
-        "importPath": "app.models.user",
-        "description": "app.models.user",
-        "isExtraImport": true,
-        "detail": "app.models.user",
-        "documentation": {}
-    },
-    {
         "label": "juegos_extra",
         "importPath": "app.models.user",
         "description": "app.models.user",
@@ -713,22 +681,6 @@
         "documentation": {}
     },
     {
-        "label": "intentos",
-        "importPath": "app.models.user",
-        "description": "app.models.user",
-        "isExtraImport": true,
-        "detail": "app.models.user",
-        "documentation": {}
-    },
-    {
-        "label": "User",
-        "importPath": "app.models.user",
-        "description": "app.models.user",
-        "isExtraImport": true,
-        "detail": "app.models.user",
-        "documentation": {}
-    },
-    {
         "label": "db",
         "importPath": "app",
         "description": "app",
@@ -754,22 +706,6 @@
     },
     {
         "label": "limiter",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "create_app",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "db",
         "importPath": "app",
         "description": "app",
         "isExtraImport": true,
@@ -888,15 +824,6 @@
         "importPath": "bcrypt",
         "description": "bcrypt",
         "detail": "bcrypt",
-        "documentation": {}
-    },
-    {
-        "label": "sqlalchemy.exc",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sqlalchemy.exc",
-        "description": "sqlalchemy.exc",
-        "detail": "sqlalchemy.exc",
         "documentation": {}
     },
     {
@@ -1036,14 +963,6 @@
         "documentation": {}
     },
     {
-        "label": "timedelta",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
         "label": "timezone",
         "importPath": "datetime",
         "description": "datetime",
@@ -1073,6 +992,14 @@
         "description": "datetime",
         "isExtraImport": true,
         "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "werkzeug.exceptions",
+        "description": "werkzeug.exceptions",
+        "isExtraImport": true,
+        "detail": "werkzeug.exceptions",
         "documentation": {}
     },
     {
@@ -1124,22 +1051,6 @@
         "documentation": {}
     },
     {
-        "label": "generate_password_hash",
-        "importPath": "werkzeug.security",
-        "description": "werkzeug.security",
-        "isExtraImport": true,
-        "detail": "werkzeug.security",
-        "documentation": {}
-    },
-    {
-        "label": "check_password_hash",
-        "importPath": "werkzeug.security",
-        "description": "werkzeug.security",
-        "isExtraImport": true,
-        "detail": "werkzeug.security",
-        "documentation": {}
-    },
-    {
         "label": "secrets",
         "kind": 6,
         "isExtraImport": true,
@@ -1150,14 +1061,6 @@
     },
     {
         "label": "event",
-        "importPath": "sqlalchemy",
-        "description": "sqlalchemy",
-        "isExtraImport": true,
-        "detail": "sqlalchemy",
-        "documentation": {}
-    },
-    {
-        "label": "text",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
         "isExtraImport": true,
@@ -1178,15 +1081,6 @@
         "description": "sqlalchemy.schema",
         "isExtraImport": true,
         "detail": "sqlalchemy.schema",
-        "documentation": {}
-    },
-    {
-        "label": "click",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "click",
-        "description": "click",
-        "detail": "click",
         "documentation": {}
     },
     {
@@ -1227,46 +1121,6 @@
         "description": "app.controllers.auth_controller",
         "isExtraImport": true,
         "detail": "app.controllers.auth_controller",
-        "documentation": {}
-    },
-    {
-        "label": "login_required",
-        "importPath": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
-        "description": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
-        "isExtraImport": true,
-        "detail": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
-        "documentation": {}
-    },
-    {
-        "label": "current_user",
-        "importPath": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
-        "description": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
-        "isExtraImport": true,
-        "detail": "werkzeug.exceptions import HTTPException  # <-- Importación correctafrom flask_login",
-        "documentation": {}
-    },
-    {
-        "label": "guardar_puntuacion",
-        "importPath": "app.controllers.game_controller",
-        "description": "app.controllers.game_controller",
-        "isExtraImport": true,
-        "detail": "app.controllers.game_controller",
-        "documentation": {}
-    },
-    {
-        "label": "obtener_quiz",
-        "importPath": "app.controllers.game_controller",
-        "description": "app.controllers.game_controller",
-        "isExtraImport": true,
-        "detail": "app.controllers.game_controller",
-        "documentation": {}
-    },
-    {
-        "label": "ver_juego",
-        "importPath": "app.routes.main",
-        "description": "app.routes.main",
-        "isExtraImport": true,
-        "detail": "app.routes.main",
         "documentation": {}
     },
     {
@@ -1369,14 +1223,6 @@
     },
     {
         "label": "Generator",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -1781,15 +1627,6 @@
         "description": "app.models.user",
         "peekOfCode": "class QuizPregunta(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'quiz_preguntas'\n    id_pregunta = db.Column(db.Integer, primary_key=True)\n    id_quiz = db.Column(db.Integer, db.ForeignKey('juegos_quiz.id_quiz'))  # FK al juego\n    q_pregunta = db.Column(db.String(500), nullable=False)\n    opcioncorrecta = db.Column(db.String(200), nullable=False)  # Correcta\n    opcion2 = db.Column(db.String(200), nullable=False)\n    opcion3 = db.Column(db.String(200), nullable=False)\n    opcion4 = db.Column(db.String(200), nullable=False)\n    explicacion = db.Column(db.String(500))",
         "detail": "app.models.user",
-        "documentation": {}
-    },
-    {
-        "label": "create_admin",
-        "kind": 2,
-        "importPath": "app.models.user_admin_crate",
-        "description": "app.models.user_admin_crate",
-        "peekOfCode": "def create_admin():\n    \"\"\"Crear un usuario administrador\"\"\"\n    username = input(\"Nombre de usuario: \")\n    email = input(\"Email: \")\n    password = getpass.getpass(\"Contraseña: \")\n    admin = User(\n        username=username,\n        email=email,\n        is_admin=True\n    )",
-        "detail": "app.models.user_admin_crate",
         "documentation": {}
     },
     {

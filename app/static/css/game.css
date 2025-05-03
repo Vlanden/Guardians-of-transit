@@ -1,4 +1,39 @@
 /* Contenedor principal */
+/* ---------------------------
+   Fondos para Juego de Quiz
+--------------------------- */
+body {
+  font-size: 16px; /* Corregido: font-weight -> font-size */
+  font-family: 'Source Serif 4', serif;
+  color: white;
+  background-image: 
+      linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      url(app/static/Media/Vialidad.jpeg); /* Slashes corregidos */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Mejor práctica */
+}
+
+.game-container {
+  background: rgba(36, 36, 36, 0.95); /* Fondo oscuro semitransparente */
+  border: 1px solid rgba(255, 153, 0, 0.3);
+  border-radius: 15px; /* O el valor que prefieras */
+  backdrop-filter: blur(5px); /* Efecto de desenfoque moderno */
+}
+
+#pregunta {
+  border: 1px solid rgba(255, 153, 0, 0.2); /* Borde sutil naranja */
+}
+
+#resultado {
+  background: rgba(0, 0, 0, 0.6) !important; /* Fondo más oscuro */
+  border-left: 4px solid #ff9900; /* Acorde al color primario */
+}
+
+
+
 .game-container {
   max-width: 800px;
   margin: 0 auto;
@@ -93,10 +128,9 @@
 #resultado {
   margin-top: 30px;
   padding: 20px;
-  background-color: #f8f9fa;
   border-radius: 8px;
   font-size: 20px;
-  border-left: 5px solid #6c757d;
+  /*border-left: 5px solid #6c757d;*/
 }
 
 #progress {

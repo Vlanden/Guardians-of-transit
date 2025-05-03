@@ -1,11 +1,7 @@
 # app/__init__.py
-import logging.handlers
 import os
-import logging
-import sqlalchemy 
-from logging.handlers import RotatingFileHandler
+import sqlalchemy
 from flask import Flask, flash , redirect,url_for
-from sqlalchemy import text
 from .config import Config
 from .extensions import db, login_manager, jwt, csrf, limiter, talisman
 from .utils.logging import configure_logging

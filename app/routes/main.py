@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, request, abort
+from flask import Blueprint, render_template, redirect, url_for, abort
 from flask_login import login_required, current_user 
 from app import limiter
 from app.controllers.user_controller import UserController
-from app.models.user import juegos_quiz, QuizPregunta, juegos_extra, juegos_sim, User, intentos
+from app.models.user import juegos_quiz, juegos_extra, juegos_sim
 
 
 main_bp = Blueprint('main', __name__)
