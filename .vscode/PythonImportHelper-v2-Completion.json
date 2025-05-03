@@ -1580,7 +1580,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class Perfil(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime)\n    ultima_conexion = db.Column(db.DateTime(timezone=True), nullable=True)\n    juegos_jugados = db.Column(db.String(80), default=0) \nclass intentos(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
+        "peekOfCode": "class Perfil(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'perfil'  \n    username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)\n    fecha_registro = db.Column(db.DateTime, nullable=False)\n    ultima_conexion = db.Column(db.DateTime(timezone=True), nullable=True)\n    juegos_jugados = db.Column(db.String(80), default=0) \nclass intentos(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'intentos'\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), db.ForeignKey('users.username'), nullable=False)",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1626,6 +1626,24 @@
         "importPath": "app.models.user",
         "description": "app.models.user",
         "peekOfCode": "class QuizPregunta(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'quiz_preguntas'\n    id_pregunta = db.Column(db.Integer, primary_key=True)\n    id_quiz = db.Column(db.Integer, db.ForeignKey('juegos_quiz.id_quiz'))  # FK al juego\n    q_pregunta = db.Column(db.String(500), nullable=False)\n    opcioncorrecta = db.Column(db.String(200), nullable=False)  # Correcta\n    opcion2 = db.Column(db.String(200), nullable=False)\n    opcion3 = db.Column(db.String(200), nullable=False)\n    opcion4 = db.Column(db.String(200), nullable=False)\n    explicacion = db.Column(db.String(500))",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "QuizSimulacion",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class QuizSimulacion(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'quiz_simulacion'\n    id_pregunta = db.Column(db.Integer, primary_key=True)\n    id_sim = db.Column(db.Integer, db.ForeignKey('juegos_sim.id_sim'))  # FK al juego\n    q_pregunta = db.Column(db.String(500), nullable=False)\n    url_sim = db.Column(db.String(500), nullable=False)\n    opcioncorrecta = db.Column(db.String(200), nullable=False)  # Correcta\n    opcion2 = db.Column(db.String(200), nullable=False)\n    opcion3 = db.Column(db.String(200), nullable=False)\n    opcion4 = db.Column(db.String(200), nullable=False)",
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "QuizExtra",
+        "kind": 6,
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "peekOfCode": "class QuizExtra(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'quiz_extra'\n    id_pregunta = db.Column(db.Integer, primary_key=True)\n    id_extra = db.Column(db.Integer, db.ForeignKey('juegos_extra.id_extra'))  # FK al juego\n    q_pregunta = db.Column(db.String(500), nullable=False)\n    opcioncorrecta = db.Column(db.String(200), nullable=False)  # Correcta\n    opcion2 = db.Column(db.String(200), nullable=False)\n    opcion3 = db.Column(db.String(200), nullable=False)\n    opcion4 = db.Column(db.String(200), nullable=False)\n    explicacion = db.Column(db.String(500))",
         "detail": "app.models.user",
         "documentation": {}
     },

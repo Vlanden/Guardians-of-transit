@@ -86,7 +86,7 @@ class Perfil(BaseModelMixin,UserMixin, db.Model):
     __tablename__ = 'perfil'  
 
     username = db.Column(db.String(80), db.ForeignKey('users.username'), primary_key=True)
-    fecha_registro = db.Column(db.DateTime)
+    fecha_registro = db.Column(db.DateTime, nullable=False)
     ultima_conexion = db.Column(db.DateTime(timezone=True), nullable=True)
     juegos_jugados = db.Column(db.String(80), default=0) 
 
