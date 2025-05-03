@@ -150,4 +150,30 @@ class QuizPregunta(BaseModelMixin, UserMixin, db.Model):
     opcion3 = db.Column(db.String(200), nullable=False)
     opcion4 = db.Column(db.String(200), nullable=False)
     explicacion = db.Column(db.String(500))
+
+
+class QuizSimulacion(BaseModelMixin, UserMixin, db.Model):
+    __tablename__ = 'quiz_simulacion'
+    
+    id_pregunta = db.Column(db.Integer, primary_key=True)
+    id_sim = db.Column(db.Integer, db.ForeignKey('juegos_sim.id_sim'))  # FK al juego
+    q_pregunta = db.Column(db.String(500), nullable=False)
+    url_sim = db.Column(db.String(500), nullable=False)
+    opcioncorrecta = db.Column(db.String(200), nullable=False)  # Correcta
+    opcion2 = db.Column(db.String(200), nullable=False)
+    opcion3 = db.Column(db.String(200), nullable=False)
+    opcion4 = db.Column(db.String(200), nullable=False)
+    explicacion = db.Column(db.String(500))
+    
+class QuizExtra(BaseModelMixin, UserMixin, db.Model):
+    __tablename__ = 'quiz_extra'
+    
+    id_pregunta = db.Column(db.Integer, primary_key=True)
+    id_extra = db.Column(db.Integer, db.ForeignKey('juegos_extra.id_extra'))  # FK al juego
+    q_pregunta = db.Column(db.String(500), nullable=False)
+    opcioncorrecta = db.Column(db.String(200), nullable=False)  # Correcta
+    opcion2 = db.Column(db.String(200), nullable=False)
+    opcion3 = db.Column(db.String(200), nullable=False)
+    opcion4 = db.Column(db.String(200), nullable=False)
+    explicacion = db.Column(db.String(500))
     
