@@ -41,6 +41,7 @@
   box-sizing: border-box;
 }
 
+
 .bg-primary {
   background-color: #000 !important;
 }
@@ -194,6 +195,7 @@ header a:hover {
   background-color: #b71c1c;
 }
 
+
 /* ---------------------------
    Mejoras adicionales añadidas:
    - box-sizing para mejor manejo de tamaños
@@ -234,7 +236,7 @@ main {
   margin: 1rem 0;
 }
 
-h1, h2, h3 {
+h1, h2, h3 , h4{
   font-family: var(--font-secondary);
   margin-bottom: 1rem;
   color: var(--dark-color);
