@@ -1477,7 +1477,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()\n        raise\n@auth_web.route('/login', methods=['GET', 'POST'], endpoint='login')\n@limiter.limit(\"10 per minute\")",
+        "peekOfCode": "def session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()\n        raise\n@auth_web.route('/login', methods=['GET', 'POST'], endpoint='login')\n@limiter.limit(\"100 per minute\")",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },

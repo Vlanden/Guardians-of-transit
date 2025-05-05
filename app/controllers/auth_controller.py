@@ -26,7 +26,7 @@ def session_scope():
         raise
 
 @auth_web.route('/login', methods=['GET', 'POST'], endpoint='login')
-@limiter.limit("10 per minute")
+@limiter.limit("100 per minute")
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
