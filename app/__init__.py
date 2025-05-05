@@ -29,7 +29,6 @@ def create_app(config_class=Config):
         content_security_policy=csp,
         force_https=True,          # Mantener seguridad en producción
         force_https_permanent=True,
-        proxy=True                  # Respeta headers X-Forwarded-Proto de Nginx
     )
     app.config.from_object(config_class)
     
