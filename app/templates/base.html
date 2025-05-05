@@ -18,11 +18,11 @@
     {% endif %}
     {% block extra_css %}{% endblock %}
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column vh-100 bg-light">
 
     {% include 'partials/header.html' %}
 
-    <main class="mt-4 flex-grow-1">
+    <main class="main-container flex-grow-1">
       <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
