@@ -61,8 +61,7 @@
                 </div>
                 <div class="mt-5 text-center">
                     <p><strong>{{ current_user.username }}</strong></p>
-                    <p><strong>Nivel: {{ user_profile.nivel }}</strong></p>
-                    <p><strong>Último juego: {{ last_game.titulo if last_game else 'N/A' }}</strong></p>
+                    <p><strong>Último juego: {{ last_game.titulo if last_game else 'N/A' }}</strong></p><!--Debe obtenerlo en base a el ultimo id de la tabla perfil la columna es juegos jugados-->
                 </div>
             </section>
 
