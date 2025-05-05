@@ -494,7 +494,7 @@ footer a:hover {
   transform: translateY(-50%);
   width: 20px;       /* Tamaño reducido */
   height: 30px;      /* Tamaño reducido */
-  background: #ff9900;
+  background: #ff0000;
   color: white;
   border: none;
   border-radius: 10%;
@@ -519,7 +519,7 @@ footer a:hover {
 
 .carrusel-prev:hover, 
 .carrusel-next:hover {
-  background: #FF0000;
+  background: #11b640;
   transform: translateY(-50%) scale(1.1);
   box-shadow: 0 3px 8px rgba(0,0,0,0.3);
 }
