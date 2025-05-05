@@ -1,28 +1,49 @@
 {% extends "base.html" %}
 
+<<<<<<< Updated upstream
 {% block content %}
 <body>
+=======
+<body class="min-vh-100 bg-dark text-light">
+    <header>
+        {% include 'partials/header.html' %}
+    </header>   
+>>>>>>> Stashed changes
     <main>
-        <article>
-            
-<!-- Aquí va tu contenido principal -->
-<h1>Términos y Condiciones</h1>
-<p>Última actualización: 16 de abril de 2025</p>
+        <article class="Elements pt-3">
+            <section class="container-xl mb-5 mt-5">
+                <div class="row">
+                    <h1 class="pb-3">Términos y Condiciones</h1>
+                    <p><strong>Última actualización:</strong> 16 de abril de 2025</p>
 
-<p>Bienvenido a <strong>Guardianes de la Vía</strong>. Al acceder o utilizar esta plataforma, aceptas cumplir con los siguientes términos y condiciones. Si no estás de acuerdo con alguno de ellos, por favor no utilices este servicio.</p>
+                    <p>Al acceder o utilizar la plataforma <strong>Guardianes de la Vía</strong>, aceptas cumplir con estos términos y condiciones. Si no estás de acuerdo, por favor no utilices este servicio.</p>
 
-<h2>1. Uso de la Plataforma</h2>
-<p>La aplicación tiene fines educativos e informativos, y está dirigida a personas interesadas en aprender sobre seguridad vial y normas de tránsito.</p>
+                    <h2>1. Uso de la Plataforma</h2>
+                    <p>La plataforma tiene fines educativos e informativos. Está dirigida a personas interesadas en aprender sobre seguridad vial y normas de tránsito.</p>
+                    <ul>
+                        <li>No está permitido el uso para actividades ilegales o no autorizadas.</li>
+                        <li>El mal uso podrá derivar en la suspensión del acceso.</li>
+                    </ul>
 
-<h2>2. Registro y Cuentas</h2>
-<p>Al registrarte, te comprometes a proporcionar información veraz y actualizada. Eres responsable de mantener la confidencialidad de tus credenciales de acceso.</p>
+                    <h2>2. Registro y Cuentas</h2>
+                    <p>Al registrarte:</p>
+                    <ul>
+                        <li>Te comprometes a proporcionar datos reales y actualizados.</li>
+                        <li>Eres responsable de la seguridad de tu cuenta y contraseña.</li>
+                        <li>Debes notificarnos ante cualquier uso no autorizado.</li>
+                    </ul>
 
-<h2>3. Contenido</h2>
-<p>Todo el contenido (textos, juegos, materiales educativos) es propiedad de los desarrolladores de Guardianes de la Vía. Queda prohibida su reproducción sin autorización.</p>
+                    <h2>3. Contenido</h2>
+                    <p>Todos los materiales —textos, imágenes, juegos, recursos educativos— son propiedad de los desarrolladores.</p>
+                    <ul>
+                        <li>No está permitida su reproducción sin consentimiento.</li>
+                        <li>Su uso es exclusivo para fines personales y educativos.</li>
+                    </ul>
 
-<h2>4. Modificaciones</h2>
-<p>Nos reservamos el derecho de actualizar estos términos en cualquier momento. Cualquier cambio será notificado en esta misma página.</p>
+                    <h2>4. Modificaciones</h2>
+                    <p>Nos reservamos el derecho de modificar estos términos. Los cambios se anunciarán en esta página.</p>
 
+<<<<<<< Updated upstream
 <h2>5. Contacto</h2>
 <p>Si tienes preguntas sobre estos términos, contáctanos al correo: contacto@guardianesdelavia.com</p>
 
@@ -31,3 +52,27 @@
 
 </body>
 {% endblock %}
+=======
+                    <h2>5. Limitación de Responsabilidad</h2>
+                    <p>No garantizamos que el servicio funcione sin interrupciones o errores.</p>
+                    <ul>
+                        <li>No nos responsabilizamos por pérdidas derivadas del uso de la plataforma.</li>
+                        <li>La información no sustituye consejos legales o técnicos profesionales.</li>
+                    </ul>
+
+                    <h2>6. Privacidad</h2>
+                    <p>El uso de tus datos se rige por nuestra <a href="#" class="text-info">Política de Privacidad</a>.</p>
+
+                    <h2>7. Contacto</h2>
+                    <p>Si tienes preguntas, escríbenos a: <a href="mailto:contacto@guardianesdelavia.com" class="text-info">contacto@guardianesdelavia.com</a></p>
+                </div>
+            </section>
+        </article>
+    </main>
+    <footer>
+        {% include 'partials/footer.html' %}
+    </footer>
+
+</body>
+</html>
+>>>>>>> Stashed changes
