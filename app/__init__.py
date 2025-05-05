@@ -21,8 +21,16 @@ def create_app(config_class=Config):
     
     #Aqui va un extra para los stylr-src y el script-src
 
-    Talisman(app, content_security_policy=csp)
-
+    # Temporalmente desactiva force_https (solo en entornos de desarrollo)
+    #Talisman(app,content_security_policy=csp,force_https=False )
+    # En app/__init__.py, modifica la inicialización de Talisman
+    Talisman(
+        app,
+        content_security_policy=csp,
+        force_https=True,          # Mantener seguridad en producción
+        force_https_permanent=True,
+        proxy=True                  # Respeta headers X-Forwarded-Proto de Nginx
+    )
     app.config.from_object(config_class)
     
     app.config.from_object(Config)

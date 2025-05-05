@@ -19,11 +19,11 @@
       </div>
       <div class="card-body">
           <div class="carrusel-container d-flex align-items-center">
-            <button class="carrusel-prev" data-carrusel-prefix="search">⬅</button>
+            <button class="carrusel-prev" data-carrusel-prefix="search"><</button>
               <div class="carrusel-track flex-grow-1" data-carrusel="search">
                   <div id="searchResultsContent" class="d-flex gap-3"></div>
               </div>
-              <button class="carrusel-arrow carrusel-next" data-carrusel-prefix="search">➡</button>
+              <button class="carrusel-arrow carrusel-next" data-carrusel-prefix="search">></button>
           </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
         
         {% if carrusel.juegos %}
         <div class="carrusel-container" data-carrusel="{{ carrusel.prefix }}">
-          <button class="carrusel-prev" data-carrusel-prefix="{{ carrusel.prefix }}">⬅</button>
+          <button class="carrusel-prev" data-carrusel-prefix="{{ carrusel.prefix }}"><</button>
           
           <div class="carrusel-track">
             {% for juego in carrusel.juegos %}
@@ -74,7 +74,7 @@
             {% endfor %}
           </div>
           
-          <button class="carrusel-next" data-carrusel-prefix="{{ carrusel.prefix }}">➡</button>
+          <button class="carrusel-next" data-carrusel-prefix="{{ carrusel.prefix }}">></button>
         </div>
         {% else %}
         <div class="alert alert-info">
