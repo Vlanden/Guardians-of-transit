@@ -1,3 +1,4 @@
+import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_jwt_extended import JWTManager
@@ -10,6 +11,7 @@ from sqlalchemy import event
 from typing import Any
 from flask import Flask
 
+
 # --------------------------------------------------
 # Inicialización de extensiones Flask
 # --------------------------------------------------
@@ -18,7 +20,22 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 jwt = JWTManager()
 csrf = CSRFProtect()
-talisman = Talisman()
+
+
+csp = {
+        'default-src': "'self'",
+        'style-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        'script-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        'img-src': ["'self'", "data:", "https://*"],
+        'font-src': ["'self'", "https://cdn.jsdelivr.net"]
+    }
+    
+    
+talisman = Talisman(
+    content_security_policy=csp,
+    force_https=os.getenv('FLASK_ENV') == 'production',
+    force_https_permanent=os.getenv('FLASK_ENV') == 'production'
+)
 
 # Configuración del rate limiter con valores por defecto seguros
 limiter = Limiter(

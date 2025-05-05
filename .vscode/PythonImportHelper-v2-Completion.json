@@ -1931,7 +1931,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo",
+        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ncsp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1940,7 +1940,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo\n    strategy=\"fixed-window\",  # Estrategia de ventana fija",
+        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ncsp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1949,7 +1949,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\ntalisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo\n    strategy=\"fixed-window\",  # Estrategia de ventana fija\n    headers_enabled=True  # Mostrar headers de límites en respuestas",
+        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\ncsp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ntalisman = Talisman(",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1958,7 +1958,16 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "csrf = CSRFProtect()\ntalisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo\n    strategy=\"fixed-window\",  # Estrategia de ventana fija\n    headers_enabled=True  # Mostrar headers de límites en respuestas\n)",
+        "peekOfCode": "csrf = CSRFProtect()\ncsp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ntalisman = Talisman(\n    content_security_policy=csp,",
+        "detail": "app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "csp",
+        "kind": 5,
+        "importPath": "app.extensions",
+        "description": "app.extensions",
+        "peekOfCode": "csp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ntalisman = Talisman(\n    content_security_policy=csp,\n    force_https=os.getenv('FLASK_ENV') == 'production',",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1967,7 +1976,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "talisman = Talisman()\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo\n    strategy=\"fixed-window\",  # Estrategia de ventana fija\n    headers_enabled=True  # Mostrar headers de límites en respuestas\n)\n# --------------------------------------------------",
+        "peekOfCode": "talisman = Talisman(\n    content_security_policy=csp,\n    force_https=os.getenv('FLASK_ENV') == 'production',\n    force_https_permanent=os.getenv('FLASK_ENV') == 'production'\n)\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -2057,7 +2066,7 @@
         "kind": 5,
         "importPath": "wsgi",
         "description": "wsgi",
-        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True)\n    #app.run(debug=True, host=\"0.0.0.0\", port=5000)",
+        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    #app.run(debug=True)\n    app.run(host='0.0.0.0', port=5000)",
         "detail": "wsgi",
         "documentation": {}
     }

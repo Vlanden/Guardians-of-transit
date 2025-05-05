@@ -1,39 +1,18 @@
 # app/__init__.py
-import os
-import sqlalchemy
+from werkzeug.middleware.proxy_fix import ProxyFix  # ✅ Añadir al inicio
 from flask import Flask, flash , redirect,url_for
 from .config import Config
 from .extensions import db, login_manager, jwt, csrf, limiter, talisman
-from .utils.logging import configure_logging
 from sqlalchemy.exc import OperationalError
-from flask_talisman import Talisman
+
 
 def create_app(config_class=Config):
     app = Flask(__name__)
-    # Configuración de CSP más permisiva pero segura
-    csp = {
-        'default-src': "'self'",
-        'style-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-        'script-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-        'img-src': ["'self'", "data:", "https://*"],
-        'font-src': ["'self'", "https://cdn.jsdelivr.net"]
-    }
-    
-    #Aqui va un extra para los stylr-src y el script-src
 
-    # Temporalmente desactiva force_https (solo en entornos de desarrollo)
-    #Talisman(app,content_security_policy=csp,force_https=False )
-    # En app/__init__.py, modifica la inicialización de Talisman
-    Talisman(
-        app,
-        content_security_policy=csp,
-        force_https=True,          # Mantener seguridad en producción
-        force_https_permanent=True,
-    )
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
+
     app.config.from_object(config_class)
-    
-    app.config.from_object(Config)
-    
+        
     # Configurar procesadores de contexto
     configure_context_processors(app)
     
