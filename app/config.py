@@ -27,9 +27,10 @@ class Config:
     # -------------------------------
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_pre_ping': True,
-        'pool_recycle': 3600,
-        'connect_args': {'connect_timeout': 10}
+    'pool_size': 5,
+    'max_overflow': 2,
+    'pool_recycle': 3600,
+    'pool_pre_ping': True
     }
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # Desactiva el tracking de modificaciones
     
@@ -47,18 +48,19 @@ class Config:
     # -------------------------------
     # Métodos de Clase
     # -------------------------------
+ 
+            
     @classmethod
     def init_app(cls, app):
         """Inicialización adicional para la aplicación"""
+        # Asegurar que el directorio instance existe
+        instance_path = Path(app.instance_path)
+        instance_path.mkdir(parents=True, exist_ok=True)
         
-        # Crear directorio de uploads si no existe
-        if not os.path.exists(cls.UPLOAD_FOLDER):
-            try:
-                os.makedirs(cls.UPLOAD_FOLDER, exist_ok=True)
-                app.logger.info(f"Directorio de uploads creado: {cls.UPLOAD_FOLDER}")
-            except OSError as e:
-                app.logger.error(f"No se pudo crear el directorio de uploads: {e}")
-                raise
+        # Actualizar dinámicamente la URI para SQLite
+        if cls.SQLALCHEMY_DATABASE_URI.startswith('sqlite'):
+            db_path = instance_path / 'local_database.db'
+            cls.SQLALCHEMY_DATABASE_URI = f'sqlite:///{db_path}'
 
     @classmethod
     def check_config(cls):

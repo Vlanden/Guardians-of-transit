@@ -1,9 +1,12 @@
 # app/__init__.py
+import os
 from werkzeug.middleware.proxy_fix import ProxyFix  # ✅ Añadir al inicio
 from flask import Flask, flash , redirect,url_for
 from .config import Config
 from .extensions import db, login_manager, jwt, csrf, limiter, talisman
 from sqlalchemy.exc import OperationalError
+from pathlib import Path
+
 
 
 def create_app(config_class=Config):
@@ -118,21 +121,33 @@ def configure_context_processors(app):
     def inject_now():
         return {'now': datetime.now()}
 
+
 def configure_database(app):
-    """Configuración segura de la base de datos"""
+    """Configuración segura con verificación de archivo y manejo de errores"""
     
-
-
     with app.app_context():
         try:
-            # Verificar permisos de escritura
-            #test_path = app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', '')
+            # Solo para SQLite: Verificar y crear directorio instance/
+            if app.config['SQLALCHEMY_DATABASE_URI'].startswith('sqlite'):
+                db_path = Path(app.instance_path) / 'local_database.db'
+                db_path.parent.mkdir(exist_ok=True, parents=True)
+                
+                if not db_path.exists():
+                    open(db_path, 'a').close()  # Crear archivo vacío
+                    app.logger.info(f"Archivo SQLite creado en {db_path}")
+
+            # Crear tablas con manejo de errores
             db.create_all()
-            app.logger.info("Base de datos creada exitosamente")
+            app.logger.info("Tablas creadas exitosamente")
+            
         except Exception as e:
-            app.logger.error(f"Error crítico: {str(e)}")
+            app.logger.error(f"Error crítico en DB: {str(e)}")
+            # Crear archivo manualmente si es SQLite y no existe
+            if app.config['SQLALCHEMY_DATABASE_URI'].startswith('sqlite'):
+                db_path = Path(app.instance_path) / 'local_database.db'
+                try:
+                    db_path.touch(exist_ok=True)
+                    db.create_all()
+                except Exception as create_error:
+                    app.logger.error(f"Fallo al crear archivo SQLite: {create_error}")
             raise
-
-
-        
-        

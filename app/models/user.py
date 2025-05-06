@@ -119,11 +119,6 @@ class juegos_sim(BaseModelMixin,UserMixin, db.Model):
     titulo = db.Column(db.String(255), index=True, nullable = False)
     descripcion = db.Column(db.String(255), index=True, nullable = False)
     img_referencia = db.Column(db.String(255), nullable=False)
-event.listen(
-    juegos_sim.__table__,
-    'after_create',
-    DDL("ALTER TABLE juegos_sim AUTO_INCREMENT = 100000;")
-)
 
 
 class juegos_extra(BaseModelMixin, UserMixin, db.Model):
@@ -133,11 +128,6 @@ class juegos_extra(BaseModelMixin, UserMixin, db.Model):
     titulo = db.Column(db.String(255), index=True, nullable = False)
     descripcion = db.Column(db.String(255), index=True, nullable = False)
     img_referencia = db.Column(db.String(255), nullable=False)
-event.listen(
-    juegos_extra.__table__,
-    'after_create',
-    DDL("ALTER TABLE juegos_extra AUTO_INCREMENT = 200000;")
-)
 
 class QuizPregunta(BaseModelMixin, UserMixin, db.Model):
     __tablename__ = 'quiz_preguntas'
