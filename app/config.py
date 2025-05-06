@@ -13,6 +13,10 @@ class Config:
     # -------------------------------
     # Configuración de Seguridad
     # -------------------------------
+    #SERVER_NAME = 'superiorteam.site'  # 🔥 Crítico para producción
+    #REFERRED_URL_SCHEME = 'https'     # Fuerza generación de URLs HTTPS
+    #SESSION_COOKIE_DOMAIN = '.superiorteam.site'  # Para subdominios
+    
     SECRET_KEY = os.getenv('FLASK_SECRET_KEY', secrets.token_urlsafe(64))
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', secrets.token_urlsafe(64))
     
@@ -27,10 +31,15 @@ class Config:
     # -------------------------------
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_pre_ping': True,
-        'pool_recycle': 3600,
-        'connect_args': {'connect_timeout': 10}
+    'pool_size': 5,
+    'max_overflow': 2,
+    'pool_recycle': 3600,  # Menor que wait_timeout de MySQL
+    'pool_pre_ping': True,
+    'connect_args': {
+        'connect_timeout': 5,
+        'ssl': {'ca': '/path/to/ca.pem'}  # Si usas SSL
     }
+}
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # Desactiva el tracking de modificaciones
     
     # -------------------------------

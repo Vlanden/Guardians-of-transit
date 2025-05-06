@@ -8,7 +8,7 @@ from app.services.auth_service import (
 import bcrypt
 from sqlalchemy.exc import SQLAlchemyError, OperationalError
 from contextlib import contextmanager
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from flask_login import logout_user, current_user, login_required, login_user
 from app.models.user import Perfil
 
@@ -64,7 +64,8 @@ def logout():
             # Actualizar última conexión
             perfil = Perfil.query.filter_by(username=current_user.username).first()
             if perfil:
-                perfil.ultima_conexion = datetime.now(timezone.utc)
+                gdl = timezone(timedelta(hours=-6))
+                perfil.ultima_conexion = datetime.now(gdl)
                 db.session.commit()
                 current_app.logger.info(f"Actualizada última conexión para {current_user.username}")
         except Exception as e:
@@ -76,7 +77,7 @@ def logout():
     return redirect(url_for('auth_web.login'))
 
 @auth_web.route('/register', methods=['GET', 'POST'], endpoint='register')
-@limiter.limit("10 per minute")
+@limiter.limit("20 per minute")
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
@@ -146,14 +147,44 @@ def register():
 def reset_password():
     if request.method == 'POST':
         email = request.form.get('email')
+        password = request.form.get('password')  # Nombre corregido
+        confirm_password = request.form.get('confirm_password')  # Nuevo campo
+        
+        # Validaciones básicas
+        if not all([email, password, confirm_password]):
+            flash('Todos los campos son requeridos', 'error')
+            return redirect(url_for('auth_web.reset_password'))
+            
+        if password != confirm_password:
+            flash('Las contraseñas no coinciden', 'error')
+            return redirect(url_for('auth_web.reset_password'))
+            
+        if not is_strong_password(password):
+            flash('La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, números y símbolos', 'error')
+            return redirect(url_for('auth_web.reset_password'))
+
         user = User.query.filter_by(email=email).first()
-
+        
         if user:
-            send_reset_email(user)
-            flash('Se ha enviado un correo para restablecer tu contraseña.', 'info')
-            return redirect(url_for('auth_web.login'))
+            try:
+                # Usar bcrypt consistentemente con el resto de la app
+                hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+                user.password_hash = hashed_pw
+                
+                # Usar el contexto transaccional
+                with session_scope():
+                    db.session.merge(user)
+                
+                flash('Contraseña actualizada exitosamente', 'success')
+                return redirect(url_for('auth_web.login'))
 
-        flash('No se encontró una cuenta con ese correo', 'error')
+            except Exception as e:
+                current_app.logger.error(f"Error reset password: {str(e)}")
+                flash('Error interno al actualizar la contraseña', 'error')
+                return redirect(url_for('auth_web.reset_password'))
+
+        flash('No existe una cuenta con este correo electrónico', 'error')
+        return redirect(url_for('auth_web.reset_password'))
 
     return render_template('auth/reset-password.html')
 

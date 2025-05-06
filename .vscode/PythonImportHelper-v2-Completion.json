@@ -947,6 +947,14 @@
         "documentation": {}
     },
     {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -956,6 +964,14 @@
     },
     {
         "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
@@ -988,6 +1004,14 @@
     },
     {
         "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
@@ -1495,7 +1519,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def logout():\n    if current_user.is_authenticated:\n        try:\n            # Actualizar última conexión\n            perfil = Perfil.query.filter_by(username=current_user.username).first()\n            if perfil:\n                perfil.ultima_conexion = datetime.now(timezone.utc)\n                db.session.commit()\n                current_app.logger.info(f\"Actualizada última conexión para {current_user.username}\")\n        except Exception as e:",
+        "peekOfCode": "def logout():\n    if current_user.is_authenticated:\n        try:\n            # Actualizar última conexión\n            perfil = Perfil.query.filter_by(username=current_user.username).first()\n            if perfil:\n                gdl = timezone(timedelta(hours=-6))\n                perfil.ultima_conexion = datetime.now(gdl)\n                db.session.commit()\n                current_app.logger.info(f\"Actualizada última conexión para {current_user.username}\")",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -1513,7 +1537,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def reset_password():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        user = User.query.filter_by(email=email).first()\n        if user:\n            send_reset_email(user)\n            flash('Se ha enviado un correo para restablecer tu contraseña.', 'info')\n            return redirect(url_for('auth_web.login'))\n        flash('No se encontró una cuenta con ese correo', 'error')\n    return render_template('auth/reset-password.html')",
+        "peekOfCode": "def reset_password():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')  # Nombre corregido\n        confirm_password = request.form.get('confirm_password')  # Nuevo campo\n        # Validaciones básicas\n        if not all([email, password, confirm_password]):\n            flash('Todos los campos son requeridos', 'error')\n            return redirect(url_for('auth_web.reset_password'))\n        if password != confirm_password:",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -1936,7 +1960,7 @@
         "kind": 6,
         "importPath": "app.config",
         "description": "app.config",
-        "peekOfCode": "class Config:\n    \"\"\"Configuración base de la aplicación Flask\"\"\"\n    # -------------------------------\n    # Configuración de Seguridad\n    # -------------------------------\n    SECRET_KEY = os.getenv('FLASK_SECRET_KEY', secrets.token_urlsafe(64))\n    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', secrets.token_urlsafe(64))\n    # Configuración de cookies seguras\n    SESSION_COOKIE_SECURE = True  # Requiere HTTPS en producción\n    SESSION_COOKIE_HTTPONLY = True",
+        "peekOfCode": "class Config:\n    \"\"\"Configuración base de la aplicación Flask\"\"\"\n    # -------------------------------\n    # Configuración de Seguridad\n    # -------------------------------\n    #SERVER_NAME = 'superiorteam.site'  # 🔥 Crítico para producción\n    #REFERRED_URL_SCHEME = 'https'     # Fuerza generación de URLs HTTPS\n    #SESSION_COOKIE_DOMAIN = '.superiorteam.site'  # Para subdominios\n    SECRET_KEY = os.getenv('FLASK_SECRET_KEY', secrets.token_urlsafe(64))\n    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', secrets.token_urlsafe(64))",
         "detail": "app.config",
         "documentation": {}
     },
@@ -1963,7 +1987,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ncsp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]",
+        "peekOfCode": "db = SQLAlchemy()\nlogin_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ncsp = {\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ncsp = {\n    'default-src': \"'self'\",",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1972,7 +1996,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ncsp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }",
+        "peekOfCode": "login_manager = LoginManager()\njwt = JWTManager()\ncsrf = CSRFProtect()\ncsp = {\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ncsp = {\n    'default-src': \"'self'\",\n    'script-src': [",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1981,7 +2005,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\ncsp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ntalisman = Talisman(",
+        "peekOfCode": "jwt = JWTManager()\ncsrf = CSRFProtect()\ncsp = {\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ncsp = {\n    'default-src': \"'self'\",\n    'script-src': [\n        \"'self'\",",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1990,7 +2014,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "csrf = CSRFProtect()\ncsp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ntalisman = Talisman(\n    content_security_policy=csp,",
+        "peekOfCode": "csrf = CSRFProtect()\ncsp = {\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ncsp = {\n    'default-src': \"'self'\",\n    'script-src': [\n        \"'self'\",\n        \"'unsafe-inline'\",  # Necesario para montar event listeners",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -1999,7 +2023,16 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "csp = {\n        'default-src': \"'self'\",\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'script-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'img-src': [\"'self'\", \"data:\", \"https://*\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ntalisman = Talisman(\n    content_security_policy=csp,\n    force_https=os.getenv('FLASK_ENV') == 'production',",
+        "peekOfCode": "csp = {\n        'style-src': [\"'self'\", \"'unsafe-inline'\", \"https://cdn.jsdelivr.net\"],\n        'font-src': [\"'self'\", \"https://cdn.jsdelivr.net\"]\n    }\ncsp = {\n    'default-src': \"'self'\",\n    'script-src': [\n        \"'self'\",\n        \"'unsafe-inline'\",  # Necesario para montar event listeners\n        \"https://cdn.jsdelivr.net\"  # Si usas recursos externos",
+        "detail": "app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "csp",
+        "kind": 5,
+        "importPath": "app.extensions",
+        "description": "app.extensions",
+        "peekOfCode": "csp = {\n    'default-src': \"'self'\",\n    'script-src': [\n        \"'self'\",\n        \"'unsafe-inline'\",  # Necesario para montar event listeners\n        \"https://cdn.jsdelivr.net\"  # Si usas recursos externos\n    ],\n    'img-src': [\"'self'\", \"data:\", \"https://*\"],\n    'connect-src': \"'self'\"\n}",
         "detail": "app.extensions",
         "documentation": {}
     },
@@ -2008,7 +2041,7 @@
         "kind": 5,
         "importPath": "app.extensions",
         "description": "app.extensions",
-        "peekOfCode": "talisman = Talisman(\n    content_security_policy=csp,\n    force_https=os.getenv('FLASK_ENV') == 'production',\n    force_https_permanent=os.getenv('FLASK_ENV') == 'production'\n)\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto\n    storage_uri=\"memory://\",  # Almacenamiento en memoria para desarrollo",
+        "peekOfCode": "talisman = Talisman(\n    content_security_policy=csp,\n    force_https=True,  # Obligatorio en producción\n    force_https_permanent=True,\n    strict_transport_security=False  # Ya lo maneja Nginx\n)\n# Configuración del rate limiter con valores por defecto seguros\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],  # Límites razonables por defecto",
         "detail": "app.extensions",
         "documentation": {}
     },

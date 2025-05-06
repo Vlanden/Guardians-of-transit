@@ -1,6 +1,6 @@
 from flask import current_app, app
 from flask_login import login_required, current_user
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from werkzeug.exceptions import HTTPException
 from app.models.user import juegos_quiz, QuizPregunta, intentos, Perfil
 from app.extensions import db
@@ -61,9 +61,15 @@ def guardar_puntuacion(data):
             # Convertir fechas a UTC correctamente
             juego_id = str(int(data['juego_id']))
             puntuacion = int(data['puntuacion'])
+            
+            
+            
             #Calcular las fechas en otra funcion 
-            fecha_inicio = datetime.strptime(data['fecha_inicio'], '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
-            fecha_fin = datetime.strptime(data['fecha_inicio'], '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
+            gdl = timezone(timedelta(hours=-6))
+            fecha_inicio = datetime.strptime(data['fecha_inicio'], '%Y-%m-%d %H:%M:%S').replace(gdl)
+            fecha_fin = datetime.strptime(data['fecha_inicio'], '%Y-%m-%d %H:%M:%S').replace(gdl)
+            
+            
         except (ValueError, TypeError) as e:
             return {'error': 'Datos inválidos', 'detalle': str(e)}, 400
 

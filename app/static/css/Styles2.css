@@ -332,6 +332,15 @@ button:hover, .btn:hover {
   margin-bottom: 1rem;
 }
 
+.flash-error {
+  color: #ff3860;
+  background-color: #fff5f7;
+  border: 1px solid #ff3860;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
 /* Footer */
 footer {
   background-color: var(--dark-color);

@@ -6,7 +6,7 @@ from werkzeug.exceptions import HTTPException
 from app.models.user import  ( Perfil, intentos, juegos_quiz, QuizPregunta, juegos_extra, juegos_sim)
 from flask_login import login_required,current_user
 from flask_wtf.csrf import CSRFProtect, validate_csrf, ValidationError
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from app import limiter
 
 
@@ -184,8 +184,9 @@ def guardar_puntuacion():
                 juegos_actuales.pop(0)
                 
         perfil.juegos_jugados = ','.join(juegos_actuales)
+        gdl = timezone(timedelta(hours=-6))
         
-        perfil.ultima_conexion = datetime.now(timezone.utc)
+        perfil.ultima_conexion = datetime.now(gdl)
         
         current_app.logger.info(f"Perfil actualizado: {perfil.username} | Juegos: {perfil.juegos_jugados} | Ultima Conexion: {perfil.ultima_conexion}")
         

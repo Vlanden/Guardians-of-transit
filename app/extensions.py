@@ -23,18 +23,26 @@ csrf = CSRFProtect()
 
 
 csp = {
-        'default-src': "'self'",
         'style-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-        'script-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-        'img-src': ["'self'", "data:", "https://*"],
         'font-src': ["'self'", "https://cdn.jsdelivr.net"]
     }
-    
-    
+
+csp = {
+    'default-src': "'self'",
+    'script-src': [
+        "'self'",
+        "'unsafe-inline'",  # Necesario para montar event listeners
+        "https://cdn.jsdelivr.net"  # Si usas recursos externos
+    ],
+    'img-src': ["'self'", "data:", "https://*"],
+    'connect-src': "'self'"
+}
+
 talisman = Talisman(
     content_security_policy=csp,
-    force_https=os.getenv('FLASK_ENV') == 'production',
-    force_https_permanent=os.getenv('FLASK_ENV') == 'production'
+    force_https=True,  # Obligatorio en producción
+    force_https_permanent=True,
+    strict_transport_security=False  # Ya lo maneja Nginx
 )
 
 # Configuración del rate limiter con valores por defecto seguros
