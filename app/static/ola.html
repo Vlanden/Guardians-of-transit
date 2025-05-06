@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+<head>
+    <link rel="stylesheet" href="ola1.css">
+</head>
+{% block title %}Completa la Frase{% endblock %}
+
+{% block content %}
+<body>  
+    <div class="cuerpo_juego_palabras">
+        
+        <h1>Completa la Frase</h1>
+
+        <div class="frase_a_completar">
+            Cuando un semáforo es rojo 
+            <div id="dropzone" class="dropzone">[Arrastra aquí]</div>
+        </div>
+    
+        <div class="opciones_para_frase">
+            <div class="opcion" draggable="true" id="correcta">Me tengo que detener</div>
+            <div class="opcion" draggable="true">Le acelero</div>
+            <div class="opcion" draggable="true">Lo ignoro</div>
+            <div class="opcion" draggable="true">Me cambio de carril</div>
+        </div>
+    
+        
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+{% endblock %}

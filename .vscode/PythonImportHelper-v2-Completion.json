@@ -280,6 +280,22 @@
         "documentation": {}
     },
     {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -673,6 +689,14 @@
         "documentation": {}
     },
     {
+        "label": "Perfil",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
         "label": "User",
         "importPath": "app.models.user",
         "description": "app.models.user",
@@ -1051,6 +1075,46 @@
         "documentation": {}
     },
     {
+        "label": "generate_csrf",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "CSRFProtect",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "validate_csrf",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "CSRFProtect",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
+        "documentation": {}
+    },
+    {
         "label": "secrets",
         "kind": 6,
         "isExtraImport": true,
@@ -1121,38 +1185,6 @@
         "description": "app.controllers.auth_controller",
         "isExtraImport": true,
         "detail": "app.controllers.auth_controller",
-        "documentation": {}
-    },
-    {
-        "label": "CSRFProtect",
-        "importPath": "flask_wtf.csrf",
-        "description": "flask_wtf.csrf",
-        "isExtraImport": true,
-        "detail": "flask_wtf.csrf",
-        "documentation": {}
-    },
-    {
-        "label": "validate_csrf",
-        "importPath": "flask_wtf.csrf",
-        "description": "flask_wtf.csrf",
-        "isExtraImport": true,
-        "detail": "flask_wtf.csrf",
-        "documentation": {}
-    },
-    {
-        "label": "ValidationError",
-        "importPath": "flask_wtf.csrf",
-        "description": "flask_wtf.csrf",
-        "isExtraImport": true,
-        "detail": "flask_wtf.csrf",
-        "documentation": {}
-    },
-    {
-        "label": "CSRFProtect",
-        "importPath": "flask_wtf.csrf",
-        "description": "flask_wtf.csrf",
-        "isExtraImport": true,
-        "detail": "flask_wtf.csrf",
         "documentation": {}
     },
     {
@@ -1445,7 +1477,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()\n        raise\n@auth_web.route('/login', methods=['GET', 'POST'], endpoint='login')\n@limiter.limit(\"10 per minute\")",
+        "peekOfCode": "def session_scope():\n    session = db.session\n    try:\n        yield session\n        session.commit()\n    except:\n        session.rollback()\n        raise\n@auth_web.route('/login', methods=['GET', 'POST'], endpoint='login')\n@limiter.limit(\"100 per minute\")",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -1535,7 +1567,7 @@
         "kind": 6,
         "importPath": "app.controllers.user_controller",
         "description": "app.controllers.user_controller",
-        "peekOfCode": "class UserController:\n    @staticmethod\n    @login_required  # Requiere que el usuario esté logueado\n    @limiter.limit(\"3 per minute\")  # Limita a 3 solicitudes por minuto\n    def update_profile():\n        \"\"\"Endpoint para actualizar el perfil del usuario actual.\"\"\"\n        if request.method == 'POST':\n            # Extrae y limpia los datos del formulario\n            data = {\n                'username': request.form.get('username', '').strip(),",
+        "peekOfCode": "class UserController:\n    @staticmethod\n    @login_required\n    def update_profile():\n        \"\"\"Endpoint para actualizar el perfil\"\"\"\n        # Regenerar CSRF token para cada solicitud\n        csrf_token = generate_csrf()\n        if request.method == 'POST':\n            # Verificar origen de la solicitud\n            if not request.referrer or request.host not in request.referrer:",
         "detail": "app.controllers.user_controller",
         "documentation": {}
     },
@@ -1778,7 +1810,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def perfil():\n    return render_template('main/profile.html', user=current_user)\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña\n@main_bp.route('/actualizar_perfil', methods=['POST'])\n@limiter.limit(\"10 per minute\")\n@login_required\ndef actualizar_perfil():\n    return UserController.update_profile()",
+        "peekOfCode": "def perfil():\n    # Obtener el perfil del usuario actual\n    user_profile = Perfil.query.filter_by(username=current_user.username).first()\n    return render_template(\n        'main/profile.html',\n        user=current_user,          # Datos básicos del usuario\n        user_profile=user_profile   # Datos extendidos del perfil\n    )\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña",
         "detail": "app.routes.main",
         "documentation": {}
     },

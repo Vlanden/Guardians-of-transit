@@ -1,0 +1,50 @@
+.cuerpo_juego_palabras {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    padding: 20px;
+    text-align: center;
+}
+
+.frase_a_completar {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.dropzone {
+    display: inline-block;
+    width: 250px;
+    height: 50px;
+    margin-top: 10px;
+    border: 2px dashed #999;
+    border-radius: 10px;
+    line-height: 50px;
+    background-color: #fff;
+}
+
+.opciones_para_frase {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.opcion {
+    background-color: #add8e6;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: grab;
+    user-select: none;
+}
+
+.opcion:hover {
+    background-color: #87ceeb;
+}
+
+.correcto {
+    background-color: #90ee90 !important;
+}
+
+.incorrecto {
+    background-color: #ff7f7f !important;
+}

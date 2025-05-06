@@ -2,16 +2,22 @@ from flask import make_response, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from app import limiter
 from app.services.user_service import UserService
+from flask import request, session
+from flask_wtf.csrf import generate_csrf
 
-
-# Controlador para manejar operaciones relacionadas con el usuario
 class UserController:
     @staticmethod
-    @login_required  # Requiere que el usuario esté logueado
-    @limiter.limit("3 per minute")  # Limita a 3 solicitudes por minuto
+    @login_required
     def update_profile():
-        """Endpoint para actualizar el perfil del usuario actual."""
+        """Endpoint para actualizar el perfil"""
+        # Regenerar CSRF token para cada solicitud
+        csrf_token = generate_csrf()
+        
         if request.method == 'POST':
+            # Verificar origen de la solicitud
+            if not request.referrer or request.host not in request.referrer:
+                flash("Solicitud no válida", "error")
+                return redirect(url_for('main.perfil'))
             # Extrae y limpia los datos del formulario
             data = {
                 'username': request.form.get('username', '').strip(),

@@ -133,7 +133,17 @@ function iniciarQuiz(datosJuego) {
       elementosDOM.resultado.innerHTML = esCorrecta 
           ? `✅ Correcto! +10 puntos<br>${explicacion}`
           : `❌ Incorrecto<br>${explicacion}`;
-      elementosDOM.resultado.className = `alert ${esCorrecta ? 'alert-success' : 'alert-danger'}`;
+      elementosDOM.resultado.className = `alert ${esCorrecta ? 'alert-success' : 'alert-danger'} show`;
+      // En la función verificarRespuesta:
+    elementosDOM.resultado.style.cssText = `
+    display: block !important;
+    background-color: #212121;
+    color: #FFD700;
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 4px solid ${esCorrecta ? '#d4edda' : '#f8d7da'};
+    margin-top: 1rem;
+    `;
       elementosDOM.resultado.style.display = "block";
 
       setTimeout(() => {
@@ -234,7 +244,7 @@ function iniciarQuiz(datosJuego) {
           document.getElementById('btnOtroQuiz')
             .addEventListener('click', () => {
               // redirige al listado de quizzes u otra categoría
-              window.location.href = '/games/lista-quizzes';
+              window.location.href = '/index';
             });
 
           if (datos.record) {

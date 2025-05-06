@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, abort
 from flask_login import login_required, current_user 
 from app import limiter
 from app.controllers.user_controller import UserController
-from app.models.user import juegos_quiz, juegos_extra, juegos_sim
+from app.models.user import juegos_quiz, juegos_extra, juegos_sim, Perfil
 
 
 main_bp = Blueprint('main', __name__)
@@ -77,10 +77,15 @@ def ver_juego(juego_id=None):
 
 @main_bp.route('/perfil')
 @login_required
-@limiter.limit("30 per minute")
 def perfil():
-    return render_template('main/profile.html', user=current_user)
-
+    # Obtener el perfil del usuario actual
+    user_profile = Perfil.query.filter_by(username=current_user.username).first()
+    
+    return render_template(
+        'main/profile.html',
+        user=current_user,          # Datos básicos del usuario
+        user_profile=user_profile   # Datos extendidos del perfil
+    )
 
 # ──────── API: FUNCIONES DEL USUARIO ────────
 
