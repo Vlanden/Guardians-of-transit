@@ -31,15 +31,16 @@ class Config:
     # -------------------------------
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_ENGINE_OPTIONS = {
-    'pool_size': 5,
-    'max_overflow': 2,
-    'pool_recycle': 3600,  # Menor que wait_timeout de MySQL
-    'pool_pre_ping': True,
-    'connect_args': {
-        'connect_timeout': 5,
-        'ssl': {'ca': '/path/to/ca.pem'}  # Si usas SSL
+        'pool_size': 5,
+        'max_overflow': 2,
+        'pool_recycle': 3600,
+        'pool_pre_ping': True,
+        'connect_args': {
+            'connect_timeout': 5,
+            'ssl': False  # Deshabilitar SSL
+        }
     }
-}
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # Desactiva el tracking de modificaciones
     
     # -------------------------------
