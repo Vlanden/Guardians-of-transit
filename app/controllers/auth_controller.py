@@ -128,6 +128,7 @@ def register():
                     new_perfil = Perfil(
                         username=new_user.username,
                         fecha_registro=datetime.now(timezone.utc),
+                        ultima_conexion = datetime.now(timezone.utc),
                         juegos_jugados=0
                     )
                     session.add(new_perfil)
