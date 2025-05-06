@@ -52,7 +52,7 @@ body{
   font-weight: 16px;
   font-family: Source Serif 4, serif;
   color: white;
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(app\static\Media\Vialidad.jpeg);
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(app\static\images\Calles.jpg);
   background-size:cover;
   background-attachment: fixed;
   background-position: center;
