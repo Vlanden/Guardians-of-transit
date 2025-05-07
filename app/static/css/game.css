@@ -2,6 +2,35 @@
 /* ---------------------------
    Fondos para Juego de Quiz
 --------------------------- */
+:root {
+  --primary-color: #FFD700; /* Amarillo */
+  --secondary-color: #E53935; /* Rojo */
+  --danger-color: #C62828; /* Rojo oscuro corregido */
+  --dark-color: #212121; /* Negro */
+  --light-color: #f5f5f5;
+  --gray-color: #95a5a6;
+  --font-main: 'Oswald', sans-serif;
+  --font-secondary: 'Big Shoulders', sans-serif;
+  --font-text: 'Source Serif 4', serif;
+}
+
+#resultado{
+  display: none;
+}
+
+.photo {
+  background-image: url("/static/images/Calles.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Oscurece solo la imagen */
+  z-index: 0;
+}
+
 body {
   font-size: 16px; /* Corregido: font-weight -> font-size */
   font-family: 'Source Serif 4', serif;
@@ -32,7 +61,36 @@ body {
   border-left: 4px solid #ff9900; /* Acorde al color primario */
 }
 
+.navbar {
+  background-color: var(--dark-color) !important;
+}
 
+.navbar-brand {
+  font-family: var(--font-main);
+  font-size: 1.5rem;
+}
+
+.nav-link {
+  font-family: var(--font-main);
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--primary-color) !important;
+}
+
+.dropdown-menu {
+  background-color: var(--dark-color);
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.dropdown-item:hover {
+  background-color: var(--primary-color);
+  color: var(--dark-color);
+}
 
 .game-container {
   max-width: 800px;
@@ -166,3 +224,4 @@ body {
     margin-bottom: 20px;
   }
 }
+

@@ -52,7 +52,11 @@
     {% endif %}
     {% if request.endpoint == 'main.ver_juego' %}
       <script>const juego_id = parseInt("{{ juego_id }}");</script>
-      <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
+      {% if juego_id >= 100000 %}
+        <script src="{{ url_for('static', filename='js/game_sim.js') }}" defer></script>
+      {% else %}
+        <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
+      {% endif %}
     {% endif %}
 
     <script src="{{ url_for('static', filename='js/bs_js/bootstrap.bundle.min.js') }}" defer></script>

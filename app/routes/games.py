@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.extensions import db
 from flask import Blueprint, request, current_app, jsonify
 from werkzeug.exceptions import HTTPException
-from app.models.user import  ( Perfil, intentos, juegos_quiz, QuizPregunta, juegos_extra, juegos_sim)
+from app.models.user import  ( Perfil, intentos, juegos_quiz, QuizPregunta, juegos_extra, juegos_sim, QuizSimulacion)
 from flask_login import login_required,current_user
 from flask_wtf.csrf import CSRFProtect, validate_csrf, ValidationError
 from datetime import datetime, timezone
@@ -115,6 +115,64 @@ def obtener_quiz(juego_id):
             "error": "Error al cargar el quiz",
             "detalle": str(e)
         }), 500
+
+
+@games_bp.route('/simulacion/<int:juego_id>', methods=['GET'])
+@limiter.limit("100 per minute")
+@login_required
+def obtener_sim(juego_id):
+    try:
+        # Verificar existencia del juego
+        juego = juegos_sim.query.get_or_404(juego_id)
+        
+        # Obtener preguntas
+        preguntas = QuizSimulacion.query.filter_by(id_sim=juego_id).all()
+        
+        # Validar preguntas
+        if not preguntas:
+            current_app.logger.warning(f"Quiz {juego_id} sin preguntas")
+            return jsonify({"error": "El quiz no tiene preguntas configuradas"}), 404
+
+        # Construir respuesta
+        data = {
+            "titulo": juego.titulo,
+            "preguntas": []
+        }
+
+        for p in preguntas:
+            opciones = [
+                p.opcioncorrecta,
+                p.opcion2,
+                p.opcion3,
+                p.opcion4
+            ]
+            
+            # Filtrar y validar opciones
+            opciones_validas = [op for op in opciones if op is not None]
+            
+            if len(opciones_validas) < 2:
+                raise ValueError("Cada pregunta debe tener al menos 2 opciones válidas")
+
+            data["preguntas"].append({
+                "pregunta": p.q_pregunta,
+                "opciones": opciones_validas,
+                "respuesta_correcta": p.opcioncorrecta,
+                "explicacion": p.explicacion or "Explicación no disponible"
+            })
+
+        return jsonify(data)
+
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        current_app.logger.error(f"Error en obtener_quiz: {str(e)}")
+        return jsonify({
+            "error": "Error al cargar el quiz",
+            "detalle": str(e)
+        }), 500
+
+
+
 
 
 @games_bp.route('/guardar-puntuacion', methods=['POST'])
