@@ -3,7 +3,8 @@
 {% block title %}{{ juego.titulo }} - Guardianes de la Vía{% endblock %}
 
 {% block content %}
-<div class="game-container">
+
+<div class="container w-75 mt-5 mb-5">
     <div id="gameDetails" 
         data-juego-id="{{ juego_id }}"
         data-juego-tipo="{{ juego_tipo }}"
@@ -13,7 +14,7 @@
 
     <div class="card shadow-lg">
         <div class="card-header bg-primary text-white">
-            <h3 id="pregunta" class="text-center mb-0">{{ juego.titulo }}</h3>
+            <h3 id="pregunta" class="text-center mb-0 text-white">{{ juego.titulo }}</h3>
             <p class="text-center mb-0">{{ juego.descripcion }}</p>
         </div>
         <div class="card-body">
@@ -29,4 +30,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const respuestas = document.getElementById("respuestas");
+        const resultado = document.getElementById("resultado");
+    
+        respuestas.addEventListener("click", function (e) {
+            if (e.target.tagName === "BUTTON") {
+                // Mostrar el resultado
+                resultado.style.display = "block";
+    
+                // Opcional: puedes establecer mensaje o estilo
+                resultado.textContent = "¡Respuesta registrada!";
+                resultado.classList.remove("alert-success", "alert-danger");
+                resultado.classList.add("alert-info");
+            }
+        });
+    });
+    </script>
 {% endblock %}
