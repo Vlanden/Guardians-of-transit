@@ -1639,7 +1639,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class juegos_sim(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), index=True, nullable = False)\n    descripcion = db.Column(db.String(255), index=True, nullable = False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_sim.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_sim AUTO_INCREMENT = 100000;\")",
+        "peekOfCode": "class juegos_sim(BaseModelMixin,UserMixin, db.Model):\n    __tablename__ = 'juegos_sim'\n    id_sim = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), index=True, nullable = False)\n    descripcion = db.Column(db.String(255), index=True, nullable = False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nclass juegos_extra(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'juegos_extra'\n    id_extra = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), index=True, nullable = False)",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -1648,7 +1648,7 @@
         "kind": 6,
         "importPath": "app.models.user",
         "description": "app.models.user",
-        "peekOfCode": "class juegos_extra(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'juegos_extra'\n    id_extra = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), index=True, nullable = False)\n    descripcion = db.Column(db.String(255), index=True, nullable = False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nevent.listen(\n    juegos_extra.__table__,\n    'after_create',\n    DDL(\"ALTER TABLE juegos_extra AUTO_INCREMENT = 200000;\")",
+        "peekOfCode": "class juegos_extra(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'juegos_extra'\n    id_extra = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    titulo = db.Column(db.String(255), index=True, nullable = False)\n    descripcion = db.Column(db.String(255), index=True, nullable = False)\n    img_referencia = db.Column(db.String(255), nullable=False)\nclass QuizPregunta(BaseModelMixin, UserMixin, db.Model):\n    __tablename__ = 'quiz_preguntas'\n    id_pregunta = db.Column(db.Integer, primary_key=True)\n    id_quiz = db.Column(db.Integer, db.ForeignKey('juegos_quiz.id_quiz'))  # FK al juego",
         "detail": "app.models.user",
         "documentation": {}
     },
@@ -2026,7 +2026,7 @@
         "kind": 5,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True)\n    #app.run(debug=True, host=\"0.0.0.0\", port=5000)",
+        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True, ssl_context='adhoc')\n    #el de abajo es un intento para usar el dominio con una pc en local\n    # app.run(debug=True, ssl_context=('superiorteam.site.pem', 'superiorteam.site-key.pem'), host=\"0.0.0.0\", port=5000, ssl_context='adhoc')",
         "detail": "run",
         "documentation": {}
     },
