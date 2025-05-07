@@ -17,6 +17,15 @@
             <h3 id="pregunta" class="text-center mb-0 text-white">{{ juego.titulo }}</h3>
             <p class="text-center mb-0">{{ juego.descripcion }}</p>
         </div>
+        <div id="multimedia-section" class="position-relative overflow-hidden d-none" style="height: 200px;">
+            <video autoplay muted loop class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+                <source src="/ruta/a/tu-video.mp4" type="video/mp4">
+                Tu navegador no soporta el video.
+            </video>
+            <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
+                <h5>¡Correcto!</h5>
+            </div>
+        </div>
         <div class="card-body">
             <div id="progress" class="text-end mb-3"></div>
             <div id="respuestas" class="d-grid gap-2"></div>
@@ -35,6 +44,20 @@
     document.addEventListener("DOMContentLoaded", function () {
         const respuestas = document.getElementById("respuestas");
         const resultado = document.getElementById("resultado");
+
+        function mostrarMultimedia() {
+        document.getElementById("multimedia-section").classList.remove("d-none");
+    }
+
+    // Ejemplo: llama a esta función cuando se selecciona una respuesta
+    // Puedes reemplazar esto con tu propia lógica de selección
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("respuestas").addEventListener("click", function (e) {
+            if (e.target && e.target.matches(".respuesta-btn")) {
+                mostrarMultimedia();
+            }
+        });
+    });
     
         respuestas.addEventListener("click", function (e) {
             if (e.target.tagName === "BUTTON") {
