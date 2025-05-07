@@ -11,6 +11,13 @@
   --font-text: 'Source Serif 4', serif;
 }
 
+.photo {
+  background-image: url("/static/images/Calles.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%; /* o un alto fijo como 100vh si es necesario */
+}
 
 @font-face {
   font-family: 'Oswald';
