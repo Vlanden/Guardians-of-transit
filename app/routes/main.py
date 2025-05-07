@@ -87,6 +87,12 @@ def perfil():
         user_profile=user_profile   # Datos extendidos del perfil
     )
 
+@main_bp.route('/jugar-juegoextra')
+@login_required
+def jugar_juegoextra():
+    return render_template('game/juegoextra.html')
+
+
 # ──────── API: FUNCIONES DEL USUARIO ────────
 
 
