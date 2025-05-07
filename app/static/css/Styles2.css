@@ -372,8 +372,8 @@ footer a:hover {
 
 /* Página de Perfil */
 .profile-container {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 100vh;
+  margin: 0;
 }
 
 .profile-header {
@@ -394,7 +394,7 @@ footer a:hover {
 .detail-label {
   font-weight: bold;
   font-family: var(--font-main);
-  display: block;
+  display: flex;
   margin-bottom: 0.5rem;
 }
 
