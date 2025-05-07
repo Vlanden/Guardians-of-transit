@@ -11,6 +11,13 @@
   --font-text: 'Source Serif 4', serif;
 }
 
+.photo {
+  background-image: url("/static/images/Calles.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%; /* o un alto fijo como 100vh si es necesario */
+}
 
 @font-face {
   font-family: 'Oswald';
@@ -52,17 +59,11 @@ body{
   font-weight: 16px;
   font-family: Source Serif 4, serif;
   color: white;
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(app\static\images\Calles.jpg);
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(app/static/images/Calles.jpg);
   background-size:cover;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-}
-
-.bg{
-  background-image: url(app\static\MediaCalles.jpg);
-  background-position: center center;
-  background-size: cover;  
 }
 
 .inputs{
