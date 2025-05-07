@@ -27,8 +27,8 @@
         padding: 2rem;
         }
         .profile-pic {
-        width: 150px;
-        height: 150px;
+        width: 128px;
+        height: 128px;
         background-color: white;
         border-radius: 50%;
         margin: 1rem auto;
@@ -71,12 +71,12 @@
                 <p><strong>Última conexión:</strong> {{ user_profile.ultima_conexion.strftime('%d/%m/%Y %H:%M') if user_profile.ultima_conexion else 'N/A' }}</p>
                 
                 <div class="mt-4">
-                    <h4>Estadísticas</h4>
+                    <h4 class="text-warning">Estadísticas</h4>
                     <p><strong>Puntuación total:</strong> {{ user_profile.puntuacion_total }}</p>
                 </div>
 
                 <div class="mt-4">
-                    <h4>Historial de Juegos</h4>
+                    <h4 class="text-warning">Historial de Juegos</h4>
                     <ul class="list-group">
                         {% for intento in game_history %}
                         <li class="list-group-item">
