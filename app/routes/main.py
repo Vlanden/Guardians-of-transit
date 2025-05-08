@@ -90,55 +90,15 @@ def obtener_tipo_juego(juego_id):
 @main_bp.route('/perfil')
 @login_required
 def perfil():
-    """Vista del perfil del usuario."""
-    try:
-        user_profile = Perfil.query.filter_by(username=current_user.username).first()
-        
-        if not user_profile:
-            flash("No se encontró perfil para este usuario", "warning")
-            return redirect(url_for('main.index'))
-        
-        # Obtener todos los intentos del usuario ordenados por fecha
-        intentos_query = intentos.query.filter_by(username=current_user.username)\
-                                    .order_by(intentos.fecha_fin.desc())\
-                                    .all()
-        
-        # Procesar para obtener: último juego, historial y juegos únicos
-        last_game = None
-        game_history = []
-        juegos_unicos = set()  # Usamos un set para evitar duplicados automáticamente
-        
-        for intento in intentos_query:
-            juego = obtener_tipo_juego(intento.juego_id)
-            if juego:
-                # Para el último juego
-                if not last_game:
-                    last_game = juego
-                
-                # Para el historial
-                game_history.append({
-                    'intento': intento,
-                    'juego': juego
-                })
-                
-                # Para juegos únicos (set evita duplicados)
-                juegos_unicos.add(juego.titulo)
-        
-        # Convertir a lista ordenada alfabéticamente
-        juegos_jugados_info = sorted(juegos_unicos)
-
-        return render_template('main/profile.html', 
-                           user_profile=user_profile,
-                           last_game=last_game,
-                           game_history=game_history,
-                           juegos_jugados_info=juegos_jugados_info)
+    # Obtener el perfil del usuario actual
+    user_profile = Perfil.query.filter_by(username=current_user.username).first()
     
-    except Exception as e:
-        print(f"Error en la consulta del perfil: {e}")
-        flash("Ocurrió un error al cargar el perfil", "error")
-        return redirect(url_for('main.index'))
+    return render_template(
+        'main/profile.html',
+        user=current_user,          # Datos básicos del usuario
+        user_profile=user_profile   # Datos extendidos del perfil
+    )
 
-    
 # ──────── API: FUNCIONES DEL USUARIO ────────
 
 

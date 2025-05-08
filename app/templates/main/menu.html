@@ -65,10 +65,11 @@
               
               <div class="card-body">
                 <h5 class="card-title">{{ juego.titulo }}</h5>
-                <a href="{{ url_for('main.ver_juego', titulo=juego.titulo, juego_id=juego.id_quiz if carrusel.prefix == 'quiz' else juego.id_sim if carrusel.prefix == 'simulacion' else juego.id_extra) }}" 
-                  class="btn btn-primary">
-                  Jugar
+                <a href="{{ url_for('main.ver_juego', juego_id=juego.id_quiz if carrusel.prefix == 'quiz' else juego.id_sim if carrusel.prefix == 'simulacion' else juego.id_extra) }}" 
+                class="btn btn-primary">
+                Jugar
                 </a>
+
               </div>
             </div>
             {% endfor %}

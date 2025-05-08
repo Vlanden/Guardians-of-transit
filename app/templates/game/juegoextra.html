@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Completa la Frase{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/juegoextra.css') }}">
+{% endblock %}
+
+{% block content %} 
+<div class="cuerpo_juego_palabras">
+    <h1>Completa la Frase</h1>
+
+    <div class="frase_a_completar">
+        <!-- Las frases se cargarán dinámicamente -->
+    </div>
+
+    <div class="opciones_para_frase">
+        <!-- Las opciones se cargarán dinámicamente -->
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/juegoextra.js') }}"></script>
+{% endblock %}
