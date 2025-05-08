@@ -33,61 +33,59 @@
 
             <h2 class="mb-4 text-warning mt-4">Juegos recomendados</h2>
 
-            {% set carruseles = [
-                {'titulo': 'Quiz', 'prefix': 'quiz', 'juegos': quiz_games},
-                {'titulo': 'Juego de Simulación', 'prefix': 'simulacion', 'juegos': sim_games},
-                {'titulo': 'Juego Extra', 'prefix': 'extra', 'juegos': extra_games}
-            ] %}
-            
-            <div id="Container" class="Elements">
-                <div class="d-flex flex-column flex-md-row gap-4 overflow-auto px-2 carruseles-scroll">
-                    {% for carrusel in carruseles %}
-                    <div class="carrusel-group">
-                        <h4>{{ carrusel.titulo }}</h4>
-                        
-                        {% if carrusel.juegos %}
-                        <div class="carrusel-container" data-carrusel="{{ carrusel.prefix }}">
-                            <button class="carrusel-prev" data-carrusel-prefix="{{ carrusel.prefix }}"><</button>
-                            
-                            <div class="carrusel-track">
-                                {% for juego in carrusel.juegos %}
-                                <div class="game-card card mx-auto mb-3" 
-                                    data-juego-id="{{ juego.id_quiz if carrusel.prefix == 'quiz' else 
-                                                    juego.id_sim if carrusel.prefix == 'simulacion' else 
-                                                    juego.id_extra }}"
-                                    data-juego-tipo="{{ carrusel.prefix }}"
-                                    data-user-id="{{ current_user.get_id() if current_user.is_authenticated else '' }}"
-                                    data-game-title="{{ juego.titulo }}"  
-                                    data-index="{{ loop.index0 }}">
-                                
-                                    <img src="{{ url_for('static', filename='images/' + juego.img_referencia) }}" 
-                                        class="card-img-top" 
-                                        alt="{{ juego.titulo }}"
-                                        onerror="this.src='{{ url_for('static', filename='images/default-game.jpg') }}'">
-                                
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ juego.titulo }}</h5>
-                                        <a href="{{ url_for('main.ver_juego', titulo=juego.titulo, juego_id=juego.id_quiz if carrusel.prefix == 'quiz' else juego.id_sim if carrusel.prefix == 'simulacion' else juego.id_extra) }}" 
-                                            class="btn btn-primary">
-                                            Jugar
-                                        </a>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            
-                            <button class="carrusel-next" data-carrusel-prefix="{{ carrusel.prefix }}">></button>
-                        </div>
-                        {% else %}
-                        <div class="alert alert-info">
-                            No hay juegos disponibles en esta categoría
-                        </div>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
+  {% set carruseles = [
+    {'titulo': 'Quiz', 'prefix': 'quiz', 'juegos': quiz_games},
+    {'titulo': 'Juego de Simulación', 'prefix': 'simulacion', 'juegos': sim_games},
+    {'titulo': 'Juego Extra', 'prefix': 'extra', 'juegos': extra_games}
+  ] %}
+  
+  <div id="Container" class="Elements">
+    <div class="d-flex flex-column flex-md-row gap-4 overflow-auto px-2 carruseles-scroll">
+      {% for carrusel in carruseles %}
+      <div class="carrusel-group">
+        <h4>{{ carrusel.titulo }}</h4>
+        
+        {% if carrusel.juegos %}
+        <div class="carrusel-container" data-carrusel="{{ carrusel.prefix }}">
+          <button class="carrusel-prev" data-carrusel-prefix="{{ carrusel.prefix }}"><</button>
+          
+          <div class="carrusel-track">
+            {% for juego in carrusel.juegos %}
+            <div class="game-card card mx-auto mb-3" 
+                data-juego-id="{{ juego.id_quiz if carrusel.prefix == 'quiz' else 
+                                juego.id_sim if carrusel.prefix == 'simulacion' else 
+                                juego.id_extra }}"
+                data-juego-tipo="{{ carrusel.prefix }}"
+                data-user-id="{{ current_user.get_id() if current_user.is_authenticated else '' }}"
+                data-game-title="{{ juego.titulo }}"  
+                data-index="{{ loop.index0 }}">
+              
+              <img src="{{ url_for('static', filename='images/' + juego.img_referencia) }}" 
+                  class="card-img-top" 
+                  alt="{{ juego.titulo }}"
+                  onerror="this.src='{{ url_for('static', filename='images/default-game.jpg') }}'">
+              
+              <div class="card-body">
+                <h5 class="card-title">{{ juego.titulo }}</h5>
+                <a href="{{ url_for('main.ver_juego', titulo=juego.titulo, juego_id=juego.id_quiz if carrusel.prefix == 'quiz' else juego.id_sim if carrusel.prefix == 'simulacion' else juego.id_extra) }}" 
+                  class="btn btn-primary">
+                  Jugar
+                </a>
+              </div>
             </div>
+            {% endfor %}
+          </div>
+          
+          <button class="carrusel-next" data-carrusel-prefix="{{ carrusel.prefix }}">></button>
         </div>
-    </main>
+        {% else %}
+        <div class="alert alert-info">
+          No hay juegos disponibles en esta categoría
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock %}

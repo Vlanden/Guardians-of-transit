@@ -215,7 +215,6 @@ function iniciarQuiz(datosJuego) {
               <p>${datosJuego.titulo}</p>
               <p>${datos.mensaje || ""}</p>
               <div class="mt-3">
-                <button id="btnRepasar" class="btn btn-outline-primary me-2">Repasar contenido</button>
                 <button id="btnReiniciar" class="btn btn-outline-secondary me-2">Reiniciar quiz</button>
                 <button id="btnOtroQuiz" class="btn btn-outline-success">Hacer otro quiz</button>
               </div>
@@ -224,12 +223,13 @@ function iniciarQuiz(datosJuego) {
            elementosDOM.resultado.style.display = "block";
            
           // --- wiring de los nuevos botones ---
-          document.getElementById('btnRepasar')
+          /*document.getElementById('btnRepasar')                <!--<button id="btnRepasar" class="btn btn-outline-primary me-2">Repasar contenido</button>-->
+
             .addEventListener('click', () => {
               // aquí puedes redirigir a la sección teórica,
               // o bien mostrar todas las preguntas con su explicación:
               window.location.href = `/games/teoria/${gameDetails.dataset.juegoId}`;
-            });
+            });*/
 
           document.getElementById('btnReiniciar')
             .addEventListener('click', () => {
