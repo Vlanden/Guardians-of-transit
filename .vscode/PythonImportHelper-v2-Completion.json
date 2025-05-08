@@ -1840,11 +1840,20 @@
         "documentation": {}
     },
     {
+        "label": "jugar_juegoextra",
+        "kind": 2,
+        "importPath": "app.routes.main",
+        "description": "app.routes.main",
+        "peekOfCode": "def jugar_juegoextra():\n    return render_template('game/juegoextra.html')\n@main_bp.route('/perfil')\n@login_required\ndef perfil():\n    # Obtener el perfil del usuario actual\n    user_profile = Perfil.query.filter_by(username=current_user.username).first()\n    return render_template(\n        'main/profile.html',\n        user=current_user,          # Datos básicos del usuario",
+        "detail": "app.routes.main",
+        "documentation": {}
+    },
+    {
         "label": "perfil",
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def perfil():\n    \"\"\"Vista del perfil del usuario.\"\"\"\n    try:\n        user_profile = Perfil.query.filter_by(username=current_user.username).first()\n        if not user_profile:\n            flash(\"No se encontró perfil para este usuario\", \"warning\")\n            return redirect(url_for('main.index'))\n        # Obtener todos los intentos del usuario ordenados por fecha\n        intentos_query = intentos.query.filter_by(username=current_user.username)\\\n                                    .order_by(intentos.fecha_fin.desc())\\",
+        "peekOfCode": "def perfil():\n    # Obtener el perfil del usuario actual\n    user_profile = Perfil.query.filter_by(username=current_user.username).first()\n    return render_template(\n        'main/profile.html',\n        user=current_user,          # Datos básicos del usuario\n        user_profile=user_profile   # Datos extendidos del perfil\n    )\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña",
         "detail": "app.routes.main",
         "documentation": {}
     },

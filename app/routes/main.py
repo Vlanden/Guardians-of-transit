@@ -87,6 +87,14 @@ def obtener_tipo_juego(juego_id):
         return None
 
 
+
+@main_bp.route('/jugar-juegoextra')
+@login_required
+def jugar_juegoextra():
+    return render_template('game/juegoextra.html')
+
+
+
 @main_bp.route('/perfil')
 @login_required
 def perfil():
