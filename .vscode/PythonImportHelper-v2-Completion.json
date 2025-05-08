@@ -665,7 +665,15 @@
         "documentation": {}
     },
     {
-        "label": "juegos_quiz",
+        "label": "QuizSimulacion",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "intentos",
         "importPath": "app.models.user",
         "description": "app.models.user",
         "isExtraImport": true,
@@ -674,6 +682,14 @@
     },
     {
         "label": "juegos_extra",
+        "importPath": "app.models.user",
+        "description": "app.models.user",
+        "isExtraImport": true,
+        "detail": "app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "juegos_quiz",
         "importPath": "app.models.user",
         "description": "app.models.user",
         "isExtraImport": true,
@@ -1716,6 +1732,15 @@
         "documentation": {}
     },
     {
+        "label": "obtener_sim",
+        "kind": 2,
+        "importPath": "app.routes.games",
+        "description": "app.routes.games",
+        "peekOfCode": "def obtener_sim(juego_id):\n    try:\n        # Verificar existencia del juego\n        juego = juegos_sim.query.get_or_404(juego_id)\n        # Obtener preguntas\n        preguntas = QuizSimulacion.query.filter_by(id_sim=juego_id).all()\n        # Validar preguntas\n        if not preguntas:\n            current_app.logger.warning(f\"Quiz {juego_id} sin preguntas\")\n            return jsonify({\"error\": \"El quiz no tiene preguntas configuradas\"}), 404",
+        "detail": "app.routes.games",
+        "documentation": {}
+    },
+    {
         "label": "guardar_puntuacion",
         "kind": 2,
         "importPath": "app.routes.games",
@@ -1806,11 +1831,20 @@
         "documentation": {}
     },
     {
+        "label": "obtener_tipo_juego",
+        "kind": 2,
+        "importPath": "app.routes.main",
+        "description": "app.routes.main",
+        "peekOfCode": "def obtener_tipo_juego(juego_id):\n    \"\"\"Obtiene el tipo de juego dependiendo del ID del juego.\"\"\"\n    if 1 <= juego_id <= 100000:\n        return juegos_quiz.query.get(juego_id)\n    elif 100001 <= juego_id <= 200000:  \n        return juegos_sim.query.get(juego_id)\n    elif 200001 <= juego_id <= 300000:  \n        return juegos_extra.query.get(juego_id)\n    else:\n        return None",
+        "detail": "app.routes.main",
+        "documentation": {}
+    },
+    {
         "label": "perfil",
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def perfil():\n    # Obtener el perfil del usuario actual\n    user_profile = Perfil.query.filter_by(username=current_user.username).first()\n    return render_template(\n        'main/profile.html',\n        user=current_user,          # Datos básicos del usuario\n        user_profile=user_profile   # Datos extendidos del perfil\n    )\n# ──────── API: FUNCIONES DEL USUARIO ────────\n#API para actualizar El nombre, correo, o contraseña, El prerequisito es la contraseña",
+        "peekOfCode": "def perfil():\n    \"\"\"Vista del perfil del usuario.\"\"\"\n    try:\n        user_profile = Perfil.query.filter_by(username=current_user.username).first()\n        if not user_profile:\n            flash(\"No se encontró perfil para este usuario\", \"warning\")\n            return redirect(url_for('main.index'))\n        # Obtener todos los intentos del usuario ordenados por fecha\n        intentos_query = intentos.query.filter_by(username=current_user.username)\\\n                                    .order_by(intentos.fecha_fin.desc())\\",
         "detail": "app.routes.main",
         "documentation": {}
     },
@@ -2026,7 +2060,7 @@
         "kind": 5,
         "importPath": "run",
         "description": "run",
-        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True, ssl_context='adhoc')\n    #el de abajo es un intento para usar el dominio con una pc en local\n    # app.run(debug=True, ssl_context=('superiorteam.site.pem', 'superiorteam.site-key.pem'), host=\"0.0.0.0\", port=5000, ssl_context='adhoc')",
+        "peekOfCode": "app = create_app()\nif __name__ == \"__main__\":\n    # Configura el host y puerto para que la aplicación sea accesible desde cualquier lugar\n    # y habilita el modo debug solo en desarrollo.\n    app.run(debug=True)\n    #el de abajo es un intento para usar el dominio con una pc en local\n    # app.run(debug=True, ssl_context=('superiorteam.site.pem', 'superiorteam.site-key.pem'), host=\"0.0.0.0\", port=5000, ssl_context='adhoc')",
         "detail": "run",
         "documentation": {}
     },
