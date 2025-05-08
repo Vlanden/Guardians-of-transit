@@ -1851,7 +1851,7 @@
         "kind": 2,
         "importPath": "app.routes.main",
         "description": "app.routes.main",
-        "peekOfCode": "def obtener_tipo_juego(juego_id):\n    \"\"\"Obtiene el tipo de juego dependiendo del ID del juego.\"\"\"\n    if 1 <= juego_id <= 100000:\n        return juegos_quiz.query.get(juego_id)\n    elif 100001 <= juego_id <= 200000:  \n        return juegos_sim.query.get(juego_id)\n    elif 200001 <= juego_id <= 300000:  \n        return juegos_extra.query.get(juego_id)\n    else:\n        return None",
+        "peekOfCode": "def obtener_tipo_juego(juego_id):\n    \"\"\"Obtiene el tipo de juego dependiendo del ID del juego.\"\"\"\n    if 1 <= juego_id <= 99999:\n        return juegos_quiz.query.get(juego_id)\n    elif 100000 <= juego_id <= 200000:  \n        return juegos_sim.query.get(juego_id)\n    elif 200000 <= juego_id <= 300000:  \n        return juegos_extra.query.get(juego_id)\n    else:\n        return None",
         "detail": "app.routes.main",
         "documentation": {}
     },
