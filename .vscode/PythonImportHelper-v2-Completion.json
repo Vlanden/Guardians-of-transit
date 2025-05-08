@@ -336,6 +336,14 @@
         "documentation": {}
     },
     {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -369,6 +377,14 @@
     },
     {
         "label": "abort",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -1529,7 +1545,7 @@
         "kind": 2,
         "importPath": "app.controllers.auth_controller",
         "description": "app.controllers.auth_controller",
-        "peekOfCode": "def reset_password():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        user = User.query.filter_by(email=email).first()\n        if user:\n            send_reset_email(user)\n            flash('Se ha enviado un correo para restablecer tu contraseña.', 'info')\n            return redirect(url_for('auth_web.login'))\n        flash('No se encontró una cuenta con ese correo', 'error')\n    return render_template('auth/reset-password.html')",
+        "peekOfCode": "def reset_password():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')  # Nombre corregido\n        confirm_password = request.form.get('confirm_password')  # Nuevo campo\n        # Validaciones básicas\n        if not all([email, password, confirm_password]):\n            flash('Todos los campos son requeridos', 'error')\n            return redirect(url_for('auth_web.reset_password'))\n        if password != confirm_password:",
         "detail": "app.controllers.auth_controller",
         "documentation": {}
     },
@@ -1736,7 +1752,7 @@
         "kind": 2,
         "importPath": "app.routes.games",
         "description": "app.routes.games",
-        "peekOfCode": "def obtener_sim(juego_id):\n    try:\n        # Verificar existencia del juego\n        juego = juegos_sim.query.get_or_404(juego_id)\n        # Obtener preguntas\n        preguntas = QuizSimulacion.query.filter_by(id_sim=juego_id).all()\n        # Validar preguntas\n        if not preguntas:\n            current_app.logger.warning(f\"Quiz {juego_id} sin preguntas\")\n            return jsonify({\"error\": \"El quiz no tiene preguntas configuradas\"}), 404",
+        "peekOfCode": "def obtener_sim(juego_id):\n    try:\n        # Verificar si el juego existe\n        juego = juegos_sim.query.get(juego_id)\n        if not juego:\n            current_app.logger.error(f\"Juego no encontrado: {juego_id}\")\n            return jsonify({\"error\": \"Juego no encontrado\"}), 404\n        # Obtener preguntas con manejo de errores\n        preguntas = QuizSimulacion.query.filter_by(id_sim=juego_id).all()\n        if not preguntas:",
         "detail": "app.routes.games",
         "documentation": {}
     },
