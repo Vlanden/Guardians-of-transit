@@ -69,6 +69,12 @@ function iniciarQuiz(datosJuego) {
 
     // Función para mostrar pregunta con video
     function mostrarPregunta() {
+
+        if (preguntaActual >= preguntas.length) {
+            console.log("[DEBUG] No hay más preguntas. Finalizando quiz.");
+            finalizarQuiz();
+            return;
+        }
         const pregunta = preguntas[preguntaActual];
         console.log(`Mostrando pregunta ID: ${pregunta.id_pregunta}`);
         
