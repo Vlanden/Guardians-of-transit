@@ -25,6 +25,8 @@ function mostrarError(mensaje) {
 
 // Función principal para iniciar el quiz
 function iniciarQuiz(datosJuego) {
+
+    
     // Al iniciar el quiz:
     if (!document.querySelector('meta[name="csrf-token"]')) {
         window.location.reload();
@@ -33,6 +35,8 @@ function iniciarQuiz(datosJuego) {
         mostrarError("Sesión inválida. Recarga la página.");
         return;
     }
+
+    
     // Guardamos la fecha de inicio
     const fechaInicio = new Date().toISOString().slice(0, 19).replace('T', ' ');// Resultado: "2023-10-05 18:25:30" (UTC)  // Mantener formato ISO
 
@@ -42,6 +46,7 @@ function iniciarQuiz(datosJuego) {
       console.warn('[WARN] Quiz sin preguntas válidas');
       mostrarError("El quiz no contiene preguntas válidas");
       return;
+  
   }
 
   const elementosDOM = {
@@ -69,8 +74,52 @@ function iniciarQuiz(datosJuego) {
 
     // Función para mostrar pregunta con video
     function mostrarPregunta() {
+
+        // Validar el array de preguntas y el índice actual
+        if (!Array.isArray(preguntas)) {
+            console.error('[ERROR] preguntas no es un array');
+            mostrarError("Error interno: formato de preguntas inválido");
+            return;
+        }
+
+        if (preguntaActual >= preguntas.length) {
+            console.log('[DEBUG] Quiz completado, mostrando resultados');
+            finalizarQuiz();
+            return;
+        }
+
+          // Verificar primero si hay preguntas y si la pregunta actual existe
+        if (!preguntas || preguntaActual >= preguntas.length) {
+            console.error('[ERROR] No hay preguntas disponibles o índice fuera de rango');
+            mostrarError("Error al cargar la pregunta");
+            return;
+        }
+
+        
+
         const pregunta = preguntas[preguntaActual];
-        console.log(`Mostrando pregunta ID: ${pregunta.id_pregunta}`);
+
+
+        // Validar la pregunta actual
+        if (!pregunta || typeof pregunta !== 'object') {
+            console.error('[ERROR] Formato de pregunta inválido en índice:', preguntaActual);
+            mostrarError("Error al cargar la pregunta. Por favor recarga la página.");
+            return;
+        }
+        
+
+    // Asegurar que la pregunta tenga id_pregunta
+    const idPregunta = pregunta.id_pregunta || preguntaActual + 1;
+    console.log(`[DEBUG] Mostrando pregunta ID: ${idPregunta}`);
+        
+        // Verificar que la pregunta tenga la estructura esperada
+        if (!pregunta || typeof pregunta !== 'object') {
+            console.error('[ERROR] Pregunta no tiene formato válido:', pregunta);
+            mostrarError("Formato de pregunta inválido");
+            return;
+        }
+
+        console.log(`[DEBUG] Mostrando pregunta ID: ${pregunta.id_pregunta || 'N/A'}`);
         
         // Configurar video
         const videoElement = document.getElementById('pregunta-video');
