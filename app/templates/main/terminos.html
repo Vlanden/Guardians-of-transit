@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
+{% block title %}Términos y Condiciones{% endblock %}
+
 {% block content %}
-<body class="min-vh-100 bg-dark text-light">
-    <main>
+<div class="d-flex flex-column min-vh-100">
+    <main class="flex-grow-1">
         <article class="Elements pt-3">
             <section class="container-xl mb-5 mt-5">
-                <div class="row  text-dark">
+                <div class="row text-dark">
                     <h1 class="pb-3">Términos y Condiciones</h1>
                     <p><strong>Última actualización:</strong> 16 de abril de 2025</p>
 
@@ -52,7 +54,5 @@
             </section>
         </article>
     </main>
-
-</body>
-</html>
+</div>
 {% endblock %}

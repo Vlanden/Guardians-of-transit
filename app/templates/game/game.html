@@ -3,41 +3,44 @@
 {% block title %}{{ juego.titulo }} - Guardianes de la Vía{% endblock %}
 
 {% block content %}
+<div class="d-flex flex-column min-vh-100">
+    <main class="flex-grow-1">
+        <div class="container w-75 mt-5 mb-5">
+            <div id="gameDetails" 
+                data-juego-id="{{ juego_id }}"
+                data-juego-tipo="{{ juego_tipo }}"
+                data-user-id="{{ current_user.get_id() if current_user.is_authenticated else '' }}"
+                data-game-title="{{ juego.titulo }}">
+            </div>
 
-<div class="container w-75 mt-5 mb-5">
-    <div id="gameDetails" 
-        data-juego-id="{{ juego_id }}"
-        data-juego-tipo="{{ juego_tipo }}"
-        data-user-id="{{ current_user.get_id() if current_user.is_authenticated else '' }}"
-        data-game-title="{{ juego.titulo }}">
-    </div>
-
-    <div class="card shadow-lg">
-        <div class="card-header bg-primary text-white">
-            <h3 id="pregunta" class="text-center mb-0 text-white">{{ juego.titulo }}</h3>
-            <p class="text-center mb-0">{{ juego.descripcion }}</p>
-        </div>
-        <div id="multimedia-section" class="position-relative overflow-hidden d-none" style="height: 200px;">
-            <video autoplay muted loop class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-                <source src="/ruta/a/tu-video.mp4" type="video/mp4">
-                Tu navegador no soporta el video.
-            </video>
-            <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
-                <h5>¡Correcto!</h5>
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h3 id="pregunta" class="text-center mb-0 text-white">{{ juego.titulo }}</h3>
+                    <p class="text-center mb-0">{{ juego.descripcion }}</p>
+                </div>
+                <div id="multimedia-section" class="position-relative overflow-hidden d-none" style="height: 200px;">
+                    <video autoplay muted loop class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+                        <source src="/ruta/a/tu-video.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                    <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
+                        <h5>¡Correcto!</h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="progress" class="text-end mb-3"></div>
+                    <div id="respuestas" class="d-grid gap-2"></div>
+                    <div id="resultado" class="alert mt-3" style="display: none;"></div>
+                </div>
+                <div class="card-footer bg-light">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Puntuación: <strong id="puntuacion-actual">0</strong> puntos</span>
+                        <span id="high-score">Récord: 0 puntos</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card-body">
-            <div id="progress" class="text-end mb-3"></div>
-            <div id="respuestas" class="d-grid gap-2"></div>
-            <div id="resultado" class="alert mt-3" style="display: none;"></div>
-        </div>
-        <div class="card-footer bg-light">
-            <div class="d-flex justify-content-between align-items-center">
-                <span>Puntuación: <strong id="puntuacion-actual">0</strong> puntos</span>
-                <span id="high-score">Récord: 0 puntos</span>
-            </div>
-        </div>
-    </div>
+    </main>
 </div>
 
 <script>
@@ -71,5 +74,5 @@
             }
         });
     });
-    </script>
+</script>
 {% endblock %}
