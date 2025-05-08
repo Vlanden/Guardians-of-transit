@@ -222,14 +222,15 @@ function iniciarQuiz(datosJuego) {
            elementosDOM.resultado.className = "alert alert-info";
            elementosDOM.resultado.style.display = "block";
            
-          // --- wiring de los nuevos botones ---
+          /*// --- wiring de los nuevos botones ---
           document.getElementById('btnRepasar')
+          <--!<button id="btnRepasar" class="btn btn-outline-primary me-2">Rpasar contenido</button>-->
             .addEventListener('click', () => {
               // aquí puedes redirigir a la sección teórica,
               // o bien mostrar todas las preguntas con su explicación:
               window.location.href = `/games/teoria/${gameDetails.dataset.juegoId}`;
             });
-
+*/
           document.getElementById('btnReiniciar')
             .addEventListener('click', () => {
               // reinicia variables y vuelve a la primera pregunta
