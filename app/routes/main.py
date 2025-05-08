@@ -77,11 +77,11 @@ def ver_juego(juego_id=None):
 
 def obtener_tipo_juego(juego_id):
     """Obtiene el tipo de juego dependiendo del ID del juego."""
-    if 1 <= juego_id <= 100000:
+    if 1 <= juego_id <= 99999:
         return juegos_quiz.query.get(juego_id)
-    elif 100001 <= juego_id <= 200000:  
+    elif 100000 <= juego_id <= 200000:  
         return juegos_sim.query.get(juego_id)
-    elif 200001 <= juego_id <= 300000:  
+    elif 200000 <= juego_id <= 300000:  
         return juegos_extra.query.get(juego_id)
     else:
         return None
