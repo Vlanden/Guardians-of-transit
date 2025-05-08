@@ -17,15 +17,26 @@
             <h3 id="pregunta" class="text-center mb-0 text-white">{{ juego.titulo }}</h3>
             <p class="text-center mb-0">{{ juego.descripcion }}</p>
         </div>
-        <div id="multimedia-section" class="position-relative overflow-hidden" style="height: 20px;">
-            <video autoplay muted loop playsinline class="w-100">
+
+        <div class="d-flex justify-content-center align-items-center mt-4">
+            <div id="multimedia-section" 
+                 class="position-relative d-inline-block" 
+                 style="width: 40px; height: 25px; overflow: hidden; border-radius: 4px;">
+          
+              <video autoplay muted loop playsinline 
+                     style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 <source src="{{ url_for('static', filename='Media/Caidas.mp4') }}" type="video/mp4">
-                Tu navegador no soporta el video.
-            </video>
-            <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
-                <h5>¡Correcto!</h5>
+              </video>
+          
+              <div class="position-absolute top-50 start-50 translate-middle text-white text-center" 
+                   style="font-size: 0.4rem;">
+                <small>¡Correcto!</small>
+              </div>
             </div>
-        </div>
+          </div>
+          
+
+
         <div class="card-body">
             <div id="progress" class="text-end mb-3"></div>
             <div id="respuestas" class="d-grid gap-2"></div>
