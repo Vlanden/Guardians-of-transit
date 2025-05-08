@@ -7,6 +7,8 @@
     <title>Guardianes de la Vía – {% block title %}{% endblock %}</title>
 
     <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bs_css/bootstrap.min.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 
@@ -24,6 +26,7 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body class="d-flex flex-column vh-100 bg-light min-vh-100 photo">
+  <div class="overlay">
 
     {% include 'partials/header.html' %}
 
@@ -59,15 +62,14 @@
 
     {% if request.endpoint == 'main.ver_juego' %}
       <script>const juego_id = parseInt("{{ juego_id }}");</script>
-      <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
+      {% if juego_id >= 100000 %}
+        <script src="{{ url_for('static', filename='js/game_sim.js') }}" defer></script>
+      {% else %}
+        <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
+      {% endif %}
     {% endif %}
 
     <script src="{{ url_for('static', filename='js/bs_js/bootstrap.bundle.min.js') }}" defer></script>
     {% block extra_js %}{% endblock %}
-
-    <!-- Elimina la condición if para forzar la carga -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/juegoextra.css') }}">
-<script src="{{ url_for('static', filename='js/juegoextra.js') }}"></script>
-
 </body>
 </html>

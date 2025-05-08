@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, abort
 from flask_login import login_required, current_user 
 from app import limiter
 from app.controllers.user_controller import UserController
-from app.models.user import juegos_quiz, juegos_extra, juegos_sim, Perfil
+from app.models.user import intentos, juegos_extra, juegos_quiz, juegos_sim, Perfil
 
 
 main_bp = Blueprint('main', __name__)
@@ -75,6 +75,18 @@ def ver_juego(juego_id=None):
                            juego_tipo=tipo)
 
 
+def obtener_tipo_juego(juego_id):
+    """Obtiene el tipo de juego dependiendo del ID del juego."""
+    if 1 <= juego_id <= 100000:
+        return juegos_quiz.query.get(juego_id)
+    elif 100001 <= juego_id <= 200000:  
+        return juegos_sim.query.get(juego_id)
+    elif 200001 <= juego_id <= 300000:  
+        return juegos_extra.query.get(juego_id)
+    else:
+        return None
+
+
 @main_bp.route('/perfil')
 @login_required
 def perfil():
@@ -86,12 +98,6 @@ def perfil():
         user=current_user,          # Datos básicos del usuario
         user_profile=user_profile   # Datos extendidos del perfil
     )
-
-@main_bp.route('/jugar-juegoextra')
-@login_required
-def jugar_juegoextra():
-    return render_template('game/juegoextra.html')
-
 
 # ──────── API: FUNCIONES DEL USUARIO ────────
 
