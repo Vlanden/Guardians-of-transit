@@ -1,70 +1,73 @@
 {% extends "base.html" %}
+{% block title %}Perfil{% endblock %}
 {% block content %}
-<main class="container-fluid perfil-container">
-    <article class="row h-100">
-        <section class="col-md-3 left-panel d-flex flex-column justify-content-start align-items-center">
-            <div class="align-self-start mb-4">
-                <a href="{{ url_for('main.index') }}" class="back-button">
-                    <i class="bi bi-arrow-left"></i>
-                </a>
-            </div>
-            <div class="profile-pic">
-                <img src="{{ url_for('static', filename='Media/user-3296.png') }}" alt="perfil" class="img-fluid">
-            </div>
-            <div class="mt-5 text-center">
-                <p><strong>{{ current_user.username }}</strong></p>
-                <p><strong>Último juego: {% if last_game %}{{ last_game.titulo }}{% else %}Ningún juego jugado{% endif %}</strong></p>
-            </div>
-        </section>
+<div class="d-flex flex-column min-vh-100">
+    <main class="flex-grow-1 container-fluid perfil-container">
+        <article class="row h-100">
+            <section class="col-md-4 left-panel d-flex flex-column justify-content-start align-items-center">
+                <div class="align-self-start mb-4">
+                    <a href="{{ url_for('main.index') }}" class="back-button">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                </div>
+                <div class="profile-pic">
+                    <img src="{{ url_for('static', filename='Media/user-3296.png') }}" alt="perfil" class="img-fluid">
+                </div>
+                <div class="mt-5 text-center">
+                    <p><strong>{{ current_user.username }}</strong></p>
+                    <p><strong>Último juego: {% if last_game %}{{ last_game.titulo }}{% else %}Ningún juego jugado{% endif %}</strong></p>
+                </div>
+            </section>
 
-        {% if user_profile %}
-        <section class="mb-4 col-md-6 right-panel mr.4">
-            <p><strong>Fecha de registro:</strong> 
-                {{ user_profile.fecha_registro.strftime('%d/%m/%Y') if user_profile.fecha_registro else 'No disponible' }}
-            </p>
-            
-            <p><strong>Última conexión:</strong> 
-                {{ user_profile.ultima_conexion.strftime('%d/%m/%Y %H:%M') if user_profile.ultima_conexion else 'No disponible' }}
-            </p>
-            
-            <div class="mt-4">
-                <h4 class="text-warning">Estadísticas</h4>
-                <p><strong>Juegos jugados (únicos):</strong></p>
-                <ul class="list-group">
-                    {% if juegos_jugados_info %}
-                        {% for juego in juegos_jugados_info %}
-                            <li class="list-group-item">{{ juego }}</li>
+            {% if user_profile %}
+            <section class="mb-4 col-md-8 right-panel">
+                <p><strong>Fecha de registro:</strong> 
+                    {{ user_profile.fecha_registro.strftime('%d/%m/%Y') if user_profile.fecha_registro else 'No disponible' }}
+                </p>
+                
+                <p><strong>Última conexión:</strong> 
+                    {{ user_profile.ultima_conexion.strftime('%d/%m/%Y %H:%M') if user_profile.ultima_conexion else 'No disponible' }}
+                </p>
+                
+                <div class="mt-4">
+                    <h4 class="text-warning">Estadísticas</h4>
+                    <p><strong>Juegos jugados (únicos):</strong></p>
+                    <ul class="list-group">
+                        {% if juegos_jugados_info %}
+                            {% for juego in juegos_jugados_info %}
+                                <li class="list-group-item">{{ juego }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item">No has jugado ningún juego aún</li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h4 class="text-warning">Historial de Juegos</h4>
+                    {% if game_history %}
+                    <ul class="list-group">
+                        {% for item in game_history %}
+                        <li class="list-group-item">
+                            {{ item.juego.titulo }} - 
+                            {{ item.intento.fecha_fin.strftime('%d/%m/%Y') if item.intento.fecha_fin else 'Fecha no disponible' }} - 
+                            Puntuación: {{ item.intento.puntaje }}
+                        </li>
                         {% endfor %}
+                    </ul>
                     {% else %}
-                        <li class="list-group-item">No has jugado ningún juego aún</li>
+                    <p>No hay registros de juegos</p>
                     {% endif %}
-                </ul>
-            </div>
-
-            <div class="mt-4">
-                <h4 class="text-warning">Historial de Juegos</h4>
-                {% if game_history %}
-                <ul class="list-group">
-                    {% for item in game_history %}
-                    <li class="list-group-item">
-                        {{ item.juego.titulo }} - 
-                        {{ item.intento.fecha_fin.strftime('%d/%m/%Y') if item.intento.fecha_fin else 'Fecha no disponible' }} - 
-                        Puntuación: {{ item.intento.puntaje }}
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p>No hay registros de juegos</p>
-                {% endif %}
-            </div>
-        </section>
-        {% else %}
-        <section class="col-md-8 right-panel">
-            <div class="alert alert-warning">
-                No se encontró información de perfil para este usuario.
-            </div>
-        </section>
-        {% endif %}
-    </article>
-</main>
+                </div>
+            </section>
+            {% else %}
+            <section class="col-md-8 right-panel">
+                <div class="alert alert-warning">
+                    No se encontró información de perfil para este usuario.
+                </div>
+            </section>
+            {% endif %}
+        </article>
+    </main>
+</div>
 {% endblock %}
