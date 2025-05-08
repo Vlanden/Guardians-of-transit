@@ -18,10 +18,16 @@
             <p class="text-center mb-0">{{ juego.descripcion }}</p>
         </div>
         <div id="multimedia-section" class="position-relative overflow-hidden" style="height: 20px;">
-            <video autoplay muted loop playsinline class="w-100">
-                <source src="{{ url_for('static', filename='Media/Caidas.mp4') }}" type="video/mp4">
-                Tu navegador no soporta el video.
-            </video>
+                <!-- Sección de video dinámico -->
+                <div id="video-container" class="ratio ratio-16x9 bg-dark">
+                    <video id="pregunta-video" controls muted playsinline class="w-100" style="display: none;">
+                        <source id="video-source" src="" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                    <div id="video-placeholder" class="d-flex justify-content-center align-items-center text-white">
+                        <i class="bi bi-play-circle-fill display-4"></i>
+                    </div>
+                </div>
             <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
                 <h5>¡Correcto!</h5>
             </div>

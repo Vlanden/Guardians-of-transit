@@ -67,40 +67,72 @@ function iniciarQuiz(datosJuego) {
   console.log(`[DEBUG] Total de preguntas: ${totalPreguntas}`);
  
 
-  function mostrarPregunta() {
-      console.log(`[DEBUG] Mostrando pregunta ${preguntaActual + 1}/${totalPreguntas}`);
-      
-      if (preguntaActual >= totalPreguntas) {
-          console.log('[DEBUG] Finalizando quiz');
-          finalizarQuiz();
-          return;
-      }
+    // Función para mostrar pregunta con video
+    function mostrarPregunta() {
+        const pregunta = preguntas[preguntaActual];
+        console.log(`Mostrando pregunta ID: ${pregunta.id_pregunta}`);
+        
+        // Configurar video
+        const videoElement = document.getElementById('pregunta-video');
+        const videoSource = document.getElementById('video-source');
+        const videoPlaceholder = document.getElementById('video-placeholder');
+    
+        if (pregunta.video_url) {
+            videoSource.src = pregunta.video_url;
+            videoElement.load();
+            
+            // Ocultar placeholder y mostrar video
+            videoElement.style.display = 'block';
+            videoPlaceholder.style.display = 'none';
+            
+            // Configurar eventos del video
+            videoElement.oncanplay = () => {
+                videoPlaceholder.innerHTML = '<i class="bi bi-play-circle-fill display-4"></i>';
+            };
+            videoElement.onerror = () => {
+                videoElement.style.display = 'none';
+                videoPlaceholder.innerHTML = '<div class="alert alert-warning">Error al cargar video</div>';
+                videoPlaceholder.style.display = 'flex';
+            };
+        } else {
+            videoElement.style.display = 'none';
+            videoPlaceholder.style.display = 'flex';
+            videoPlaceholder.innerHTML = '<i class="bi bi-film display-4"></i><p class="mt-2">No hay video para esta pregunta</p>';
+        }
+    
+        // Mostrar opciones de respuesta
+        const opcionesMezcladas = mezclarArray(pregunta.opciones.filter(Boolean));
+        elementosDOM.respuestas.innerHTML = '';
+        
+        opcionesMezcladas.forEach((opcion, index) => {
+            const boton = document.createElement("button");
+            boton.className = `btn btn-${['primary', 'success', 'warning', 'danger'][index % 4]} respuesta-btn`;
+            boton.textContent = opcion;
+            boton.onclick = (e) => {
+                verificarRespuesta(e, opcion === pregunta.respuesta_correcta, pregunta.explicacion);
+                if (pregunta.video_url) {
+                    videoElement.play().catch(e => console.error("Error al reproducir:", e));
+                }
+            };
+            elementosDOM.respuestas.appendChild(boton);
+        });
+    }
 
-      const pregunta = preguntas[preguntaActual];
-      console.log('[DEBUG] Pregunta actual:', pregunta);
+    // Event listener para el placeholder del video
+    document.getElementById('video-placeholder').addEventListener('click', function() {
+        const video = document.getElementById('pregunta-video');
+        if (video.style.display !== 'none') {
+            video.play().catch(e => console.error("Error al reproducir:", e));
+            this.style.display = 'none';
+        }
+    });
 
-      elementosDOM.pregunta.textContent = pregunta.pregunta;
-      elementosDOM.progreso.textContent = `Pregunta ${preguntaActual + 1} de ${totalPreguntas}`;
-      elementosDOM.respuestas.innerHTML = "";
 
-      const opcionesMezcladas = mezclarArray(pregunta.opciones);
-      const indiceCorrecto = opcionesMezcladas.indexOf(pregunta.respuesta_correcta);
-      console.log(`[DEBUG] Índice correcto: ${indiceCorrecto}`);
 
-      // Asignar colores alternados a las opciones
-      const colores = ['rojo', 'amarillo', 'negro', 'blanco'];
 
-      opcionesMezcladas.forEach((opcion, indice) => {
-          const boton = document.createElement("button");
-          boton.className = `opcion ${colores[indice % colores.length]}`;
-          boton.textContent = opcion;
-          boton.onclick = (evento) => {
-              console.log('[DEBUG] Opción seleccionada:', opcion);
-              verificarRespuesta(evento, indice === indiceCorrecto, pregunta.explicacion);
-          };
-          elementosDOM.respuestas.appendChild(boton);
-      });
-  }
+
+
+
 
   function verificarRespuesta(evento, esCorrecta, explicacion) {
       console.log(`[DEBUG] Respuesta ${esCorrecta ? 'correcta' : 'incorrecta'}`);

@@ -1,7 +1,7 @@
 # app/routes/games.py
 from sqlalchemy.exc import SQLAlchemyError
 from app.extensions import db
-from flask import Blueprint, request, current_app, jsonify
+from flask import Blueprint, request, current_app, jsonify, url_for
 from werkzeug.exceptions import HTTPException
 from app.models.user import  ( Perfil, intentos, juegos_quiz, QuizPregunta, juegos_extra, juegos_sim, QuizSimulacion)
 from flask_login import login_required,current_user
@@ -117,61 +117,61 @@ def obtener_quiz(juego_id):
         }), 500
 
 
+
 @games_bp.route('/simulacion/<int:juego_id>', methods=['GET'])
 @limiter.limit("100 per minute")
 @login_required
 def obtener_sim(juego_id):
     try:
-        # Verificar existencia del juego
-        juego = juegos_sim.query.get_or_404(juego_id)
-        
-        # Obtener preguntas
+        # Verificar si el juego existe
+        juego = juegos_sim.query.get(juego_id)
+        if not juego:
+            current_app.logger.error(f"Juego no encontrado: {juego_id}")
+            return jsonify({"error": "Juego no encontrado"}), 404
+
+        # Obtener preguntas con manejo de errores
         preguntas = QuizSimulacion.query.filter_by(id_sim=juego_id).all()
-        
-        # Validar preguntas
         if not preguntas:
-            current_app.logger.warning(f"Quiz {juego_id} sin preguntas")
-            return jsonify({"error": "El quiz no tiene preguntas configuradas"}), 404
+            current_app.logger.warning(f"No hay preguntas para el juego {juego_id}")
+            return jsonify({"error": "El juego no tiene preguntas configuradas"}), 404
 
         # Construir respuesta
         data = {
             "titulo": juego.titulo,
+            "descripcion": juego.descripcion,
+            "imagen": url_for('static', filename=juego.img_referencia),
             "preguntas": []
         }
 
         for p in preguntas:
-            opciones = [
-                p.opcioncorrecta,
-                p.opcion2,
-                p.opcion3,
-                p.opcion4
-            ]
-            
-            # Filtrar y validar opciones
-            opciones_validas = [op for op in opciones if op is not None]
-            
-            if len(opciones_validas) < 2:
-                raise ValueError("Cada pregunta debe tener al menos 2 opciones válidas")
-
-            data["preguntas"].append({
-                "pregunta": p.q_pregunta,
-                "opciones": opciones_validas,
-                "respuesta_correcta": p.opcioncorrecta,
-                "explicacion": p.explicacion or "Explicación no disponible"
-            })
+            try:
+                # Construir URL del video de forma segura
+                video_url = None
+                if p.url_sim:
+                    # Limpiar la ruta del video
+                    video_path = p.url_sim.lstrip('/').replace('\\', '/')
+                    video_url = url_for('static', filename=f'{video_path}', _external=True)
+                
+                data["preguntas"].append({
+                    "id_pregunta": p.id_pregunta,
+                    "pregunta": p.q_pregunta,
+                    "opciones": [p.opcioncorrecta, p.opcion2, p.opcion3, p.opcion4],
+                    "respuesta_correcta": p.opcioncorrecta,
+                    "explicacion": p.explicacion,
+                    "video_url": video_url
+                })
+            except Exception as e:
+                current_app.logger.error(f"Error procesando pregunta {p.id_pregunta}: {str(e)}")
+                continue
 
         return jsonify(data)
 
-    except HTTPException as e:
-        raise e
     except Exception as e:
-        current_app.logger.error(f"Error en obtener_quiz: {str(e)}")
+        current_app.logger.error(f"Error grave en obtener_sim: {str(e)}", exc_info=True)
         return jsonify({
-            "error": "Error al cargar el quiz",
+            "error": "Error interno del servidor",
             "detalle": str(e)
         }), 500
-
-
 
 
 
