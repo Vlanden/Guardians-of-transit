@@ -1840,6 +1840,15 @@
         "documentation": {}
     },
     {
+        "label": "jugar_juegoextra",
+        "kind": 2,
+        "importPath": "app.routes.main",
+        "description": "app.routes.main",
+        "peekOfCode": "def jugar_juegoextra():\n    return render_template('game/juegoextra.html')\n@main_bp.route('/perfil')\n@login_required\ndef perfil():\n    \"\"\"Vista del perfil del usuario.\"\"\"\n    try:\n        user_profile = Perfil.query.filter_by(username=current_user.username).first()\n        if not user_profile:\n            flash(\"No se encontró perfil para este usuario\", \"warning\")",
+        "detail": "app.routes.main",
+        "documentation": {}
+    },
+    {
         "label": "perfil",
         "kind": 2,
         "importPath": "app.routes.main",
