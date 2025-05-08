@@ -17,6 +17,7 @@
             <h3 id="pregunta" class="text-center mb-0 text-white">{{ juego.titulo }}</h3>
             <p class="text-center mb-0">{{ juego.descripcion }}</p>
         </div>
+        {% if juego_tipo == "simulacion": %}
         <div id="multimedia-section" class="position-relative overflow-hidden" style="height: 20px;">
                 <!-- Sección de video dinámico -->
                 <div id="video-container" class="ratio ratio-16x9 bg-dark">
@@ -32,6 +33,7 @@
                 <h5>¡Correcto!</h5>
             </div>
         </div>
+        {% endif %}
         <div class="card-body">
             <div id="progress" class="text-end mb-3"></div>
             <div id="respuestas" class="d-grid gap-2"></div>
