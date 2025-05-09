@@ -111,7 +111,9 @@ function mezclarArray(array) {
       // Asegurar que la pregunta tenga id_pregunta
       const idPregunta = pregunta.id_pregunta || preguntaActual + 1;
       console.log(`[DEBUG] Mostrando pregunta ID: ${idPregunta}`);
-          
+        
+      elementosDOM.pregunta.textContent = pregunta.pregunta;
+
           // Verificar que la pregunta tenga la estructura esperada
           if (!pregunta || typeof pregunta !== 'object') {
               console.error('[ERROR] Pregunta no tiene formato válido:', pregunta);
