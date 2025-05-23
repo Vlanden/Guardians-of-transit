@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+<head><link rel="stylesheet" href="..\static\css\Styles2.css"></head>
+
+{% block content %}
+<main class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="row w-100 h-100">
+        <section class="col bg-danger d-none d-lg-block col-md-5 col-lg-5 rounded-start-3 bg-image-section">
+            <!-- Imagen decorativa -->
+            <!--<img src="{{ url_for('static', filename='images/dogo.png') }}" alt="Imagen decorativa">-->
+        </section>
+        
+        <section class="col bg-black p-5 rounded-end-3">
+            <form method="post" action="{{ url_for('auth_web.login') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <h2 class="text-center py-4 text-white">¡Inicia sesión!</h2>
+                
+                <div class="mb-4">
+                    <label class="fw-bold form-label text-white" for="username">Nombre de usuario:</label>
+                    <input type="text" id="username" name="username" class="form-control inputs" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="fw-bold form-label text-white" for="pass">Contraseña:</label>
+                    <input type="password" id="pass" name="password" class="form-control inputs" required>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <p class="fw-bold text-center mt-3 text-white">
+                        ¿No tienes una cuenta? 
+                        <a href="{{ url_for('auth_web.register') }}" class="reg-links">Regístrate aquí</a>
+                    </p>
+                    <p class="fw-bold text-center mt-1 text-white">
+                        ¿Olvidaste tu contraseña? 
+                        <a href="{{ url_for('auth_web.reset_password') }}" class="reg-links">Recupérala aquí</a>
+                    </p>
+                    <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>                 
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+{% endblock %}

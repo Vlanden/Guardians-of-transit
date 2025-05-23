@@ -1,0 +1,129 @@
+from flask import Blueprint, render_template, redirect, url_for, flash, current_app
+from flask_login import login_required, current_user
+from werkzeug.utils import secure_filename
+import os
+import logging
+from sqlalchemy.exc import SQLAlchemyError
+
+# Configurar logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+quiz_admin = Blueprint('quiz_admin', __name__, url_prefix='/admin/quizzes')
+
+def admin_required(func):
+    """Decorator para requerir rol de administrador"""
+    def wrapper(*args, **kwargs):
+        if not current_user.is_admin:  # Asumiendo que tienes un campo is_admin en User
+            flash('Acceso denegado: Se requiere permiso de administrador', 'danger')
+            return redirect(url_for('main.index'))
+        return func(*args, **kwargs)
+    return wrapper
+
+@quiz_admin.route('/', methods=['GET'])
+@login_required
+@admin_required
+def listar_quizzes():
+    try:
+        quizzes = juegos_quiz.query.order_by(juegos_quiz.id_quiz.desc()).all()
+        return render_template('admin/listar_quizzes.html', quizzes=quizzes)
+    except SQLAlchemyError as e:
+        logger.error(f"Error de base de datos: {str(e)}")
+        flash('Error al cargar los quizzes', 'danger')
+        return redirect(url_for('main.index'))
+
+@quiz_admin.route('/crear', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def crear_quiz():
+    form = QuizForm()
+    
+    if form.validate_on_submit():
+        try:
+            # Manejo de la imagen
+            imagen = form.imagen.data
+            filename = secure_filename(imagen.filename)
+            upload_folder = os.path.join(current_app.config['UPLOAD_FOLDER'], 'quizzes')
+            
+            # Crear directorio si no existe
+            os.makedirs(upload_folder, exist_ok=True)
+            
+            # Guardar imagen
+            file_path = os.path.join(upload_folder, filename)
+            imagen.save(file_path)
+            
+            # Crear nuevo quiz
+            nuevo_quiz = juegos_quiz(
+                titulo=form.titulo.data,
+                descripcion=form.descripcion.data,
+                img_referencia=os.path.join('quizzes', filename)
+            )
+            
+            db.session.add(nuevo_quiz)
+            db.session.commit()
+            
+            flash('Quiz creado exitosamente!', 'success')
+            return redirect(url_for('quiz_admin.listar_quizzes'))
+            
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            logger.error(f"Error de base de datos: {str(e)}")
+            flash('Error al guardar en la base de datos', 'danger')
+        except IOError as e:
+            logger.error(f"Error de archivo: {str(e)}")
+            flash('Error al guardar la imagen', 'danger')
+        except Exception as e:
+            logger.error(f"Error inesperado: {str(e)}")
+            flash('Error inesperado al crear el quiz', 'danger')
+    
+    return render_template('admin/crear_quiz.html', form=form)
+
+@quiz_admin.route('/<int:quiz_id>/preguntas/agregar', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def agregar_pregunta(quiz_id):
+    form = PreguntaForm()
+    quiz = juegos_quiz.query.get_or_404(quiz_id)
+    
+    # Calcular orden automático
+    ultima_pregunta = QuizPregunta.query.filter_by(id_quiz=quiz_id)\
+                                      .order_by(QuizPregunta.orden.desc())\
+                                      .first()
+    form.orden.data = (ultima_pregunta.orden + 1) if ultima_pregunta else 1
+    
+    if form.validate_on_submit():
+        try:
+            nueva_pregunta = QuizPregunta(
+                id_quiz=quiz_id,
+                q_pregunta=form.pregunta.data,
+                opcioncorrecta=form.opcioncorrecta.data,
+                opcion2=form.opcion2.data,
+                opcion3=form.opcion3.data,
+                opcion4=form.opcion4.data,
+                explicacion=form.explicacion.data,
+                orden=form.orden.data
+            )
+            
+            db.session.add(nueva_pregunta)
+            db.session.commit()
+            
+            flash('Pregunta agregada exitosamente!', 'success')
+            return redirect(url_for('quiz_admin.agregar_pregunta', quiz_id=quiz_id))
+            
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            logger.error(f"Error de base de datos: {str(e)}")
+            flash('Error al guardar la pregunta', 'danger')
+        except Exception as e:
+            logger.error(f"Error inesperado: {str(e)}")
+            flash('Error inesperado al guardar la pregunta', 'danger')
+    
+    # Obtener preguntas existentes
+    preguntas = QuizPregunta.query.filter_by(id_quiz=quiz_id)\
+                                .order_by(QuizPregunta.orden.asc())\
+                                .all()
+    
+    return render_template('admin/agregar_pregunta.html', 
+                         form=form, 
+                         quiz=quiz, 
+                         preguntas=preguntas)

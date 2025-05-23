@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+<head><link rel="stylesheet" href="{{ url_for('static', filename='css/Styles2.css') }}"></head>
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<main class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="row w-100 h-100">
+        <section class="col bg-danger d-none d-lg-block col-md-5 col-lg-5 rounded-start-3 bg-image-section">
+            <!-- Imagen decorativa -->
+            <!--<img src="{{ url_for('static', filename='images/dogo.png') }}" alt="Imagen decorativa">-->
+        </section>
+        
+        <section class="col bg-black p-5 rounded-end-3">
+            <form method="POST" action="{{ url_for('auth_web.register') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <h2 class="Title text-center py-4 text-white">¡Bienvenido!</h2>
+                
+                <div class="input-container mb-4">
+                    <label class="labels fw-bold form-label text-white" for="username">Nombre de usuario:</label>
+                    <input type="text" id="username" name="username" class="inputs form-control" required>
+                </div>
+                
+                <div class="input-container mb-4">
+                    <label class="labels fw-bold form-label text-white" for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" class="inputs form-control" required>
+                </div>
+                
+                <div class="input-container mb-4">
+                    <label class="labels fw-bold form-label text-white" for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" class="inputs form-control" required>
+                </div>
+                
+                <div class="input-container mb-4">
+                    <label class="labels fw-bold form-label text-white" for="confirm_password">Confirma contraseña:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" class="inputs form-control" required>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <p class="fw-bold text-center mt-3 text-white">
+                        ¿Ya te registraste?
+                        <a href="{{ url_for('auth_web.login') }}" class="text-white reg-links">Inicia sesión</a>
+                    </p>
+                    <p class="fw-bold text-center mt-3 text-white">
+                        Por favor lee nuestros <a href="{{ url_for('main.terminos') }}" class="me-3 reg-links">Términos y Condiciones</a>
+                    </p>
+                    <p class="fw-bold text-center mt-3 text-white">                         
+                        y nuestras <a href="{{ url_for('main.privacidad') }}" class="me-3 reg-links">Politicas de Privacidad</a>
+                    </p>
+                    <button type="submit" class="btn btn-primary w-100 px-2">Registro</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+{% endblock %}

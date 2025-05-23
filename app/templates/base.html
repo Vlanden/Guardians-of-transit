@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self'">
+    <title>Guardianes de la Vía – {% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bs_css/bootstrap.min.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    
+    <!-- Estilos personalizados -->
+    {% if request.endpoint == 'main.ver_juego' %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+    {% else %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/Styles2.css') }}">
+    {% endif %}
+
+    {% if request.endpoint == 'main_bp.jugar_juegoextra' %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/juegoextra.css') }}">
+    {% endif %}
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="d-flex flex-column vh-100 bg-light min-vh-100 photo">
+  <div class="overlay">
+
+    {% include 'partials/header.html' %}
+
+    <main class="main-container flex-grow-1">
+      <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, msg in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ msg }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert">❌</button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    {% include 'partials/footer.html' %}
+
+    <!-- Scripts personalizados -->
+    {% if request.endpoint == 'main.index' %}
+    <script src="{{ url_for('static', filename='js/B_y_M_C.js') }}" defer></script>
+    <!--<script src="{{ url_for('static', filename='js/No.js') }}" defer></script>
+      <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+      <script src="{{ url_for('static', filename='js/buscar.js') }}" defer></script>-->
+    {% endif %}
+
+    {% if request.endpoint == 'main_bp.jugar_juegoextra' %}
+    <script src="{{ url_for('static', filename='js/juegoextra.js') }}"></script>
+    {% endif %}
+
+    {% if request.endpoint == 'main.ver_juego' %}
+      <script>const juego_id = parseInt("{{ juego_id }}");</script>
+      {% if juego_id >= 100000 %}
+        <script src="{{ url_for('static', filename='js/game_sim.js') }}" defer></script>
+      {% else %}
+        <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
+      {% endif %}
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='js/bs_js/bootstrap.bundle.min.js') }}" defer></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
